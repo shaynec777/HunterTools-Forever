@@ -183,7 +183,7 @@ function F.AddWeaponComparison(tooltip)
     building=false
     if not ok or (not result and not reason) then return end
     tooltip.HunterToolsWeaponAdded=true
-    tooltip:AddLine(' ');tooltip:AddLine('HunterTools | Ranged comparison (experimental)',1,0.82,0)
+    tooltip:AddLine(' ');tooltip:AddLine('HunterTools Forever | Ranged comparison (experimental)',1,0.82,0)
     if not result then tooltip:AddLine(reason,0.8,0.8,0.8,true);return end
     local r=result
     tooltip:AddLine(('Estimated shot: %.1f - %.1f | %.1f Auto Shot DPS'):format(r.min,r.max,r.dps),0.95,0.95,0.95,true)

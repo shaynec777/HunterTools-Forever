@@ -108,7 +108,7 @@ function F.AnimalDetails(unit,s)
     if type(level)~='number' or level<1 then level=forever and forever.minLevel end
     if s.info then
         lines[#lines+1]=family..(type(level)=='number' and level>0 and (' - level '..level) or '')
-            ..(record and record.tameable==true and ' (tameable: '..(record.sources and record.sources.tameable or 'Wowhead Forever')..')'
+            ..(F.TameabilityText and (' ('..F.TameabilityText(record)..')') or record and record.tameable==true and ' (tameable: '..(record.sources and record.sources.tameable or 'Wowhead Forever')..')'
                 or record and record.tameable==false and ' (reference: not tameable)' or ' (tameability unconfirmed)')
         if record and record.zone then lines[#lines+1]='Location: '..record.zone end
     end
@@ -160,6 +160,22 @@ end
 function F.TargetPetDetails()
     return F.AnimalDetails('target',F.AnimalSettings().target)
 end
+-- Tooltip-only colors: keep the underlying detail text usable by other views.
+local function petTipLine(tooltip,label,value)
+    local r,g,b=0.90,0.90,0.90
+    local lower=(value or label):lower()
+    if not value then r,g,b=0.45,0.78,1 end
+    if label=='Pet' or label=='Role' or label=='Focus' or label=='Location' then r,g,b=0.45,0.78,1
+    elseif label=='Diet' or label=='Eats' or label=='Food' or label=='In bags' or label=='Usable food (Classic estimate)' then r,g,b=0.55,0.90,0.65
+    elseif label:find('reference',1,true) or label:find('baseline',1,true) then r,g,b=0.62,0.67,0.72 end
+    if label=='Happiness' or label=='Feeding' or label=='Food' or label=='Combat' or label=='Partial count' then
+        if lower:find('unhappy',1,true) or lower:find('dead',1,true) or lower:find('no suitable',1,true) or lower:match('^0 suitable') then r,g,b=1,0.35,0.35
+        elseif lower:find('hungry',1,true) or lower:find('content',1,true) or label=='Combat' or label=='Partial count' then r,g,b=1,0.75,0.30
+        elseif lower:find('happy',1,true) or lower:find('being fed',1,true) then r,g,b=0.40,1,0.50 end
+    end
+    local text=value and ('|cffffd580'..label..':|r '..value) or label
+    tooltip:AddLine(text,r,g,b,true)
+end
 local building=false
 function F.AddAnimalTip(tooltip)
     if building or not F.db or InCombatLockdown() or tooltip.HunterToolsAnimalTipAdded then return end
@@ -172,8 +188,11 @@ function F.AddAnimalTip(tooltip)
     building=false
     if not ok or not details then return end
     tooltip.HunterToolsAnimalTipAdded=true
-    tooltip:AddLine(' ');tooltip:AddLine('HunterTools animal information',1,0.82,0)
-    for line in details:gmatch('[^\n]+') do tooltip:AddLine(line,0.9,0.9,0.9,true) end
+    tooltip:AddLine(' ');tooltip:AddLine('HunterTools Forever animal information',1,0.82,0)
+    for line in details:gmatch('[^\n]+') do
+        local label,value=line:match('^([^:]+):%s*(.*)$')
+        petTipLine(tooltip,label or line,value)
+    end
 end
 if GameTooltip and GameTooltip.HookScript then
     GameTooltip:HookScript('OnTooltipCleared',function(t) t.HunterToolsAnimalTipAdded=nil end)
@@ -232,7 +251,7 @@ function F.SearchBeasts(text)
     if needle=='' then return {} end
     local ids={}
     local function add(rows) for id in pairs(rows or {}) do ids[id]=true end end
-    add(F.petCreatureDB);add(F.foreverPetCreatureDB);add(F.petopiaForeverCreatures);add(F.petopiaCommunityCreatures)
+    add(F.petopiaTameability);add(F.petCreatureDB);add(F.foreverPetCreatureDB);add(F.petopiaForeverCreatures);add(F.petopiaCommunityCreatures)
     add(F.db and F.db.beastJournal and F.db.beastJournal.records)
     local matches={}
     for id in pairs(ids) do
@@ -262,7 +281,7 @@ function F.BeastRecordDetails(id)
     local levels=row.minLevel and tostring(row.minLevel) or 'unknown'
     if row.maxLevel and row.maxLevel~=row.minLevel then levels=levels..'-'..row.maxLevel end
     local lines={'Database lookup (NPC '..id..')',family..' - level '..levels,
-        'Tameability: '..(row.tameable==true and 'reference says tameable' or row.tameable==false and 'reference says not tameable' or 'unconfirmed'),
+        'Tameability: '..(F.TameabilityText and F.TameabilityText(row) or (row.tameable==true and 'reference says tameable' or row.tameable==false and 'reference says not tameable' or 'unconfirmed')),
         'Location: '..(row.zone or 'unknown'),'Role: '..F.PetRole(row.family)}
     local abilities=row.abilities
     local _,class=query(UnitClass,'player')

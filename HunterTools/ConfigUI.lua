@@ -55,7 +55,7 @@ function F.OpenConfig()
         p.checks={};p.actions={};p.statusLabels={}
         local emblem=p:CreateTexture(nil,'ARTWORK');emblem:SetSize(90,90);emblem:SetPoint('TOPLEFT',24,-12)
         emblem:SetTexture('Interface\\AddOns\\HunterTools\\Artwork\\HunterToolsLogo')
-        F.MenuText(p,'HunterTools',128,-29,550,'GameFontNormalHuge')
+        F.MenuText(p,'HunterTools Forever',128,-29,550,'GameFontNormalHuge')
         F.MenuText(p,'Your field kit for the hunt',130,-62,550,'GameFontHighlight')
         p.versionLabel=F.MenuText(p,'',130,-85,550,'GameFontHighlightSmall')
         F.MenuText(p,'Enable the tools you want. Open a card to adjust its details.',28,-108,700)

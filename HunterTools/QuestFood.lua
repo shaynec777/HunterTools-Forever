@@ -114,7 +114,7 @@ function F.DebugQuestFood()
         add(label..': '..table.concat(fields,' | '))
         return result[2]
     end
-    add('HunterTools '..F.VERSION..'; protection='..value(F.db.protectQuestFood))
+    add('HunterTools Forever '..F.VERSION..'; protection='..value(F.db.protectQuestFood))
     local q=C_QuestLog or {}
     call('Classic entry count',GetNumQuestLogEntries)
     call('Modern entry count',q.GetNumQuestLogEntries)

@@ -38,7 +38,7 @@ s.target.role=false;assert(s.mouseover.role)
 local text=F.TargetPetDetails()
 assert(not text:find('Abilities:',1,true) and not text:find('Role:',1,true))
 assert(text:find('Meat (12)',1,true) and text:find('Fish (7)',1,true) and text:find('estimate): 7',1,true) and text:find('Partial count',1,true))
-local lines={};local tip={GetUnit=function() return 'Cat','mouseover' end,AddLine=function(_,v) lines[#lines+1]=v end}
+local lines={};local tip={GetUnit=function() return 'Cat','mouseover' end,AddLine=function(_,v) lines[#lines+1]=v:gsub('|c%x%x%x%x%x%x%x%x',''):gsub('|r','') end}
 F.db.range.enabled=false
 post(tip);text=table.concat(lines,'\n');assert(text:find('Cat - level 40',1,true) and text:find('Role: Offensive',1,true),'hover must use hovered animal and work with Range disabled')
 local count=#lines;post(tip);assert(#lines==count)

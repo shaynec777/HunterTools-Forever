@@ -1,0 +1,5 @@
+<Bindings>
+    <Binding name="CLICK GFWClassicFeedButton:LeftButton" header="GFWCLASSIC" category="ADDONS">
+        <!-- The client dispatches this binding directly to the secure feed button. -->
+    </Binding>
+</Bindings>

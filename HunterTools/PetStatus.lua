@@ -134,14 +134,30 @@ function F.PetStatusLines(data,fields)
     end
     return lines
 end
+-- Tooltip-only colors: keep the underlying detail text usable by other views.
+local function petTipLine(tooltip,label,value)
+    local r,g,b=0.90,0.90,0.90
+    local lower=(value or label):lower()
+    if not value then r,g,b=0.45,0.78,1 end
+    if label=='Pet' or label=='Role' or label=='Focus' or label=='Location' then r,g,b=0.45,0.78,1
+    elseif label=='Diet' or label=='Eats' or label=='Food' or label=='In bags' or label=='Usable food (Classic estimate)' then r,g,b=0.55,0.90,0.65
+    elseif label:find('reference',1,true) or label:find('baseline',1,true) then r,g,b=0.62,0.67,0.72 end
+    if label=='Happiness' or label=='Feeding' or label=='Food' or label=='Combat' or label=='Partial count' then
+        if lower:find('unhappy',1,true) or lower:find('dead',1,true) or lower:find('no suitable',1,true) or lower:match('^0 suitable') then r,g,b=1,0.35,0.35
+        elseif lower:find('hungry',1,true) or lower:find('content',1,true) or label=='Combat' or label=='Partial count' then r,g,b=1,0.75,0.30
+        elseif lower:find('happy',1,true) or lower:find('being fed',1,true) then r,g,b=0.40,1,0.50 end
+    end
+    local text=value and ('|cffffd580'..label..':|r '..value) or label
+    tooltip:AddLine(text,r,g,b,true)
+end
 function F.AddPetStatusTip(tooltip,data,heading)
     if not F.db or not F.PetStatusSettings().tooltipEnabled then return end
     if tooltip.HunterToolsPetTipAdded then return end
     tooltip.HunterToolsPetTipAdded=true
     tooltip:AddLine(' ')
-    tooltip:AddLine(heading or 'HunterTools pet status',1,0.82,0)
+    tooltip:AddLine(heading or 'HunterTools Forever pet status',1,0.82,0)
     for _,line in ipairs(F.PetStatusLines(data or F.PetStatusData(),F.PetStatusSettings().tooltipFields)) do
-        tooltip:AddLine(line[1]..': '..line[2],0.9,0.9,0.9,true)
+        petTipLine(tooltip,line[1],line[2])
     end
 end
 local function unitTip(tooltip)
@@ -199,7 +215,7 @@ function F.UpdatePetStatusWindow()
         p:SetScript('OnMouseUp',function(_,button) if button=='RightButton' then F.OpenConfig() end end)
         p:SetScript('OnEnter',function()
             if not F.PetStatusSettings().tooltipEnabled then return end
-            GameTooltip:SetOwner(p,'ANCHOR_RIGHT');GameTooltip:SetText('HunterTools')
+            GameTooltip:SetOwner(p,'ANCHOR_RIGHT');GameTooltip:SetText('HunterTools Forever')
             F.AddPetStatusTip(GameTooltip,F.PetStatusData());GameTooltip:Show()
         end)
         p:SetScript('OnLeave',function() GameTooltip:Hide() end)

@@ -84,7 +84,7 @@ function F.BuildTrackingButton()
         if not GameTooltip then return end
         GameTooltip:SetOwner(self,'ANCHOR_RIGHT')
         if self.activeSpellID then GameTooltip:SetSpellByID(self.activeSpellID)
-        else GameTooltip:AddLine('HunterTools tracking',1,0.82,0) end
+        else GameTooltip:AddLine('HunterTools Forever tracking',1,0.82,0) end
         GameTooltip:AddLine(self.trackingName or 'No active tracking confirmed',1,1,1)
         GameTooltip:AddLine('Right-click: choose a tracking ability.',0.8,0.9,0.8,true)
         GameTooltip:AddLine(F.TrackingSettings().locked and 'Position locked. /ht tracking opens settings.' or 'Shift + left-drag to move. /ht tracking opens settings.',0.8,0.8,0.8,true)

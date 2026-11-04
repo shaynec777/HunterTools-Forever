@@ -66,3 +66,7 @@ Original feeding engine: FeedPetForever by Gideon (MIT licensed). Adaptation and
 Food and partial Forever reference: Wowhead Forever. Beast/family data: [Petopia Forever](https://www.wow-petopia.com/forever/) and xWillawisp's linked community taming sheet. Classic ability/diet baseline: [Petopia Classic](https://www.wow-petopia.com/classic/abilities.php). See PET-DATA-SOURCES.md and WEAPON-COMPARISONS.md for scope, formula sources and limitations. Buff-food detection recognizes English Well Fed tooltip text; manually block any special foods it misses.
 
 Thanks to Raytchel Bates and Vanauge Imnewtorp for their suggestions!
+
+## Source editions and laptop installation
+
+The latest development source includes the independent Classic Era edition under `classic-port/source/HunterToolsClassic`. See [LAPTOP_SETUP.md](LAPTOP_SETUP.md) for cloning and installing either edition. Git source updates do not create a tagged release.

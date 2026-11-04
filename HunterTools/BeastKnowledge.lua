@@ -96,14 +96,14 @@ end
 function F.BeastRecord(id)
     local result,sources={},{}
     local localRow=F.db and F.db.beastJournal and F.db.beastJournal.records and F.db.beastJournal.records[id]
-    local rows={{localRow,'Observed in Forever'},{F.petopiaForeverCreatures and F.petopiaForeverCreatures[id],'Petopia Forever'},
+    local rows={{localRow,'Observed in Forever'},{F.petopiaTameability and F.petopiaTameability[id],'Petopia Forever'},{F.petopiaForeverCreatures and F.petopiaForeverCreatures[id],'Petopia Forever'},
         {F.petopiaCommunityCreatures and F.petopiaCommunityCreatures[id],'Petopia community report (unverified)'},
         {F.foreverPetCreatureDB and F.foreverPetCreatureDB[id],'Wowhead Forever'},
         {F.petCreatureDB and F.petCreatureDB[id],'Classic reference (Wowhead Classic-linked)'}}
     for _,pair in ipairs(rows) do
         local row,label=pair[1],pair[2]
         if row then
-            for _,field in ipairs({'name','family','zone','minLevel','maxLevel','tameable','diet','abilities'}) do
+            for _,field in ipairs({'name','family','zone','minLevel','maxLevel','tameable','requiredFaction','tameabilityRestriction','tameabilitySource','diet','abilities'}) do
                 local value=row[field]
                 if field=='abilities' and row==localRow then value=row.tameAbilities or row.loreAbilities end
                 if value~=nil and result[field]==nil then
@@ -116,6 +116,13 @@ function F.BeastRecord(id)
     result.sources=sources
     return next(sources) and result or nil
 end
+function F.TameabilityText(row)
+    if not row or type(row.tameable)~='boolean' then return 'not specified by available sources' end
+    local status=row.tameable and 'Tameable' or 'Not tameable'
+    if row.tameable and row.tameabilityRestriction then status=status..' ('..row.tameabilityRestriction..')' end
+    local source=row.sources and row.sources.tameable
+    return status..(source and (' - '..source) or '')
+end
 function F.BeastDiet(family)
     local row=F.petopiaForeverFamilies and F.petopiaForeverFamilies[family]
     if row and row.diet then return row.diet,'Petopia Forever' end
@@ -123,7 +130,7 @@ function F.BeastDiet(family)
     return F.petFamilyDiets and F.petFamilyDiets[family],'Classic reference (Wowhead Classic-linked)'
 end
 function F.BeastSourceURLs(id)
-    local row=(F.petopiaForeverCreatures and F.petopiaForeverCreatures[id]) or (F.petopiaCommunityCreatures and F.petopiaCommunityCreatures[id])
+    local row=(F.petopiaTameability and F.petopiaTameability[id]) or (F.petopiaForeverCreatures and F.petopiaForeverCreatures[id]) or (F.petopiaCommunityCreatures and F.petopiaCommunityCreatures[id])
     return row and row.source,'https://www.wowhead.com/forever/npc='..id,'https://www.wowhead.com/classic/npc='..id
 end
 function F.BeastTeachers(key,rank,fallback)

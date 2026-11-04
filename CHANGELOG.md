@@ -1,3 +1,13 @@
+# Unreleased
+
+- Color pet-status and animal tooltip labels and values while preserving learned-ability indicators.
+- Include the independent Classic Era source, tests and laptop setup guide.
+- Classic Era: skip protected interaction-distance checks during combat while retaining public spell-range results.
+
+- Refresh NPC-specific Petopia tameability, including non-tameable and faction-restricted creatures; expose exact source pages in details and search. New data module requires a full restart.
+
+- Rename the displayed addon to HunterTools Forever. Existing addon folder, saved settings and commands remain compatible. Public publishing name changes begin with the next version.
+
 # HunterTools 3.1.5
 
 ## New features
@@ -302,7 +312,7 @@ Thanks to Raytchel Bates and Vanauge Imnewtorp for their suggestions!
 
 
 
-# In-game validation — October 16, 2026
+# In-game validation â€” October 16, 2026
 
 
 

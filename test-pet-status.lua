@@ -55,7 +55,7 @@ F.db.petLastFeeds={['pet-one']={food='Apple',at=880}};assert(F.PetStatusData().l
 F.foodEntryPending=true;assert(F.PetStatusData().food=='Inventory settlingâ€¦');F.foodEntryPending=nil
 local lineCount=#F.PetStatusLines(d,s.windowFields);s.windowFields.diet=false;assert(#F.PetStatusLines(d,s.windowFields)==lineCount-1)
 local added={}
-local tip={GetUnit=function() return 'Strider','mouseover' end,AddLine=function(_,v) added[#added+1]=v end}
+local tip={GetUnit=function() return 'Strider','mouseover' end,AddLine=function(_,v) added[#added+1]=v:gsub('|c%x%x%x%x%x%x%x%x',''):gsub('|r','') end}
 postCall(tip);assert(#added>2 and table.concat(added):find('Diet: Fruit, Cheese',1,true))
 local before=#added;postCall(tip);assert(#added==before,'do not duplicate tooltip lines')
 hooks.OnTooltipCleared(tip);s.tooltipFields.diet=false;added={};postCall(tip);assert(not table.concat(added):find('Diet:',1,true))

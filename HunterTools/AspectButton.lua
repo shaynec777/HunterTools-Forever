@@ -37,7 +37,7 @@ function F.BuildAspectButton()
         if not GameTooltip then return end
         GameTooltip:SetOwner(self,'ANCHOR_RIGHT')
         if self.activeSpellID then GameTooltip:SetSpellByID(self.activeSpellID)
-        else GameTooltip:AddLine('HunterTools aspects',1,0.82,0) end
+        else GameTooltip:AddLine('HunterTools Forever aspects',1,0.82,0) end
         GameTooltip:AddLine(self.aspectName or 'No active aspect confirmed',1,1,1)
         GameTooltip:AddLine('Right-click: choose a learned aspect.',0.8,0.9,0.8,true)
         GameTooltip:AddLine(F.AspectSettings().button.locked and 'Position locked. /ht aspects opens settings.' or 'Shift + left-drag to move. /ht aspects opens settings.',0.8,0.8,0.8,true)

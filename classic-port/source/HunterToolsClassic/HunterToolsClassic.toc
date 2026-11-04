@@ -1,0 +1,42 @@
+## Interface: 11509
+## Title: HunterTools Classic
+## Author: Gideon (original engine); OpenAI Codex (adaptation and enhancements)
+## Version: 0.1.0-beta1
+## Notes: Hunter tools, each individually enabled or disabled: feeding, ammo, range, pet status and animal tooltips.
+## SavedVariablesPerCharacter: HunterToolsClassicDB
+ClassicCompat.lua
+Core.lua
+MenuStyle.lua
+Foods.lua
+QuestFood.lua
+SpecialFood.lua
+AmmoCatalog.lua
+Ammo.lua
+AmmoUpgradeData.lua
+AmmoUpgrades.lua
+WeaponCompare.lua
+WeaponCompareUI.lua
+AmmoUI.lua
+FoodList.lua
+InstanceCheck.lua
+AspectReminder.lua
+SpellDropdown.lua
+AspectButton.lua
+TrackingButton.lua
+ConfigUI.lua
+Range.lua
+PetStatus.lua
+PetAlerts.lua
+PetDatabase.lua
+KnownPetAbilities.lua
+PetBrowserData.lua
+ClassicReference.lua
+PetopiaTameability.lua
+BeastKnowledge.lua
+PetAbilityBrowser.lua
+PetFoodTypes.lua
+TargetPetInfo.lua
+BeastJournalUI.lua
+MobFinder.lua
+PlayerFinder.lua
+HunterToolsClassic.lua

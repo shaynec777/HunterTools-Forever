@@ -1,4 +1,4 @@
-# HunterTools
+# HunterTools Forever
 
 ![HunterTools jackknife logo](https://raw.githubusercontent.com/shaynec777/HunterTools/main/artwork/HunterToolsLogo.png)
 

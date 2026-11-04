@@ -60,7 +60,7 @@ function F.OpenFoodList()
     p:SetScript('OnDragStart',function(self) if IsShiftKeyDown() and not InCombatLockdown() then self:StartMoving() end end); p:SetScript('OnDragStop',p.StopMovingOrSizing)
     p:SetBackdrop({bgFile='Interface\\DialogFrame\\UI-DialogBox-Background',edgeFile='Interface\\DialogFrame\\UI-DialogBox-Border',edgeSize=24})
     local title=p:CreateFontString(nil,'OVERLAY','GameFontNormalLarge')
-    title:SetPoint('TOP',0,-18); title:SetText('HunterTools food list')
+    title:SetPoint('TOP',0,-18); title:SetText('HunterTools Forever food list')
     local close=CreateFrame('Button',nil,p,'UIPanelCloseButton'); close:SetPoint('TOPRIGHT',-4,-4)
     -- Keep the searchable catalog separate from feeding preferences.
     p.catalogPage=CreateFrame('Frame',nil,p);p.catalogPage:SetAllPoints(p)

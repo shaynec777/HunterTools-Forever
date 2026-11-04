@@ -9,7 +9,7 @@ end
 F.IsPublic = public
 
 function F.Print(message)
-    DEFAULT_CHAT_FRAME:AddMessage("|cffffcc66HunterTools:|r " .. message)
+    DEFAULT_CHAT_FRAME:AddMessage("|cffffcc66HunterTools Forever:|r " .. message)
 end
 
 function F.LoadSettings()
@@ -27,7 +27,7 @@ function F.LoadSettings()
         if type(F.db.instanceChecks[key])~="boolean" then F.db.instanceChecks[key]=true end
     end
     if type(F.db.protectQuestFood) ~= "boolean" then F.db.protectQuestFood = true end
-    if F.db.foodOrder ~= "low" then F.db.foodOrder = "high" end
+    if F.db.foodOrder ~= "low" and F.db.foodOrder ~= "high" then F.db.foodOrder = "low" end
     if type(F.db.mute) ~= "boolean" then F.db.mute = false end
     if type(F.db.wolfSound) ~= "boolean" then F.db.wolfSound = false end
     for _, key in ipairs({"whitelist", "blacklist"}) do

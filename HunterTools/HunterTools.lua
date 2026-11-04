@@ -1,5 +1,5 @@
 local addonName, F = ...
-BINDING_HEADER_GFWFOREVER = 'HunterTools'
+BINDING_HEADER_GFWFOREVER = 'HunterTools Forever'
 _G['BINDING_NAME_CLICK GFWForeverFeedButton:LeftButton'] = 'Feed Pet'
 
 function F.UpdateHappinessBorder()
@@ -89,7 +89,7 @@ function F.BuildUI()
     b:SetScript('OnEnter',function()
         F.Refresh()
         GameTooltip:SetOwner(b,'ANCHOR_RIGHT')
-        GameTooltip:SetText('HunterTools')
+        GameTooltip:SetText('HunterTools Forever')
         GameTooltip:AddLine(F.TooltipStatus(),1,1,1,true)
         GameTooltip:AddLine(F.PetDietText(),0.7,0.9,1,true)
         local preview=F.FoodPreview()
