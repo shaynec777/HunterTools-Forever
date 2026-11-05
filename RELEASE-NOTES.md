@@ -1,3 +1,22 @@
+# HunterTools Forever 3.1.6
+
+## New in this update
+
+- Clearer colored pet-status and animal tooltips, preserving learned-ability indicators.
+- Updated NPC-specific Petopia tameability, including untameable and faction-restricted creatures and exact source links.
+- Display the addon as HunterTools Forever while retaining existing folder names, commands and settings.
+
+## Bug fixes
+
+- Skip interaction-distance checks during combat and tolerate unavailable checks outside combat. Public spell-range results remain usable; unknown distances remain unknown.
+- New or invalid food-order settings default to lower-level food first; existing high/low preferences are retained.
+
+## Updating and validation
+
+Install HunterTools and FeedomaticToo from the ZIP and fully restart Forever for the tameability module. Existing character settings are preserved. Classic is a separate edition and is not included in this release.
+
+Focused Lua 5.1 range, Mend Pet and pet-alert regressions passed. The user reports the currently installed build is functional. This is not exhaustive in-game coverage. Weapon comparisons and scope previews remain Experimental; existing data-source limitations remain documented.
+
 # HunterTools 3.1.5
 
 ## New features

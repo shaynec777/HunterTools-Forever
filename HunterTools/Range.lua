@@ -16,6 +16,11 @@ local function query(fn,...)
     local ok,value=pcall(fn,...)
     if ok and safe(value) then return value end
 end
+local function interactRange(index)
+    -- Avoid protected interaction checks in combat; keep public spell results.
+    if InCombatLockdown and InCombatLockdown() then return end
+    return query(CheckInteractDistance,'target',index)
+end
 -- Actual Forever hunter Mend Pet ranks; native range checks include applicable modifiers.
 local mendRanks={136,3111,3661,3662,13542,13543,13544}
 function F.PetHealRangeWarning(ignoreDisplaySetting)
@@ -71,7 +76,7 @@ function F.TargetRangeStatus()
     -- ranged check inside that distance means the target is too close.
     local info=C_Spell and C_Spell.GetSpellInfo and C_Spell.GetSpellInfo(75)
     local maximum=info and info.maxRange
-    local near=CheckInteractDistance and CheckInteractDistance('target',4)
+    local near=interactRange(4)
     if not safe(near) or not safe(maximum) or type(maximum)~='number' or maximum<28 then
         return 'Range unavailable',0.7,0.7,0.7
     end
@@ -80,9 +85,8 @@ function F.TargetRangeStatus()
     return 'Range unavailable',0.7,0.7,0.7
 end
 function F.NonEnemyDistanceBand()
-    if not CheckInteractDistance then return nil end
-    local close=CheckInteractDistance('target',3)
-    local near=CheckInteractDistance('target',4)
+    local close=interactRange(3)
+    local near=interactRange(4)
     if not safe(close) or not safe(near) then return nil end
     if close==true or close==1 then return 0,10 end
     if near==true or near==1 then return (close==false or close==0) and 10 or 0,28 end

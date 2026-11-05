@@ -8,18 +8,14 @@ HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dunge
 
 ## New in this update
 
-- Compact aspect and tracking lists open beneath their floating buttons on right-click. Green markers identify active choices; opening either list closes the other. Automatic reminder dialogs remain separate.
-- Favorite aspects and tracking abilities with the star beside each choice. Favorites save per character and appear first; aspect favorites survive learning a higher rank. Favorites can be changed outside combat.
-- Native spell tooltips on aspect/tracking choices, aspect reminder choices, and the active spell on each floating button.
-- Beast details and name search for every class. `/ht beastdetail` or `/ht beastdetails` inspects a targeted wild beast, or opens search when no suitable beast is targeted. Add a full or partial name to search directly; `/ht beastsearch` also opens search.
-- Search the bundled beast references and your character's journal by name, with paged results and distinct NPC identities for beasts sharing a name. Detail windows include a search box and preserve data-source labels and unknown fields.
-- Pet Abilities includes a beast-name search that displays results and scrollable details inside the ability browser, with optional portraits and a Back control. Selecting an ability or clearing the beast search returns to teaching animals.
+- Clearer colored pet-status and animal tooltips, preserving learned-ability indicators.
+- Updated NPC-specific Petopia tameability, including untameable and faction-restricted creatures and exact source links.
+- Display the addon as HunterTools Forever while retaining existing folder names, commands and settings.
 
-## Bug fixes and refinements
+## Bug fixes
 
-- Keep Pet Abilities searches and details in the ability browser rather than switching to the standalone beast window.
-- Give the embedded beast-details panel a solid dark background and raise it above the ability controls for readability.
-- Non-hunters can inspect beast information without enabling hunter display options; hunter learned-ability labels are omitted for other classes. HunterTools itself must be enabled for that character.
+- Skip interaction-distance checks during combat and tolerate unavailable checks outside combat. Public spell-range results remain usable; unknown distances remain unknown.
+- New or invalid food-order settings default to lower-level food first; existing high/low preferences are retained.
 
 ## Tools and controls
 

@@ -8,17 +8,14 @@ HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dunge
 
 ## New in this update
 
-- Mob Finder and Player Finder, accessible from the new Finders section of the main menu or `/ht mobfinder` and `/ht playerfinder`.
-- Saved watch lists, optional partial-name matching, sound/screen alerts and a click-to-target detection popup. Player targeting supports Forever surnames.
-- Brief highlight on the targeted unit's visible nameplate. Direction arrows and private map markers require genuine public location data; ordinary detections commonly provide none. No Questie dependency.
-- Current pet details can display learned abilities from the live pet spellbook, with independent window and mouseover settings.
+- Clearer colored pet-status and animal tooltips, preserving learned-ability indicators.
+- Updated NPC-specific Petopia tameability, including untameable and faction-restricted creatures and exact source links.
+- Display the addon as HunterTools Forever while retaining existing folder names, commands and settings.
 
-## Bug fixes and refinements
+## Bug fixes
 
-- Include Sonic Blast in Bat family training options, with Blizzard/Petopia source labeling. This does not claim that every wild bat teaches it or assign unknown ranks.
-- Clarify that weapon comparisons assume stationary Auto Shot, including the new 0.5-second standing requirement.
-- Reviewed October 15 changes to Dismember, Sonic Blast and Mine!: bundled ability records store spell identities and teaching references, not outdated damage, duration or cooldown descriptions. Pet expertise/crit changes do not require changes to our Auto Shot-only estimate.
-- Growl detection and disabling on instance entry confirmed working in game after the update.
+- Skip interaction-distance checks during combat and tolerate unavailable checks outside combat. Public spell-range results remain usable; unknown distances remain unknown.
+- New or invalid food-order settings default to lower-level food first; existing high/low preferences are retained.
 
 ## Tools and controls
 

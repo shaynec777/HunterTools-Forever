@@ -1,4 +1,6 @@
-# Unreleased
+# HunterTools Forever 3.1.6 — November 4, 2026
+
+- Forever: skip interaction-distance checks during combat and tolerate unavailable checks; public spell-range results remain usable.
 
 - Color pet-status and animal tooltip labels and values while preserving learned-ability indicators.
 - Include the independent Classic Era source, tests and laptop setup guide.

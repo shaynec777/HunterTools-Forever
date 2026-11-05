@@ -46,3 +46,28 @@ assert(F.TargetDistanceEstimate('Range uncertain')=='Est. 10-28 yd')
 CheckInteractDistance=function() return false end
 assert(F.TargetDistanceEstimate('Range uncertain')=='Est. > 28 yd')
 print('PASS: non-enemy target distance bands')
+
+-- Restricted interaction checks must never be attempted during combat.
+InCombatLockdown=function() return true end
+local interactions=0
+CheckInteractDistance=function() interactions=interactions+1;error('protected call attempted') end
+UnitExists=function() return true end
+UnitCanAttack=function() return false end
+ranged=nil
+C_Spell.GetSpellInfo=function() return {minRange=8,maxRange=35} end
+assert(F.NonEnemyDistanceBand()==nil)
+assert(F.TargetRangeStatus()=='Range uncertain')
+assert(F.TargetDistanceEstimate('Range uncertain')=='Distance unavailable')
+UnitCanAttack=function() return true end
+ranged=false
+assert(F.TargetRangeStatus()=='Range unavailable')
+ranged=true
+assert(F.TargetRangeStatus()=='In range','public spell range remains usable in combat')
+assert(interactions==0,'combat must not call interaction distance')
+InCombatLockdown=function() return false end
+ranged=false
+CheckInteractDistance=function() return true end
+assert(F.TargetRangeStatus()=='Too close','interaction estimates resume after combat')
+CheckInteractDistance=function() error('API unavailable') end
+assert(F.TargetRangeStatus()=='Range unavailable' and F.NonEnemyDistanceBand()==nil)
+print('PASS: combat skips interaction calls, public spell checks remain available, recovery and API errors handled')
