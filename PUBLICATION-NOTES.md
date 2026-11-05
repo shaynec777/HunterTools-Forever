@@ -81,3 +81,5 @@ Published GitHub release https://github.com/shaynec777/HunterTools/releases/tag/
 GitHub main and tag v3.1.6 published at 601a1a6. Release: https://github.com/shaynec777/HunterTools-Forever/releases/tag/v3.1.6
 
 Addon-only ZIP SHA256: 506156bfba45dc0157f03eb8f654d1ed7df9b003d5060b6410798865f199011a. Forever Lua regression files passed when run with their intended fixtures; syntax, TOC references, ZIP bytes and uploaded GitHub asset digest verified. User reports installed build functional. CurseForge submission remains pending author upload-token configuration; no CurseForge upload has been made for this version yet.
+
+CurseForge upload accepted November 4, 2026 via the author upload API. Project 1740323; file 9446546; display name HunterTools Forever 3.1.6; release type release; API-resolved Forever 1.60.1; automatic publication after approval enabled. URL: https://www.curseforge.com/wow/addons/huntertools/files/9446546 . Uploaded ZIP SHA256 remains 506156bfba45dc0157f03eb8f654d1ed7df9b003d5060b6410798865f199011a. API acceptance confirms submission, not moderation approval. Token is encrypted locally in an ignored folder and is not included in Git.
