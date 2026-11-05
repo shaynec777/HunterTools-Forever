@@ -75,3 +75,9 @@ Ongoing requirement, October 17, 2026: always show the current addon version in 
 ## HunterTools 3.1.2 — October 18, 2026
 
 Published GitHub release https://github.com/shaynec777/HunterTools/releases/tag/v3.1.2 at commit 80632854f8db5b5b78f51c45fc37abd39b7c7d33. ZIP SHA256 db1975c7185212eb1332a2a65aa60050c8f993f55ec5c0e447a966ed5c542079 (271730 bytes), uploaded GitHub asset digest verified. CurseForge file 9239112 is Under Review with automatic publication enabled. Public project description saved successfully. Aspect controls, Mend Pet range warning, native restricted-health visual/death alerts and menu version included. Sound/chat restriction explicitly documented; weapon comparisons/scopes remain Experimental with formula retained. All release regressions, Lua 5.1 syntax/TOC and addon-only ZIP root checks passed. Installed both addon folders with backup and complete source hash verification.
+
+## HunterTools Forever 3.1.6 â€” November 4, 2026
+
+GitHub main and tag v3.1.6 published at 601a1a6. Release: https://github.com/shaynec777/HunterTools-Forever/releases/tag/v3.1.6
+
+Addon-only ZIP SHA256: 506156bfba45dc0157f03eb8f654d1ed7df9b003d5060b6410798865f199011a. Forever Lua regression files passed when run with their intended fixtures; syntax, TOC references, ZIP bytes and uploaded GitHub asset digest verified. User reports installed build functional. CurseForge submission remains pending author upload-token configuration; no CurseForge upload has been made for this version yet.
