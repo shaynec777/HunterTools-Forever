@@ -92,3 +92,7 @@ Published November 6, 2026 at commit 9a99795:
 - Forever GitHub release: https://github.com/shaynec777/HunterTools-Forever/releases/tag/v3.1.7 . ZIP SHA256 e589ea1fb1efd6f14fe128ba6b571d5befd9b1510c0b64dd36594ef87232b29e. CurseForge project 1740323 accepted file 9472123 for Forever 1.60.1, release channel, automatic publication after approval.
 - Classic GitHub release: https://github.com/shaynec777/HunterTools-Forever/releases/tag/classic-v0.1.0-beta2 . ZIP SHA256 b3535441cf965a668338128bb4bb476727895cf6af7da982c2a493a4db189c40. CurseForge project 1760155 accepted file 9472125 for Classic Era 1.15.9, beta channel, automatic publication after approval. Includes the previously prepared NPC tameability module; full restart required.
 GitHub uploaded asset digests verified. CurseForge acceptance confirms submission, not moderation approval.
+
+## Website description synchronization — November 6, 2026
+
+Verified public file listings via CFWidget: Forever 3.1.7 (9472123), Classic 0.1.0-beta2 (9472125). Updated both local DESCRIPTION.md sources with explicit matching versions and feeder controls. CurseForge author-token POST /api/projects/{projectId}/update-project accepted both descriptions and returned their correct project IDs (1740323 and 1760155). Public feed readback still served stale descriptions immediately afterward; visible propagation remains unverified. Future releases must synchronize the main website description with the approved downloadable version, separately from file changelogs.

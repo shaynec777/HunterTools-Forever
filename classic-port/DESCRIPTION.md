@@ -2,28 +2,23 @@
 
 A configurable hunter toolkit for **WoW Classic Era**, with feeding, pet information, ammunition reminders, tracking, dungeon checks and nearby-unit finders.
 
-**Initial beta: 0.1.0-beta1.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
+**Current beta: 0.1.0-beta2.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
 
-## New in this update
+## New in this update — 0.1.0-beta2
 
-- Feeder text: choose Verbose, Simplified (Happy / Not happy), or Off in Food > Feeding & alerts. Simplified leaves unavailable happiness blank. The colored border remains visible.
+- Choose Verbose, Simplified, or Off for the text beneath the feeder button in **Food > Feeding & alerts**. Click **Feeder text** to cycle through the choices.
+- Simplified shows **Happy** or **Not happy**. Off hides the text beneath the button. The happiness border and supply count remain visible.
+- The setting is saved per character; Verbose remains the default.
 
-- Classic Era compatibility for pet happiness, diet, loyalty, training points, Beast Training, spellbooks, auras and tooltips.
-- One-click pet feeding, per-pet allowed/blocked food lists, quest-food protection, hunger alerts and supply warnings. Food defaults to lowest item level first; switch between low-to-high and high-to-low in **Food > Feeding & alerts**.
-- A movable pet-status window and own-pet mouseover tips, including learned abilities from the current pet's spellbook.
-- Pet ability browser, teaching-creature references, beast-name search and a local observation journal.
-- Aspect and tracking buttons with right-click lists, active markers, favorites and native spell tooltips. Learned profession tracking is included.
-- Ammo stock reminders and optional upgrade advice.
-- Dungeon prompts to disable Growl autocast and replace your own Aspect of the Pack, through your explicit click outside combat.
-- Target range estimates and a Mend Pet range warning when that spell is learned.
-- Mob Finder and Player Finder with saved watches, optional partial matching, private alerts and a click-to-target popup.
+## Bug fixes
 
-## Bug fixes and Classic refinements
+- Simplified leaves the label blank when happiness cannot be read, including during combat, instead of displaying Unknown.
 
-- Track Beasts remains selectable when minimap tracking rows omit a spell ID or an inactive tracking spell.
-- Classic player names retain their realm instead of treating it as a surname.
-- All pet reference links use **Petopia Classic** and **Wowhead Classic**. The copy-link window has one button for each source.
-- Range checks try native, legacy, action-button and learned-shot results. A known range failure remains **Out of range** when its direction cannot be established.
+- Includes NPC-specific Petopia Classic tameability, faction restrictions, source links and name search for non-teaching creatures. Fully restart Classic to load the new tameability module.
+
+## Classic toolkit
+
+Feeding, per-pet food lists, quest-food protection, hunger and supply alerts, pet status, ability teachers, beast search, aspects and tracking, ammo reminders, dungeon prompts, target range and nearby mob/player watches. Uses Classic-specific APIs, reference links and saved settings.
 
 ## Commands and controls
 

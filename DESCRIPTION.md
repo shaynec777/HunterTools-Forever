@@ -6,18 +6,21 @@ FeedomaticToo has morphed into HunterTools Forever due to the many great suggest
 
 HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dungeon checks, pet information, target range, and an ability browser together for World of Warcraft Forever. All tools can be individually enabled or disabled.
 
-## New in this update
+## New in this update — 3.1.7
 
-- Feeder text: choose Verbose, Simplified (Happy / Not happy), or Off in Food > Feeding & alerts. Simplified leaves unavailable happiness blank. The colored border remains visible.
-
-- Clearer colored pet-status and animal tooltips, preserving learned-ability indicators.
-- Updated NPC-specific Petopia tameability, including untameable and faction-restricted creatures and exact source links.
-- Display the addon as HunterTools Forever while retaining existing folder names, commands and settings.
+- Choose Verbose, Simplified, or Off for the text beneath the feeder button in **Food > Feeding & alerts**. Click **Feeder text** to cycle through the choices.
+- Simplified shows **Happy** or **Not happy**. Off hides the text beneath the button. The happiness border and supply count remain visible.
+- The setting is saved per character; Verbose remains the default.
 
 ## Bug fixes
 
-- Skip interaction-distance checks during combat and tolerate unavailable checks outside combat. Public spell-range results remain usable; unknown distances remain unknown.
-- New or invalid food-order settings default to lower-level food first; existing high/low preferences are retained.
+- Simplified leaves the label blank when happiness cannot be read, including during combat, instead of displaying Unknown.
+
+## Included from 3.1.6
+
+- Clearer colored pet-status and animal tooltips, preserving learned-ability indicators.
+- Updated NPC-specific Petopia tameability, faction restrictions and exact source links.
+- Combat-safe interaction-distance checks and low-level-food-first defaults for new or invalid settings.
 
 ## Tools and controls
 
