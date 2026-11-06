@@ -87,3 +87,8 @@ CurseForge upload accepted November 4, 2026 via the author upload API. Project 1
 ## Feeder text releases — November 6, 2026
 
 Prepared Forever 3.1.7 and Classic 0.1.0-beta2. User confirmed the Forever feeder controls and blank unavailable-happiness label in game. Both editions passed feeder-mode regressions and Lua 5.1 syntax. Forever focused menu, food-login, range and Mend Pet suites passed. Classic validation passed 25 suites; the shared combat-range assertion fails against the older Classic range implementation and is outside this feeder change. Classic feeder in-game validation remains pending. Packages contain only their respective addon folders and were verified byte-for-byte.
+
+Published November 6, 2026 at commit 9a99795:
+- Forever GitHub release: https://github.com/shaynec777/HunterTools-Forever/releases/tag/v3.1.7 . ZIP SHA256 e589ea1fb1efd6f14fe128ba6b571d5befd9b1510c0b64dd36594ef87232b29e. CurseForge project 1740323 accepted file 9472123 for Forever 1.60.1, release channel, automatic publication after approval.
+- Classic GitHub release: https://github.com/shaynec777/HunterTools-Forever/releases/tag/classic-v0.1.0-beta2 . ZIP SHA256 b3535441cf965a668338128bb4bb476727895cf6af7da982c2a493a4db189c40. CurseForge project 1760155 accepted file 9472125 for Classic Era 1.15.9, beta channel, automatic publication after approval. Includes the previously prepared NPC tameability module; full restart required.
+GitHub uploaded asset digests verified. CurseForge acceptance confirms submission, not moderation approval.
