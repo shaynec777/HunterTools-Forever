@@ -96,3 +96,7 @@ GitHub uploaded asset digests verified. CurseForge acceptance confirms submissio
 ## Website description synchronization — November 6, 2026
 
 Verified public file listings via CFWidget: Forever 3.1.7 (9472123), Classic 0.1.0-beta2 (9472125). Updated both local DESCRIPTION.md sources with explicit matching versions and feeder controls. CurseForge author-token POST /api/projects/{projectId}/update-project accepted both descriptions and returned their correct project IDs (1740323 and 1760155). Public feed readback still served stale descriptions immediately afterward; visible propagation remains unverified. Future releases must synchronize the main website description with the approved downloadable version, separately from file changelogs.
+
+## Shared HunterTools version sequence — November 6, 2026
+
+Classic is now numbered 3.1.7 to match Forever. GitHub classic-v3.1.7 published at 37592e0; verified ZIP SHA256 9ed43d2fa481f76a20966217b36d262c1715d2991405a8eb3dbe3472764bb9c8. CurseForge accepted Classic file 9472375 on the beta channel. Public download still showed beta2 at last check, so public description remains beta2 until approval. Future editions follow the shared Forever version sequence with separate packages and settings.
