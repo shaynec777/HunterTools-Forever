@@ -6,6 +6,8 @@ A configurable hunter toolkit for **WoW Classic Era**, with feeding, pet informa
 
 ## New in this update
 
+- Feeder text: choose Verbose, Simplified (Happy / Not happy), or Off in Food > Feeding & alerts. Simplified leaves unavailable happiness blank. The colored border remains visible.
+
 - Classic Era compatibility for pet happiness, diet, loyalty, training points, Beast Training, spellbooks, auras and tooltips.
 - One-click pet feeding, per-pet allowed/blocked food lists, quest-food protection, hunger alerts and supply warnings. Food defaults to lowest item level first; switch between low-to-high and high-to-low in **Food > Feeding & alerts**.
 - A movable pet-status window and own-pet mouseover tips, including learned abilities from the current pet's spellbook.

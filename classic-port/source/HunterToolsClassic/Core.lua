@@ -1,5 +1,5 @@
 local _, F = ...
-F.VERSION = "0.1.0-beta1"
+F.VERSION = "0.1.0-beta2"
 F.FEED_SPELL = 6991
 F.FEED_EFFECT = 1539
 

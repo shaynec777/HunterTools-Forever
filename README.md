@@ -8,6 +8,8 @@ HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dunge
 
 ## New in this update
 
+- Feeder text: choose Verbose, Simplified (Happy / Not happy), or Off in Food > Feeding & alerts. Simplified leaves unavailable happiness blank. The colored border remains visible.
+
 - Clearer colored pet-status and animal tooltips, preserving learned-ability indicators.
 - Updated NPC-specific Petopia tameability, including untameable and faction-restricted creatures and exact source links.
 - Display the addon as HunterTools Forever while retaining existing folder names, commands and settings.

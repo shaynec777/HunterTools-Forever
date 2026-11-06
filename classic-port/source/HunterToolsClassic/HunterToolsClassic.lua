@@ -27,7 +27,20 @@ function F.Render(mode)
     else
         F.button.icon:SetVertexColor(1,1,1)
     end
-    F.button.label:SetText(food and tostring(F.foodCount)..' food' or (mode=='hidden' and F.TooltipStatus() or 'No suitable food'))
+    local label=food and tostring(F.foodCount)..' food' or (mode=='hidden' and F.TooltipStatus() or 'No suitable food')
+    if F.db.feederTextMode=='off' then
+        label=''
+    elseif F.db.feederTextMode=='simplified' then
+        label=''
+        if not InCombatLockdown() and F.supported and UnitExists('pet') and not UnitIsDeadOrGhost('pet') then
+            local happiness=F.ClassicPetInfo.GetPetHappiness()
+            if F.IsPublic(happiness) then
+                if happiness==3 then label='Happy'
+                elseif happiness==1 or happiness==2 then label='Not happy' end
+            end
+        end
+    end
+    F.button.label:SetText(label)
     if F.button.supply then F.button.supply:SetText(F.SupplyCountText()) end
     F.button:Show()
 end

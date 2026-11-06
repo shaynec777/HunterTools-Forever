@@ -207,6 +207,19 @@ function F.OpenFoodList()
     local questHelp=p.feedingPage:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall')
     questHelp:SetPoint('TOPLEFT',310,-421)
     questHelp:SetText('All stacks, until turn-in or abandonment.')
+    local feederText=CreateFrame('Button',nil,p.feedingPage,'UIPanelButtonTemplate')
+    feederText:SetSize(280,25);feederText:SetPoint('TOPLEFT',25,-440)
+    local function updateFeederText()
+        local names={verbose='Verbose',simplified='Simplified',off='Off'}
+        feederText:SetText('Feeder text: '..(names[F.db.feederTextMode] or 'Verbose'))
+    end
+    feederText:SetScript('OnShow',updateFeederText)
+    feederText:SetScript('OnClick',function()
+        local nextMode={verbose='simplified',simplified='off',off='verbose'}
+        F.db.feederTextMode=nextMode[F.db.feederTextMode or 'verbose'] or 'verbose'
+        updateFeederText();F.Refresh()
+    end)
+    updateFeederText()
     local alertStatus=p.feedingPage:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall')
     alertStatus:SetPoint('TOPLEFT',25,-465);alertStatus:SetWidth(630);alertStatus:SetJustifyH('LEFT')
     local elapsed=0

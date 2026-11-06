@@ -1,3 +1,18 @@
+# HunterTools Classic 0.1.0-beta2
+
+## New in this update
+
+- Choose Verbose, Simplified, or Off for the text beneath the feeder button in Food > Feeding & alerts. Click Feeder text to cycle through the choices. The choice is saved per character; Verbose remains the default.
+- Simplified shows Happy or Not happy. Off hides the text beneath the button while preserving the happiness border and supply count.
+
+## Bug fixes
+
+- Simplified mode leaves the label blank when happiness is unavailable, including during combat, instead of showing Unknown.
+
+## Validation
+
+The user confirmed the new controls and blank fallback in Forever. Classic uses its private happiness adapter and still needs in-game confirmation of this change. Existing settings are retained.
+
 # HunterTools Classic 0.1.0-beta1
 
 ## New in this update
