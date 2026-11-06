@@ -1,3 +1,16 @@
+# HunterTools Classic 3.1.7
+
+## New in this update
+
+- Align the Classic version number with HunterTools Forever: both editions now use 3.1.7. Future releases share the Forever version sequence while retaining separate addon packages and settings.
+- Includes the feeder text controls from Classic 0.1.0-beta2: Verbose, Simplified (Happy / Not happy), and Off. Unavailable happiness leaves Simplified blank.
+
+## Bug fixes
+
+- No gameplay changes from Classic 0.1.0-beta2; this release synchronizes version metadata. Classic remains on the beta channel while broader Classic testing continues.
+
+Fully restart Classic if updating from beta1 for the NPC tameability module. Existing settings are retained.
+
 # HunterTools Classic 0.1.0-beta2
 
 ## New in this update

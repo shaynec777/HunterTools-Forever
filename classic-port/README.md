@@ -1,6 +1,6 @@
 # HunterTools Classic â€” Era test build
 
-Version **0.1.0-beta1**, prepared October 21, 2026. This is a separate addon, not a replacement for HunterTools Forever. It is ready for initial in-game testing, not a public stable release.
+Version **3.1.7**, aligned with Forever on November 6, 2026. This is a separate addon, not a replacement for HunterTools Forever. It is ready for initial in-game testing, not a public stable release.
 
 ## Installation
 
