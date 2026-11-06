@@ -63,7 +63,7 @@ function F.TrackingState()
                     local active=safe(info.active) and info.active==true
                     local row={id=id,name=name,active=active,texture=safe(info.texture) and info.texture or nil}
                     state.choices[#state.choices+1]=row;seen[id]=true
-                    if active and not state.active then state.active=row end
+                    if active and (not state.active or (state.active.id==2481 and id~=2481)) then state.active=row end
                 end
             end
         end
@@ -81,7 +81,7 @@ function F.TrackingState()
             end
             local row={id=id,name=name,texture=texture,active=active}
             state.choices[#state.choices+1]=row;seen[id]=true
-            if active and not state.active then state.active=row end
+            if active and (not state.active or (state.active.id==2481 and id~=2481)) then state.active=row end
         end
     end
     return state

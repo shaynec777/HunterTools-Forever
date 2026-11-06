@@ -193,3 +193,21 @@ other:Show();click(current,'RightButton');assert(not own.shown and not other.sho
 click(current,'LeftButton');assert(not own.shown)
 current.refs.otherPicker=nil;click(current,'RightButton');assert(own.shown)
 print('PASS: secure mutual menu exclusion, same-button toggle, missing peer, and both construction orders')
+
+-- Find Treasure is a fallback icon when multiple tracking abilities coexist.
+combat=false
+local trackingRows={}
+C_Minimap={GetNumTrackingTypes=function() return #trackingRows end,GetTrackingInfo=function(i) return trackingRows[i] end}
+C_SpellBook={IsSpellKnown=function() return true end}
+local treasure={spellID=2481,name='Find Treasure',active=true}
+local minerals={spellID=2580,name='Find Minerals',active=true}
+trackingRows={treasure,minerals}
+local result=readTrackingState()
+assert(result.active.id==2580 and result.choices[1].active and result.choices[2].active)
+trackingRows={minerals,treasure}
+assert(readTrackingState().active.id==2580,'treasure must not replace another active tracker')
+minerals.active=false
+assert(readTrackingState().active.id==2481,'treasure alone remains the icon')
+treasure.active=false
+assert(readTrackingState().active==nil,'inactive treasure must not be selected')
+print('PASS: active non-treasure tracking takes icon priority in either order; treasure-only fallback')

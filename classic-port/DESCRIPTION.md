@@ -2,19 +2,16 @@
 
 A configurable hunter toolkit for **WoW Classic Era**, with feeding, pet information, ammunition reminders, tracking, dungeon checks and nearby-unit finders.
 
-**Current beta: 0.1.0-beta2.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
+**Current beta: 3.1.8.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
 
-## New in this update — 0.1.0-beta2
+## New in this update — 3.1.8
 
-- Choose Verbose, Simplified, or Off for the text beneath the feeder button in **Food > Feeding & alerts**. Click **Feeder text** to cycle through the choices.
-- Simplified shows **Happy** or **Not happy**. Off hides the text beneath the button. The happiness border and supply count remain visible.
-- The setting is saved per character; Verbose remains the default.
+- The tracking button prefers other active trackers over Find Treasure, using Treasure only when it is the sole active tracker.
+- Includes Verbose, Simplified and Off feeder text controls.
 
 ## Bug fixes
 
-- Simplified leaves the label blank when happiness cannot be read, including during combat, instead of displaying Unknown.
-
-- Includes NPC-specific Petopia Classic tameability, faction restrictions, source links and name search for non-teaching creatures. Fully restart Classic to load the new tameability module.
+- Find Treasure no longer masks another active tracker on the button.
 
 ## Classic toolkit
 

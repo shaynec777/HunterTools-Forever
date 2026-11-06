@@ -6,21 +6,14 @@ FeedomaticToo has morphed into HunterTools Forever due to the many great suggest
 
 HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dungeon checks, pet information, target range, and an ability browser together for World of Warcraft Forever. All tools can be individually enabled or disabled.
 
-## New in this update — 3.1.7
+## New in this update — 3.1.8
 
-- Choose Verbose, Simplified, or Off for the text beneath the feeder button in **Food > Feeding & alerts**. Click **Feeder text** to cycle through the choices.
-- Simplified shows **Happy** or **Not happy**. Off hides the text beneath the button. The happiness border and supply count remain visible.
-- The setting is saved per character; Verbose remains the default.
+- The tracking button prefers other active trackers over Find Treasure, using Treasure only when it is the sole active tracker.
+- Includes Verbose, Simplified and Off feeder text controls.
 
 ## Bug fixes
 
-- Simplified leaves the label blank when happiness cannot be read, including during combat, instead of displaying Unknown.
-
-## Included from 3.1.6
-
-- Clearer colored pet-status and animal tooltips, preserving learned-ability indicators.
-- Updated NPC-specific Petopia tameability, faction restrictions and exact source links.
-- Combat-safe interaction-distance checks and low-level-food-first defaults for new or invalid settings.
+- Find Treasure no longer masks another active tracker on the button.
 
 ## Tools and controls
 

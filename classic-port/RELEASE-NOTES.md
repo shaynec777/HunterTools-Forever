@@ -1,3 +1,17 @@
+# HunterTools Classic 3.1.8
+
+## New in this update
+
+- When multiple tracking abilities are active, the tracking button prefers any active tracker other than Find Treasure. Find Treasure remains the icon when it is the only active tracker.
+
+## Bug fixes
+
+- Prevent active Find Treasure from masking Find Minerals or other active trackers on the floating button. Tracking abilities and their active indicators remain unchanged.
+
+## Validation
+
+Tracking regressions cover both list orders, Treasure-only fallback, and no active tracking. The user confirmed the change in Forever. Classic in-game confirmation remains pending. Existing settings are preserved.
+
 # HunterTools Classic 3.1.7
 
 ## New in this update
