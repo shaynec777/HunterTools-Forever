@@ -100,3 +100,7 @@ Verified public file listings via CFWidget: Forever 3.1.7 (9472123), Classic 0.1
 ## Shared HunterTools version sequence — November 6, 2026
 
 Classic is now numbered 3.1.7 to match Forever. GitHub classic-v3.1.7 published at 37592e0; verified ZIP SHA256 9ed43d2fa481f76a20966217b36d262c1715d2991405a8eb3dbe3472764bb9c8. CurseForge accepted Classic file 9472375 on the beta channel. Public download still showed beta2 at last check, so public description remains beta2 until approval. Future editions follow the shared Forever version sequence with separate packages and settings.
+
+## Tracking icon priority release 3.1.8
+
+Published GitHub v3.1.8 and classic-v3.1.8 at c298d37. Forever ZIP SHA256 09ef93bb3fd852ca93179e61ed0a72d56c2c0bedafa7ec4ab0b5bc45e80baed2; Classic cb88265b239668c411a4f0635ce1d1f862ea9cf574b19bc83f71e684b7dcce1f. GitHub asset digests, Lua 5.1 syntax, tracking regressions and ZIP/source equality verified. User confirmed Forever icon preference in game. CurseForge accepted Forever file 9480379 and Classic file 9480380 for automatic publication after approval. Public downloads still 3.1.7 for both at last check; descriptions remain aligned to approved 3.1.7. Classic retains beta status.
