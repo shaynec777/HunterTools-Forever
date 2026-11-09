@@ -2,16 +2,16 @@
 
 A configurable hunter toolkit for **WoW Classic Era**, with feeding, pet information, ammunition reminders, tracking, dungeon checks and nearby-unit finders.
 
-**Current beta: 3.1.8.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
+**Current beta: 3.1.9.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
 
-## New in this update — 3.1.8
+## New in this update — 3.1.9
 
-- The tracking button prefers other active trackers over Find Treasure, using Treasure only when it is the sole active tracker.
-- Includes Verbose, Simplified and Off feeder text controls.
+- Reduce repeated event, inventory, quest, menu and pet-status work while preserving immediate feeding validation and live reminders.
+- Includes feeder text controls and preference for active trackers other than Find Treasure.
 
 ## Bug fixes
 
-- Find Treasure no longer masks another active tracker on the button.
+- Unrelated unit activity no longer triggers feeder inventory rescans. Unchanged menus and pet portraits are not repeatedly rebuilt.
 
 ## Classic toolkit
 

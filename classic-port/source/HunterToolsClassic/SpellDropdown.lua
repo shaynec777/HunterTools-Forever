@@ -41,6 +41,16 @@ end
 function F.UpdateSpellDropdown(p,state,settings,title)
     if InCombatLockdown() then return end
     local favorites=type(settings.favorites)=='table' and settings.favorites or {}
+    local stamp={title}
+    for _,spell in ipairs(state.choices) do
+        stamp[#stamp+1]=table.concat({tostring(spell.id),spell.name or '',tostring(spell.texture),
+            tostring(spell.active or (state.active and state.active.id==spell.id)),
+            tostring(favorites[spell.key or spell.name])},'|')
+    end
+    stamp=table.concat(stamp,'\n')
+    if p.renderStamp==stamp then return end
+    p.renderStamp=stamp
+
     local choices={}
     for i,spell in ipairs(state.choices) do choices[i]=spell end
     local function key(spell) return spell.key or spell.name end

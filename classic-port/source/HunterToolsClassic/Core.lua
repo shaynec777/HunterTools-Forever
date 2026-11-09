@@ -1,5 +1,5 @@
 local _, F = ...
-F.VERSION = "3.1.8"
+F.VERSION = "3.1.9"
 F.FEED_SPELL = 6991
 F.FEED_EFFECT = 1539
 
@@ -330,7 +330,7 @@ end
 
 function F.FindFood()
     if InCombatLockdown and InCombatLockdown() then return end
-    if F.ScanQuestFood then F.ScanQuestFood() end
+    if F.EnsureQuestFood then F.EnsureQuestFood() elseif F.ScanQuestFood then F.ScanQuestFood() end
     local best, count, pending, locked = nil, 0, false, false
     F.protectedFoodReasons={}
     for bag = 0, (NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4) do

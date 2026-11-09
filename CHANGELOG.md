@@ -1,3 +1,20 @@
+# HunterTools Forever 3.1.9
+
+## New in this update
+
+- Reduce background work by filtering unrelated unit events and combining bursts of relevant events into a single refresh.
+- Cache quest-food protection and pet ability lists, with event invalidation and loading/recovery retries.
+- Avoid rebuilding unchanged aspect/tracking menus and resetting unchanged pet portraits. Keep the half-second live-status and reminder fallback.
+
+## Bug fixes
+
+- Prevent unrelated aura and spellcast activity from repeatedly invalidating inventory and refreshing pet displays.
+- Feeding clicks retain immediate validation; settings and existing functionality are preserved.
+
+## Validation
+
+The user played the combined Forever build without observing issues. This does not confirm resolution of the original stuttering report. Classic in-game confirmation remains pending.
+
 # HunterTools Forever 3.1.8
 
 ## New in this update

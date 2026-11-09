@@ -104,3 +104,7 @@ Classic is now numbered 3.1.7 to match Forever. GitHub classic-v3.1.7 published 
 ## Tracking icon priority release 3.1.8
 
 Published GitHub v3.1.8 and classic-v3.1.8 at c298d37. Forever ZIP SHA256 09ef93bb3fd852ca93179e61ed0a72d56c2c0bedafa7ec4ab0b5bc45e80baed2; Classic cb88265b239668c411a4f0635ce1d1f862ea9cf574b19bc83f71e684b7dcce1f. GitHub asset digests, Lua 5.1 syntax, tracking regressions and ZIP/source equality verified. User confirmed Forever icon preference in game. CurseForge accepted Forever file 9480379 and Classic file 9480380 for automatic publication after approval. Public downloads still 3.1.7 for both at last check; descriptions remain aligned to approved 3.1.7. Classic retains beta status.
+
+## Performance release 3.1.9
+
+Ported the combined performance changes to Classic. User played the Forever preview without observing issues; original reported stutter resolution is unconfirmed. Both editions pass Lua 5.1 syntax and targeted event/cache regressions. Thirteen focused Forever suites passed; Classic validation passed 25 suites with the pre-existing shared combat-range assertion still failing. Package roots, TOC references, ZIP CRC and source/archive equality checked. Forever SHA256 fcf8c809418577802f01640e1ce6c4cccb1d71c9d2217d7b729404c832318e85; Classic ca1eb202d24515711562a42dc7025dfa34560ca9a184b402f9a2363e07e01520. Source and installed Forever backups preserved under pre-performance-20261109-030722.

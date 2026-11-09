@@ -97,7 +97,16 @@ function F.PetStatusData()
     d.training=number(total) and number(used) and total>=used and ('%d available / %d total (%d spent)'):format(total-used,total,used) or 'Unavailable'
     d.diet=F.PetDietText and F.PetDietText():gsub('^Pet eats: ','') or 'Unavailable'
     local s=F.PetStatusSettings()
-    if s.windowFields.abilities or (s.tooltipEnabled and s.tooltipFields.abilities) then d.abilities=F.CurrentPetAbilities() end
+    if s.windowFields.abilities or (s.tooltipEnabled and s.tooltipFields.abilities) then
+        local now=GetTime and GetTime() or 0
+        local cache=F.petAbilitiesCache
+        if not cache or F.petAbilitiesDirty or cache.guid~=d.guid or now-cache.at>=5 then
+            cache={guid=d.guid,at=now,text=F.CurrentPetAbilities()};F.petAbilitiesCache=cache;F.petAbilitiesDirty=false
+            -- Partial/unavailable spellbooks should retry on the next update.
+            if cache.text:find('loading',1,true) or cache.text:find('unavailable',1,true) then F.petAbilitiesDirty=true end
+        end
+        d.abilities=cache.text
+    end
     if s.windowFields.food or (s.tooltipEnabled and s.tooltipFields.food) then
         if d.guid~=F.petStatusFoodPet then F.bagsDirty=true; F.petStatusFoodPet=d.guid end
         if F.FindFood and (F.bagsDirty or F.foodCount==nil or F.foodEntryPending) then F.FindFood() end
@@ -222,7 +231,12 @@ function F.UpdatePetStatusWindow()
         p:SetScript('OnHide',function() GameTooltip:Hide() end)
     end
     local p=F.petStatusWindow;local d=F.PetStatusData();p.name:SetText(d.name)
-    if not d.missing and SetPortraitTexture then SetPortraitTexture(p.portrait,'pet');p.portrait:Show() else p.portrait:Hide() end
+    if not d.missing and SetPortraitTexture then
+        if not p.portraitReady or p.portraitGUID~=d.guid then
+            SetPortraitTexture(p.portrait,'pet');p.portraitGUID=d.guid;p.portraitReady=true
+        end
+        p.portrait:Show()
+    else p.portrait:Hide();p.portraitReady=nil end
     local y=62
     for _,spec in ipairs({{p.health,'health',d.hp,d.maxHP},{p.focus,'focus',d.focusValue,d.maxFocus}}) do
         local b,key,current,maximum=spec[1],spec[2],spec[3],spec[4]

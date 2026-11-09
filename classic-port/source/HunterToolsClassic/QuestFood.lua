@@ -8,6 +8,16 @@ local function clean(text)
         :gsub('|H.-|h(.-)|h','%1'):gsub('^%s+',''):gsub('%s+$',''))
 end
 
+-- Cache the quest protection scan independently of ordinary feeder refreshes.
+function F.EnsureQuestFood()
+    local now=GetTime and GetTime() or 0
+    if not GetTime or F.questFoodDirty or not F.questFoodScanAt or F.questFoodProtection~=F.db.protectQuestFood
+        or now-F.questFoodScanAt>=5 then
+        if InCombatLockdown and InCombatLockdown() then return end
+        F.ScanQuestFood()
+        F.questFoodDirty=false;F.questFoodScanAt=now;F.questFoodProtection=F.db.protectQuestFood
+    end
+end
 function F.ScanQuestFood()
     if InCombatLockdown and InCombatLockdown() then return end
     F.questFood = {}

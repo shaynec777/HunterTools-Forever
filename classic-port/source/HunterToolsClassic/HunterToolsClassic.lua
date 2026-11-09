@@ -177,15 +177,22 @@ loader:SetScript('OnEvent',function(_,event,a,b,c)
         for _,e in ipairs({'PLAYER_ENTERING_WORLD','PLAYER_REGEN_ENABLED','BAG_UPDATE_DELAYED','PLAYER_EQUIPMENT_CHANGED',
             'ITEM_LOCK_CHANGED','GET_ITEM_INFO_RECEIVED','UNIT_PET','UNIT_HAPPINESS',
             'UNIT_AURA','SPELLS_CHANGED','UNIT_SPELLCAST_SUCCEEDED','UNIT_SPELLCAST_FAILED','UNIT_SPELLCAST_INTERRUPTED',
-            'QUEST_LOG_UPDATE','QUEST_ACCEPTED','QUEST_REMOVED','QUEST_TURNED_IN'}) do loader:RegisterEvent(e) end
+            'PET_BAR_UPDATE','QUEST_LOG_UPDATE','QUEST_ACCEPTED','QUEST_REMOVED','QUEST_TURNED_IN'}) do loader:RegisterEvent(e) end
     end
     if not F.supported then return end
+    -- Unit events for other players/nameplates cannot change our feeder.
+    if event:match('^UNIT_') and a~='pet' and a~='player' then return end
+    if event=='UNIT_PET' and a~='player' then return end
+    if event=='UNIT_PET' or event=='SPELLS_CHANGED' or event=='PET_BAR_UPDATE' or event=='PLAYER_ENTERING_WORLD' then F.petAbilitiesDirty=true end
+    local inventoryChanged=event=='ADDON_LOADED' or event=='PLAYER_ENTERING_WORLD'
+        or event=='BAG_UPDATE_DELAYED' or event=='ITEM_LOCK_CHANGED' or event=='GET_ITEM_INFO_RECEIVED'
+        or event=='UNIT_PET' or event:match('^QUEST_')
+    if inventoryChanged then F.bagsDirty=true;F.questFoodDirty=true end
     if event=='ADDON_LOADED' or event=='PLAYER_ENTERING_WORLD' then F.QueueFoodEntryScan() end
     if event=='BAG_UPDATE_DELAYED' or event=='GET_ITEM_INFO_RECEIVED' or event=='ITEM_LOCK_CHANGED' or event=='UNIT_PET' then
         F.foodEntrySnapshot=nil
     end
     if event=='PLAYER_ENTERING_WORLD' then F.QueueInstanceCheck(); F.QueueAmmoEntryScan() end
-    F.bagsDirty=true
     if event=='ADDON_LOADED' or event=='PLAYER_ENTERING_WORLD' or event=='PLAYER_REGEN_ENABLED'
         or event=='BAG_UPDATE_DELAYED' or event=='PLAYER_EQUIPMENT_CHANGED' or event=='GET_ITEM_INFO_RECEIVED' then F.ammoDirty=true end
     if event=='UNIT_SPELLCAST_SUCCEEDED' or event=='UNIT_SPELLCAST_FAILED' or event=='UNIT_SPELLCAST_INTERRUPTED' then
@@ -199,6 +206,15 @@ loader:SetScript('OnEvent',function(_,event,a,b,c)
     if F.dragging then
         F.button:StopMovingOrSizing(); F.dragging=false
     end
-    F.Refresh()
-    F.UpdatePetStatusWindow()
+    -- Collapse an event burst into one next-frame refresh. Click handlers still
+    -- validate inventory synchronously; the ticker remains a recovery fallback.
+    if not F.eventRefreshPending then
+        F.eventRefreshPending=true
+        local function refresh()
+            F.eventRefreshPending=nil
+            if InCombatLockdown() or F.clickInProgress then return end
+            F.Refresh();F.UpdatePetStatusWindow()
+        end
+        if C_Timer.After then C_Timer.After(0,refresh) else refresh() end
+    end
 end)

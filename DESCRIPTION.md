@@ -6,14 +6,14 @@ FeedomaticToo has morphed into HunterTools Forever due to the many great suggest
 
 HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dungeon checks, pet information, target range, and an ability browser together for World of Warcraft Forever. All tools can be individually enabled or disabled.
 
-## New in this update — 3.1.8
+## New in this update — 3.1.9
 
-- The tracking button prefers other active trackers over Find Treasure, using Treasure only when it is the sole active tracker.
-- Includes Verbose, Simplified and Off feeder text controls.
+- Reduce repeated event, inventory, quest, menu and pet-status work while preserving immediate feeding validation and live reminders.
+- Includes feeder text controls and preference for active trackers other than Find Treasure.
 
 ## Bug fixes
 
-- Find Treasure no longer masks another active tracker on the button.
+- Unrelated unit activity no longer triggers feeder inventory rescans. Unchanged menus and pet portraits are not repeatedly rebuilt.
 
 ## Tools and controls
 
