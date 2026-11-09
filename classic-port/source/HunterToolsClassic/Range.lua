@@ -77,11 +77,28 @@ function F.ClassicTargetShotRange()
         end
     end
 end
+-- Auto Shot metadata can contain invalid bounds (observed min=35/max=0).
+-- Use a learned shot's validated bounds rather than guessing or swapping fields.
+function F.ClassicShotRangeInfo()
+    local api=F.ClassicSpell
+    for _,id in ipairs({75,3044,1978,5116}) do
+        if id==75 or query(F.ClassicSpellBook and F.ClassicSpellBook.IsSpellKnown,id)==true then
+            local info=query(api and api.GetSpellInfo,id)
+            if safe(info) and type(info)=='table' then
+                local low,high=info.minRange,info.maxRange
+                if safe(low) and safe(high) and type(low)=='number' and type(high)=='number'
+                    and low>=0 and high>low and high>=28 then return info,id end
+            end
+        end
+    end
+end
 function F.DebugClassicRange()
     if InCombatLockdown() then F.Print('Run rangedebug outside combat.');return end
     local info=query(F.ClassicSpell and F.ClassicSpell.GetSpellInfo,75)
     F.Print('Auto Shot: range='..tostring(query(F.ClassicSpell and F.ClassicSpell.IsSpellInRange,75,'target'))..
         '; min='..tostring(type(info)=='table' and info.minRange)..'; max='..tostring(type(info)=='table' and info.maxRange))
+    local bounds,source=F.ClassicShotRangeInfo()
+    F.Print('Shooting bounds: source='..tostring(source)..'; min='..tostring(bounds and bounds.minRange)..'; max='..tostring(bounds and bounds.maxRange))
     F.Print('Interact follow='..tostring(interactRange(4))..
         '; legacy='..tostring(query(IsSpellInRange,query(F.ClassicSpell and F.ClassicSpell.GetSpellName,75),'target'))..
         '; resolved='..tostring(F.ClassicTargetShotRange()))
@@ -93,13 +110,15 @@ function F.TargetRangeStatus()
     local dead=UnitIsDeadOrGhost('target')
     if not safe(enemy) or not safe(dead) then return 'Range unavailable',0.7,0.7,0.7 end
     F.rangeNonEnemy=not enemy or dead
+    -- A corpse/friendly unit is not a valid test of shooting eligibility.
+    if F.rangeNonEnemy then return 'Range uncertain',0.7,0.7,0.7 end
     local ranged=F.ClassicTargetShotRange()
     if not safe(ranged) then return 'Range unavailable',0.7,0.7,0.7 end
     if ranged==true or ranged==1 then return 'In range',0.2,1,0.3 end
     if ranged~=false and ranged~=0 then
         if F.rangeNonEnemy then
             local low,high=F.NonEnemyDistanceBand()
-            local info=F.ClassicSpell and F.ClassicSpell.GetSpellInfo and F.ClassicSpell.GetSpellInfo(75)
+            local info=F.ClassicShotRangeInfo()
             local minimum=info and info.minRange
             local maximum=info and info.maxRange
             if safe(minimum) and safe(maximum) and type(minimum)=='number' and type(maximum)=='number' then
@@ -113,11 +132,14 @@ function F.TargetRangeStatus()
     end
     -- Follow-distance is inside Auto Shot's normal maximum range, so a failed
     -- ranged check inside that distance means the target is too close.
-    local info=F.ClassicSpell and F.ClassicSpell.GetSpellInfo and F.ClassicSpell.GetSpellInfo(75)
+    local info=F.ClassicShotRangeInfo()
     local maximum=info and info.maxRange
     local near=interactRange(4)
-    if not safe(near) or not safe(maximum) then return 'Out of range',1,0.8,0.2 end
-    if type(maximum)~='number' or maximum<28 then return 'Out of range',1,0.8,0.2 end
+    if not safe(near) then return 'Out of range',1,0.8,0.2 end
+    -- Era Auto Shot's base maximum exceeds follow distance. Its malformed
+    -- metadata must not suppress a valid live shot/follow classification.
+    -- If valid metadata explicitly contradicts that relationship, stay uncertain.
+    if maximum and (not safe(maximum) or maximum<28) then return 'Out of range',1,0.8,0.2 end
     if near==true or near==1 then return 'Too close',1,0.3,0.15 end
     if near==false or near==0 then return 'Too far',1,0.8,0.2 end
     return 'Out of range',1,0.8,0.2
@@ -141,7 +163,7 @@ function F.TargetDistanceEstimate(status)
     if status~='In range' and status~='Too close' and status~='Too far' then
         return 'Distance unavailable'
     end
-    local info=F.ClassicSpell and F.ClassicSpell.GetSpellInfo and F.ClassicSpell.GetSpellInfo(75)
+    local info=F.ClassicShotRangeInfo()
     if not safe(info) or type(info)~='table' then return 'Distance unavailable' end
     local minimum,maximum=info.minRange,info.maxRange
     if not safe(minimum) or not safe(maximum) or type(minimum)~='number'

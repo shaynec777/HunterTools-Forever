@@ -1,3 +1,19 @@
+# HunterTools Classic 3.1.11a
+
+## Bug fixes — 3.1.11a
+
+- Fix Classic's range window remaining at In range / Out of range when Auto Shot reports invalid spell bounds (observed minimum 35, maximum 0).
+- Use validated learned-shot bounds when available. Outside combat, retain live shot/follow-distance classification even if numeric bounds are unavailable, restoring Too close / In range / Too far without inventing yardage.
+- Carcasses and friendly targets display estimated distance bands without claiming shooting eligibility. In combat, unavailable secondary checks retain the honest Out of range fallback.
+
+## Validation
+
+User confirmed the Classic range window now shows Too close, In range and Too far at the tested positions outside combat. Dedicated regressions cover malformed metadata, missing fallback bounds, corpses, combat restrictions and recovery. Existing settings are preserved.
+
+Includes the 3.1.11 sidebar menus, per-line tooltip controls, green buttons and 80% opaque backgrounds.
+
+Thanks to [**AalSupes**](https://www.curseforge.com/members/aalsupes) and [**BluBuryPi**](https://www.curseforge.com/members/bluburypi) for their help testing and improving HunterTools.
+
 # HunterTools Classic 3.1.11
 
 ## New in this update

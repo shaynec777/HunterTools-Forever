@@ -2,18 +2,23 @@
 
 A configurable hunter toolkit for **WoW Classic Era**, with feeding, pet information, ammunition reminders, tracking, dungeon checks and nearby-unit finders.
 
-**Current beta: 3.1.11.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
+**Current beta: 3.1.11a.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
 
-## New in this update — 3.1.11
+## Current update — 3.1.11a
 
-- Sidebar settings navigation groups Feeding, My pet, Wild beasts, Tracking & aspects, Ammunition & weapons, Range & dungeon checks, and Finders in one window. Existing slash commands remain available.
-- Direct pet and wild-beast tooltip settings, with per-line controls independent of window settings. Additional beast controls include location, learned-rank labels, training options and reference lines.
-- Softer rounded tooltip-style borders, green buttons and 80% opaque menu backgrounds. Embedded pages share the main background to avoid stacked opacity.
+## Bug fixes — 3.1.11a
 
-## Bug fixes
+- Fix Classic's range window remaining at In range / Out of range when Auto Shot reports invalid spell bounds (observed minimum 35, maximum 0).
+- Use validated learned-shot bounds when available. Outside combat, retain live shot/follow-distance classification even if numeric bounds are unavailable, restoring Too close / In range / Too far without inventing yardage.
+- Carcasses and friendly targets display estimated distance bands without claiming shooting eligibility. In combat, unavailable secondary checks retain the honest Out of range fallback.
 
-- Clearer category/page headings and specific enable labels make settings easier to locate. Existing character preferences are retained.
+## Validation
 
+User confirmed the Classic range window now shows Too close, In range and Too far at the tested positions outside combat. Dedicated regressions cover malformed metadata, missing fallback bounds, corpses, combat restrictions and recovery. Existing settings are preserved.
+
+Includes the 3.1.11 sidebar menus, per-line tooltip controls, green buttons and 80% opaque backgrounds.
+
+Thanks to [**AalSupes**](https://www.curseforge.com/members/aalsupes) and [**BluBuryPi**](https://www.curseforge.com/members/bluburypi) for their help testing and improving HunterTools.
 
 ## Classic toolkit
 

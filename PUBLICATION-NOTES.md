@@ -122,3 +122,7 @@ CurseForge accepted Forever file 9522244 and Classic file 9522245 with automatic
 Published GitHub v3.1.11 and classic-v3.1.11 at a4ee29b. Both editions include sidebar settings navigation, direct per-line tooltip settings, green buttons, softer rounded tooltip-style borders and 80% opaque shared backgrounds. Credits to AalSupes and BluBuryPi retained. Verified Lua 5.1 syntax, targeted navigation/tooltip/styling checks, package contents and uploaded GitHub asset digests. Forever ZIP SHA256 e582742eb79fd76806c4b4a506ff1f64420ef446f8c1c4a2bf23e346c3b73033; Classic c32754d69a4a168831a8c25148d61baec6c339a762353385c8fb6b264c8de258. Classic broader validation: 25 passed, existing range assertion failure unchanged; Classic live confirmation pending.
 
 CurseForge accepted Forever file 9522426 and Classic file 9522427 with automatic publication after approval. Website descriptions synchronized by author API to the public feed's current 3.1.9 downloads at last check; feed may lag approvals. Advance descriptions to 3.1.11 once publicly downloadable. Classic retains beta status.
+
+## Release policy — effective November 9, 2026
+
+User instruction: update CurseForge website notes to the latest version uploaded for approval immediately, even before that version is available for download. This supersedes the prior approved-download-only description policy. Do not claim moderation approval until verified. Corrective suffixes such as Classic 3.1.11a may differ from the unchanged Forever release.
