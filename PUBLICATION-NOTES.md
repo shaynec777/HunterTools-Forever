@@ -126,3 +126,5 @@ CurseForge accepted Forever file 9522426 and Classic file 9522427 with automatic
 ## Release policy — effective November 9, 2026
 
 User instruction: update CurseForge website notes to the latest version uploaded for approval immediately, even before that version is available for download. This supersedes the prior approved-download-only description policy. Do not claim moderation approval until verified. Corrective suffixes such as Classic 3.1.11a may differ from the unchanged Forever release.
+
+Classic 3.1.11a published at 7d62952: https://github.com/shaynec777/HunterTools-Forever/releases/tag/classic-v3.1.11a . ZIP SHA256 5f6d3a82e313ccb89909471c9265fe3ce0cf9b063f07d31c99eb4a3762b54e80; GitHub uploaded digest verified. CurseForge accepted file 9530047 with automatic publication after approval, beta status retained. Author API accepted Classic website notes for 3.1.11a and Forever notes for 3.1.11 immediately, per revised policy. User confirmed corrected Classic close/in/far labels outside combat. Next regular release must re-synchronize Forever and Classic version numbers; no matching Forever suffix release is needed now.
