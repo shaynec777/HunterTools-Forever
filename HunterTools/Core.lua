@@ -1,5 +1,5 @@
 local _, F = ...
-F.VERSION = "3.1.9"
+F.VERSION = "3.1.10"
 F.FEED_SPELL = 6991
 F.FEED_EFFECT = 1539
 
@@ -314,6 +314,7 @@ function F.PreferFood(food, best)
 end
 
 function F.QueueFoodEntryScan()
+    F.pendingFoodItemIDs={}
     F.foodEntryPending=true
     F.foodEntryReadyAt=GetTime()+10
     F.foodEntrySnapshot=nil
@@ -339,6 +340,7 @@ function F.FindFood()
     if InCombatLockdown and InCombatLockdown() then return end
     if F.EnsureQuestFood then F.EnsureQuestFood() elseif F.ScanQuestFood then F.ScanQuestFood() end
     local best, count, pending, locked = nil, 0, false, false
+    F.pendingFoodItemIDs={}
     F.protectedFoodReasons={}
     for bag = 0, (NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4) do
         local slots=C_Container.GetContainerNumSlots(bag)
@@ -361,11 +363,11 @@ function F.FindFood()
                 -- the entire food scan in a permanent loading state.
                 local edible=C_PetInfo.CanPetEatItem(item.itemID)
                 if not public(edible) or edible==nil then
-                    pending=true
+                    pending=true;F.pendingFoodItemIDs[item.itemID]=true
                 elseif edible then
                     local name, link, quality, level = C_Item.GetItemInfo(item.itemID)
                     if not public(name) or not name then
-                        pending=true -- Only edible items require food metadata.
+                        pending=true;F.pendingFoodItemIDs[item.itemID]=true -- Retry only this missing food item.
                     elseif item.isLocked then
                         locked = true
                     else
@@ -578,8 +580,8 @@ end
 function F.Refresh(forceScan)
     if not F.button or InCombatLockdown() or F.clickInProgress then return end
     if F.dragging then F.Disarm(); return end
-    F.FoodLists()
     if not F.db.enabled then F.Disarm(); F.button:Hide(); return end
+    F.FoodLists()
     if F.foodEntryPending then forceScan=true end
     local state, reason = F.GetState()
     F.reason = reason

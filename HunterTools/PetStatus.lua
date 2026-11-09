@@ -79,7 +79,7 @@ function F.PetStatusData()
     if not exists then return {name='No pet',missing=true} end
     local d={name=text(query(UnitName,'pet')) or 'Your pet',guid=query(UnitGUID,'pet')}
     local level=query(UnitLevel,'pet'); local family=text(query(UnitCreatureFamily,'pet'))
-    d.identity=(number(level) and level>0 and ('Level '..level) or 'Level unavailable')..' â€¢ '..(family or 'Family unavailable')
+    d.identity=(number(level) and level>0 and ('Level '..level) or 'Level unavailable')..' - '..(family or 'Family unavailable')
     d.role=F.PetRole and F.PetRole(family) or 'Unknown'
     local hp,maxHP=query(UnitHealth,'pet'),query(UnitHealthMax,'pet')
     local focus,maxFocus=query(UnitPower,'pet',2),query(UnitPowerMax,'pet',2)
@@ -89,10 +89,10 @@ function F.PetStatusData()
     local petInfo=C_PetInfo or {}
     local happiness,damage,rate=query(petInfo.GetPetHappiness)
     d.happiness=({[1]='Unhappy',[2]='Content',[3]='Happy'})[happiness] or 'Unavailable'
-    if number(damage) then d.happiness=d.happiness..(' â€¢ %g%% damage'):format(damage) end
+    if number(damage) then d.happiness=d.happiness..(' - %g%% damage'):format(damage) end
     d.happinessValue=happiness
     d.loyalty=text(query(petInfo.GetPetLoyalty)) or 'Unavailable'
-    if number(rate) then d.loyalty=d.loyalty..' â€¢ '..(rate>0 and 'rising' or rate<0 and 'falling' or 'steady') end
+    if number(rate) then d.loyalty=d.loyalty..' - '..(rate>0 and 'rising' or rate<0 and 'falling' or 'steady') end
     local total,used=query(petInfo.GetPetTrainingPoints)
     d.training=number(total) and number(used) and total>=used and ('%d available / %d total (%d spent)'):format(total-used,total,used) or 'Unavailable'
     d.diet=F.PetDietText and F.PetDietText():gsub('^Pet eats: ','') or 'Unavailable'
@@ -108,26 +108,28 @@ function F.PetStatusData()
         d.abilities=cache.text
     end
     if s.windowFields.food or (s.tooltipEnabled and s.tooltipFields.food) then
-        if d.guid~=F.petStatusFoodPet then F.bagsDirty=true; F.petStatusFoodPet=d.guid end
+        if d.guid~=F.petStatusFoodPet then
+            F.bagsDirty=true; F.petStatusFoodPet=d.guid
+        end
         if F.FindFood and (F.bagsDirty or F.foodCount==nil or F.foodEntryPending) then F.FindFood() end
     end
     if F.foodEntryPending or F.pendingItems or F.lockedFood or F.foodCount==nil then
-        d.food='Inventory settlingâ€¦'
+        d.food='Inventory settling...'
     else
         d.food=('%d suitable item%s'):format(F.foodCount,F.foodCount==1 and '' or 's')
-        if F.food and text(F.food.name) then d.food=d.food..' â€¢ Next: '..F.food.name end
+        if F.food and text(F.food.name) then d.food=d.food..' - Next: '..F.food.name end
     end
     local dead=query(UnitIsDeadOrGhost,'pet')
     local effect=F.FEED_EFFECT and query(C_Spell and C_Spell.GetSpellName,F.FEED_EFFECT)
     local aura=effect and query(C_UnitAuras and C_UnitAuras.GetAuraDataBySpellName,'pet',effect,'HELPFUL')
-    d.feeding=dead and 'Pet is dead' or aura and 'Being fed' or happiness==3 and 'Happy â€” no feeding needed' or (happiness==1 or happiness==2) and 'Hungry' or 'Unavailable'
+    d.feeding=dead and 'Pet is dead' or aura and 'Being fed' or happiness==3 and 'Happy - no feeding needed' or (happiness==1 or happiness==2) and 'Hungry' or 'Unavailable'
     local last=d.guid and type(F.db.petLastFeeds)=='table' and F.db.petLastFeeds[d.guid]
     d.lastFeed='Not recorded yet'
     if type(last)=='table' and type(last.food)=='string' and number(last.at) then
         local now=query(time)
         if number(now) and now>=last.at then
             local minutes=math.floor((now-last.at)/60)
-            d.lastFeed=last.food..(minutes==0 and ' â€¢ just now' or (' â€¢ %d min ago'):format(minutes))
+            d.lastFeed=last.food..(minutes==0 and ' - just now' or (' - %d min ago'):format(minutes))
         end
     end
     return d
@@ -208,7 +210,7 @@ function F.UpdatePetStatusWindow()
         p:SetBackdrop({bgFile='Interface\\DialogFrame\\UI-DialogBox-Background',edgeFile='Interface\\Tooltips\\UI-Tooltip-Border',edgeSize=12})
         p.portrait=p:CreateTexture(nil,'ARTWORK');p.portrait:SetSize(40,40);p.portrait:SetPoint('TOPLEFT',12,-12)
         p.name=p:CreateFontString(nil,'OVERLAY','GameFontNormal');p.name:SetPoint('TOPLEFT',62,-17);p.name:SetWidth(235);p.name:SetJustifyH('LEFT');p.name:SetWordWrap(false)
-        p.header=p:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall');p.header:SetPoint('TOPLEFT',62,-35);p.header:SetText('Pet status â€¢ right-click: tool menu')
+        p.header=p:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall');p.header:SetPoint('TOPLEFT',62,-35);p.header:SetText('Right-click for settings')
         local function bar(color)
             local b=CreateFrame('StatusBar',nil,p);b:SetHeight(18);b:SetWidth(286);b:SetStatusBarTexture('Interface\\TargetingFrame\\UI-StatusBar');b:SetStatusBarColor(unpack(color))
             local bg=b:CreateTexture(nil,'BACKGROUND');bg:SetAllPoints();bg:SetColorTexture(0.1,0.1,0.1,0.8)
@@ -245,7 +247,23 @@ function F.UpdatePetStatusWindow()
         else b:Hide() end
     end
     local fields={};for k,v in pairs(s.windowFields) do fields[k]=v end;fields.health=false;fields.focus=false
-    local lines={};for _,line in ipairs(F.PetStatusLines(d,fields)) do lines[#lines+1]=line[1]..': '..line[2] end
+    local lines={}
+    for _,line in ipairs(F.PetStatusLines(d,fields)) do
+        local label,value=line[1],line[2]
+        if label==labels.abilities then
+            label='Abilities'
+            -- Commands and stances remain in the full mouseover details.
+            local entries={}
+            for entry in value:gmatch('[^;]+') do
+                if not entry:find('(Pet Command)',1,true) and not entry:find('(Pet Stance)',1,true) then
+                    entries[#entries+1]=entry:match('^%s*(.-)%s*$')
+                end
+            end
+            if #entries>0 then value=table.concat(entries,', ')
+            elseif value:find('(Pet ',1,true) then value='No combat abilities listed' end
+        end
+        lines[#lines+1]='|cffc9b77d'..label..':|r '..value
+    end
     p.details:ClearAllPoints();p.details:SetPoint('TOPLEFT',12,-y);p.details:SetText(table.concat(lines,'\n'))
     p:SetHeight(math.max(78,y+p.details:GetStringHeight()+14));p:Show()
 end

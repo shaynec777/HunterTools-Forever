@@ -46,3 +46,12 @@ assert(not F.foodEntryPending and not F.pendingItems and F.foodCount==20)
 assert(F.HungerMessage()=='Tallstrider is hungry.')
 F.pendingItems=true;assert(F.HungerMessage()=='Tallstrider is hungry.','known food stays usable during a partial scan')
 print('PASS: uncached non-food cannot block food readiness; available food avoids misleading loading alerts')
+
+F.QueueFoodEntryScan();now=500;slots=1
+C_PetInfo.CanPetEatItem=function() return true end
+C_Item.GetItemInfo=function() return nil end
+F.FindFood();assert(F.pendingFoodItemIDs[1] and F.pendingItems)
+C_Item.GetItemInfo=function() return 'Food','link',1,10 end
+F.FindFood();assert(not F.pendingFoodItemIDs[1] and not F.pendingItems)
+now=502;F.FindFood();assert(not F.foodEntryPending,'resolved food completes entry confirmation')
+print('PASS: missing food IDs tracked precisely and cleared after resolution; entry scan completes')

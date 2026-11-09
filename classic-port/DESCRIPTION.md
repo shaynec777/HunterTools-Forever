@@ -2,16 +2,17 @@
 
 A configurable hunter toolkit for **WoW Classic Era**, with feeding, pet information, ammunition reminders, tracking, dungeon checks and nearby-unit finders.
 
-**Current beta: 3.1.9.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
+**Current beta: 3.1.10.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
 
-## New in this update — 3.1.9
+## New in this update — 3.1.10
 
-- Reduce repeated event, inventory, quest, menu and pet-status work while preserving immediate feeding validation and live reminders.
-- Includes feeder text controls and preference for active trackers other than Find Treasure.
+- Fix repeated inventory loading retries and cache quest food names, reducing unnecessary background scans.
+- Cleaner pet-status text and compact abilities.
+- Temporary performance diagnostics removed from the release.
 
 ## Bug fixes
 
-- Unrelated unit activity no longer triggers feeder inventory rescans. Unchanged menus and pet portraits are not repeatedly rebuilt.
+- Unrelated item-information events no longer reset food inventory confirmation or trigger unnecessary quest scans. Missing food data still retries normally.
 
 ## Classic toolkit
 
@@ -58,3 +59,5 @@ All 25 automated Lua 5.1 suites, syntax, TOC references, ZIP integrity and sourc
 Original feeding engine: FeedPetForever by Gideon (MIT licensed); original notices are retained. Original Feed-O-Matic concept: Gazmik Fizzwidget. Adaptation and enhancements: OpenAI Codex, directed and tested by the user. The approved hunter multitool logo is original AI-generated project artwork. No affiliation or endorsement by Blizzard or the reference sites is implied.
 
 Thanks to Raytchel Bates and Vanauge Imnewtorp for their suggestions!
+
+Thanks to [**AalSupes**](https://www.curseforge.com/members/aalsupes) and [**BluBuryPi**](https://www.curseforge.com/members/bluburypi) for their help testing and improving HunterTools.

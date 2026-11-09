@@ -6,14 +6,15 @@ FeedomaticToo has morphed into HunterTools Forever due to the many great suggest
 
 HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dungeon checks, pet information, target range, and an ability browser together for World of Warcraft Forever. All tools can be individually enabled or disabled.
 
-## New in this update — 3.1.9
+## New in this update — 3.1.10
 
-- Reduce repeated event, inventory, quest, menu and pet-status work while preserving immediate feeding validation and live reminders.
-- Includes feeder text controls and preference for active trackers other than Find Treasure.
+- Fix repeated inventory loading retries and cache quest food names, reducing unnecessary background scans.
+- Cleaner pet-status text and compact abilities.
+- Temporary performance diagnostics removed from the release.
 
 ## Bug fixes
 
-- Unrelated unit activity no longer triggers feeder inventory rescans. Unchanged menus and pet portraits are not repeatedly rebuilt.
+- Unrelated item-information events no longer reset food inventory confirmation or trigger unnecessary quest scans. Missing food data still retries normally.
 
 ## Tools and controls
 
@@ -62,3 +63,5 @@ Original feeding engine: FeedPetForever by Gideon (MIT licensed). Adaptation and
 Food and partial Forever reference: Wowhead Forever. Beast/family data: [Petopia Forever](https://www.wow-petopia.com/forever/) and xWillawisp's linked community taming sheet. Classic ability/diet baseline: [Petopia Classic](https://www.wow-petopia.com/classic/abilities.php). See PET-DATA-SOURCES.md and WEAPON-COMPARISONS.md for scope, formula sources and limitations. Buff-food detection recognizes English Well Fed tooltip text; manually block any special foods it misses.
 
 Thanks to Raytchel Bates and Vanauge Imnewtorp for their suggestions!
+
+Thanks to [**AalSupes**](https://www.curseforge.com/members/aalsupes) and [**BluBuryPi**](https://www.curseforge.com/members/bluburypi) for their help testing and improving HunterTools.

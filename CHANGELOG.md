@@ -1,3 +1,22 @@
+# HunterTools Forever 3.1.10
+
+## New in this update
+
+- Reduce repeated inventory and quest-protection scans by tracking specific missing item IDs. Unrelated item-information events no longer reset the stable inventory snapshot or keep loading retries running indefinitely.
+- Cache resolved quest food names and avoid idle target-highlight updates. Preserve immediate feeding validation and retries for genuinely missing data.
+- Clean up pet-status separators, labels and the compact ability list. Full command/stance information remains in the tooltip.
+
+## Bug fixes
+
+- Fix the entry-loading loop that repeatedly rescanned ready inventory. Retain quest-food protection and item-loading safeguards.
+- Remove temporary timing diagnostics and counters from the shipped addon.
+
+## Validation
+
+The user's Forever performance sample dropped from 5.31 to 0.15 inventory scans per second after the loop fix. This is one comparison, not a universal performance guarantee. Classic shares the affected logic and receives the same fixes; Classic in-game confirmation remains pending.
+
+Thanks to [**AalSupes**](https://www.curseforge.com/members/aalsupes) and [**BluBuryPi**](https://www.curseforge.com/members/bluburypi) for their help testing and improving HunterTools.
+
 # HunterTools Forever 3.1.9
 
 ## New in this update

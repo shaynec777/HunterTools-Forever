@@ -3,6 +3,7 @@ BINDING_HEADER_GFWCLASSIC = 'HunterTools Classic'
 _G['BINDING_NAME_CLICK GFWClassicFeedButton:LeftButton'] = 'Feed Pet'
 
 function F.UpdateHappinessBorder()
+    if F.db and not F.db.enabled then return end
     if not F.button or not F.button.border then return end
     local r,g,b=0.45,0.45,0.45
     -- Do not read restricted pet data during combat.
@@ -184,12 +185,30 @@ loader:SetScript('OnEvent',function(_,event,a,b,c)
     if event:match('^UNIT_') and a~='pet' and a~='player' then return end
     if event=='UNIT_PET' and a~='player' then return end
     if event=='UNIT_PET' or event=='SPELLS_CHANGED' or event=='PET_BAR_UPDATE' or event=='PLAYER_ENTERING_WORLD' then F.petAbilitiesDirty=true end
-    local inventoryChanged=event=='ADDON_LOADED' or event=='PLAYER_ENTERING_WORLD'
-        or event=='BAG_UPDATE_DELAYED' or event=='ITEM_LOCK_CHANGED' or event=='GET_ITEM_INFO_RECEIVED'
+    local foodItem=event=='GET_ITEM_INFO_RECEIVED' and F.pendingFoodItemIDs and F.pendingFoodItemIDs[a]
+    local questItem=event=='GET_ITEM_INFO_RECEIVED' and F.questFoodPendingIDs and F.questFoodPendingIDs[a]
+    local relevantItem=foodItem or questItem
+    if event=='GET_ITEM_INFO_RECEIVED' and not relevantItem then
+        return
+    end
+    if foodItem then F.pendingFoodItemIDs[a]=nil end
+    if questItem then
+        if F.InvalidateQuestItemName then F.InvalidateQuestItemName(a) end
+        F.questFoodPendingIDs[a]=nil
+    end
+    local inventoryChanged=event=='ADDON_LOADED'  or event=='PLAYER_ENTERING_WORLD'
+        or event=='BAG_UPDATE_DELAYED' or event=='ITEM_LOCK_CHANGED' or foodItem
         or event=='UNIT_PET' or event:match('^QUEST_')
-    if inventoryChanged then F.bagsDirty=true;F.questFoodDirty=true end
+    if inventoryChanged then
+        F.bagsDirty=true
+    end
+    -- Locks and pet state do not change quest objectives or native bag flags.
+    if event=='ADDON_LOADED' or event=='PLAYER_ENTERING_WORLD' or event=='BAG_UPDATE_DELAYED'
+        or questItem or event:match('^QUEST_') then
+        F.questFoodDirty=true
+    end
     if event=='ADDON_LOADED' or event=='PLAYER_ENTERING_WORLD' then F.QueueFoodEntryScan() end
-    if event=='BAG_UPDATE_DELAYED' or event=='GET_ITEM_INFO_RECEIVED' or event=='ITEM_LOCK_CHANGED' or event=='UNIT_PET' then
+    if event=='BAG_UPDATE_DELAYED' or foodItem or event=='ITEM_LOCK_CHANGED' or event=='UNIT_PET' then
         F.foodEntrySnapshot=nil
     end
     if event=='PLAYER_ENTERING_WORLD' then F.QueueInstanceCheck(); F.QueueAmmoEntryScan() end

@@ -12,18 +12,31 @@ end
 function F.EnsureQuestFood()
     local now=GetTime and GetTime() or 0
     if not GetTime or F.questFoodDirty or not F.questFoodScanAt or F.questFoodProtection~=F.db.protectQuestFood
-        or now-F.questFoodScanAt>=5 then
+        or now-F.questFoodScanAt>=30 then
         if InCombatLockdown and InCombatLockdown() then return end
         F.ScanQuestFood()
         F.questFoodDirty=false;F.questFoodScanAt=now;F.questFoodProtection=F.db.protectQuestFood
     end
+end
+local questItemNames={}
+function F.InvalidateQuestItemName(id)
+    if questItemNames[id] and not questItemNames[id].name then questItemNames[id]=nil end
 end
 function F.ScanQuestFood()
     if InCombatLockdown and InCombatLockdown() then return end
     F.questFood = {}
     if not F.db.protectQuestFood then return end
     local byName, active, names = {}, {}, {}
-    for id in pairs(F.foodCatalog or {}) do names[id] = clean(C_Item.GetItemInfo(id)) end
+    local now=GetTime and GetTime() or 0
+    F.questFoodPendingIDs=F.questFoodPendingIDs or {}
+    for id in pairs(F.foodCatalog or {}) do
+        local cached=questItemNames[id]
+        if not cached or (not cached.name and now-cached.at>=30) then
+            cached={name=clean(C_Item.GetItemInfo(id)),at=now};questItemNames[id]=cached
+            if not cached.name then F.questFoodPendingIDs[id]=true end
+        end
+        names[id]=cached.name
+    end
     local function objective(text, kind, title, fulfilled, required)
         if kind ~= 'item' then return end
         text = clean(text)

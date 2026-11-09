@@ -49,10 +49,10 @@ s.windowFields.health=true
 local d=F.PetStatusData();assert(d.name=='Strider' and d.health=='240 / 300 (80%)')
 assert(d.role=='Defensive (Classic baseline)' and s.windowFields.role and s.tooltipFields.role)
 s.windowFields.role=false;assert(s.tooltipFields.role)
-assert(d.happiness=='Happy â€¢ 125% damage' and d.loyalty=='Faithful â€¢ rising')
+assert(d.happiness=='Happy - 125% damage' and d.loyalty=='Faithful - rising')
 assert(d.training=='15 available / 40 total (25 spent)' and d.food:find('12 suitable items',1,true))
-F.db.petLastFeeds={['pet-one']={food='Apple',at=880}};assert(F.PetStatusData().lastFeed=='Apple â€¢ 2 min ago')
-F.foodEntryPending=true;assert(F.PetStatusData().food=='Inventory settlingâ€¦');F.foodEntryPending=nil
+F.db.petLastFeeds={['pet-one']={food='Apple',at=880}};assert(F.PetStatusData().lastFeed=='Apple - 2 min ago')
+F.foodEntryPending=true;assert(F.PetStatusData().food=='Inventory settling...');F.foodEntryPending=nil
 local lineCount=#F.PetStatusLines(d,s.windowFields);s.windowFields.diet=false;assert(#F.PetStatusLines(d,s.windowFields)==lineCount-1)
 local added={}
 local tip={GetUnit=function() return 'Strider','mouseover' end,AddLine=function(_,v) added[#added+1]=v:gsub('|c%x%x%x%x%x%x%x%x',''):gsub('|r','') end}

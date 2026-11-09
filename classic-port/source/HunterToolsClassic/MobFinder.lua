@@ -407,5 +407,5 @@ driver:SetScript('OnEvent',function(_,event,unit)
     elseif event=='PLAYER_REGEN_DISABLED' then F.mobFinderFound=nil;F.mobFinderNavigation=nil;hideNavigation() end
     elapsed=0.5
 end)
-driver:SetScript('OnUpdate',function(_,dt) F.UpdateMobFinderTargetPing();elapsed=elapsed+dt;if elapsed>=0.5 then elapsed=0;if F.db then F.ScanMobFinder() end end end)
+driver:SetScript('OnUpdate',function(_,dt) if pendingTargetPing or (F.mobFinderTargetPing and F.mobFinderTargetPing:IsShown()) then F.UpdateMobFinderTargetPing() end;elapsed=elapsed+dt;if elapsed>=0.5 then elapsed=0;if F.db then F.ScanMobFinder() end end end)
 F.mobFinderDriver=driver
