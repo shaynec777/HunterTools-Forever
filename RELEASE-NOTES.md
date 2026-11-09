@@ -1,3 +1,21 @@
+# HunterTools Forever 3.1.11
+
+## New in this update
+
+- Sidebar settings navigation groups Feeding, My pet, Wild beasts, Tracking & aspects, Ammunition & weapons, Range & dungeon checks, and Finders in one window. Existing slash commands remain available.
+- Direct pet and wild-beast tooltip settings, with per-line controls independent of window settings. Additional beast controls include location, learned-rank labels, training options and reference lines.
+- Softer rounded tooltip-style borders, green buttons and 80% opaque menu backgrounds. Embedded pages share the main background to avoid stacked opacity.
+
+## Bug fixes
+
+- Clearer category/page headings and specific enable labels make settings easier to locate. Existing character preferences are retained.
+
+## Validation
+
+User reviewed the new Forever menus and requested the final green-button, 80% opacity styling. Automated navigation, tooltip controls, saved-field independence and combat guards checked. Classic in-game confirmation remains pending.
+
+Thanks to [**AalSupes**](https://www.curseforge.com/members/aalsupes) and [**BluBuryPi**](https://www.curseforge.com/members/bluburypi) for their help testing and improving HunterTools.
+
 # HunterTools Forever 3.1.10
 
 ## New in this update

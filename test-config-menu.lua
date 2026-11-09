@@ -71,3 +71,26 @@ F.OpenConfig();F.configPanel.actions.playerfinder.scripts.OnClick();assert(playe
 mobOpened=false;InCombatLockdown=function() return true end
 F.configPanel.actions.mobfinder.scripts.OnClick();assert(not mobOpened)
 print('PASS: separate main-menu Finders section, mob/player navigation and combat guard')
+
+-- Tooltip shortcuts change only tooltip fields, and expose line-level beast controls.
+InCombatLockdown=function() return false end
+local animals={mouseover={enabled=true,info=false,abilities=true},target={food=true}}
+F.AnimalSettings=function() return animals end
+assert(loadfile('HunterTools/TooltipSettings.lua'))('test',F)
+petSettings.windowFields.health=true
+F.OpenConfig();F.configPanel.actions.petTooltip.scripts.OnClick()
+local tooltip=F.tooltipSettingsPanel
+assert(tooltip.shown and not F.configPanel.shown)
+tooltip.rows[1].checked=false;tooltip.rows[1].scripts.OnClick()
+assert(petSettings.tooltipFields.health==false and petSettings.windowFields.health==true)
+F.OpenConfig();F.configPanel.actions.beastTooltip.scripts.OnClick()
+assert(tooltip.title.text=='Wild beast tooltip' and animals.mouseover.location==false)
+local ability=tooltip.rows[4];ability.checked=false;ability.scripts.OnClick()
+assert(animals.mouseover.abilities==false and animals.target.food==true)
+local source=tooltip.rows[10];source.checked=false;source.scripts.OnClick()
+assert(animals.mouseover.dietReference==false)
+InCombatLockdown=function() return true end
+ability.checked=true;ability.scripts.OnClick();assert(not animals.mouseover.abilities)
+InCombatLockdown=function() return false end
+F.OpenConfig();assert(not tooltip.shown)
+print('PASS: direct pet/beast tooltip shortcuts, per-line toggles, independent window settings, migration, combat guard and navigation')

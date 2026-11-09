@@ -82,6 +82,7 @@ end
 function F.AnimalDetails(unit,s)
     if not s.enabled then return nil end
     local any=false;for _,field in ipairs(F.animalFields) do if s[field[1]] then any=true end end
+    if s.location==true then any=true end
     if not any or InCombatLockdown() then return nil end
     if not query(UnitExists,unit) then return nil end
     local family=query(UnitCreatureFamily,unit)
@@ -110,8 +111,8 @@ function F.AnimalDetails(unit,s)
         lines[#lines+1]=family..(type(level)=='number' and level>0 and (' - level '..level) or '')
             ..(F.TameabilityText and (' ('..F.TameabilityText(record)..')') or record and record.tameable==true and ' (tameable: '..(record.sources and record.sources.tameable or 'Wowhead Forever')..')'
                 or record and record.tameable==false and ' (reference: not tameable)' or ' (tameability unconfirmed)')
-        if record and record.zone then lines[#lines+1]='Location: '..record.zone end
     end
+    if s.location~=false and (s.location==true or s.info) and record and record.zone then lines[#lines+1]='Location: '..record.zone end
     if s.role then lines[#lines+1]='Role: '..F.PetRole(family) end
     local diet,abilities
     local tip=query(C_TooltipInfo and C_TooltipInfo.GetUnit,unit)
@@ -133,7 +134,7 @@ function F.AnimalDetails(unit,s)
     local baseline=false
     if not abilities and record then
         abilities=record.abilities
-        if abilities and record.sources and s.abilities then lines[#lines+1]='Ability reference: '..record.sources.abilities..'.' end
+        if abilities and record.sources and s.abilities and s.abilityReference~=false then lines[#lines+1]='Ability reference: '..record.sources.abilities..'.' end
         baseline=(not record.sources and not forever) and s.abilities and abilities~=nil
     end
     local wowheadDiet=false
@@ -146,15 +147,15 @@ function F.AnimalDetails(unit,s)
     if abilities and F.MarkTargetAbilities and s.abilities and s.learned~=false then abilities=F.MarkTargetAbilities(abilities) end
     if s.abilities then lines[#lines+1]='Abilities: '..(abilities or 'no database record; inspect with Beast Lore.') end
     local familyInfo=F.petopiaForeverFamilies and F.petopiaForeverFamilies[family]
-    if s.abilities and not abilities and familyInfo and familyInfo.learnable and #familyInfo.learnable>0 then
+    if s.familyTraining~=false and (s.familyTraining==true or s.abilities) and not abilities and familyInfo and familyInfo.learnable and #familyInfo.learnable>0 then
         lines[#lines+1]='Family training options: '..table.concat(familyInfo.learnable,', ')..' ('..(familyInfo.trainingReference or 'Petopia Forever')..'; innate ranks unknown).'
     end
     if s.diet then lines[#lines+1]='Eats: '..(diet or 'not revealed; inspect with Beast Lore.') end
     if s.food then lines[#lines+1]='In bags: '..F.AnimalFoodCounts(diet,level) end
-    if wowheadDiet and (s.diet or s.food) then lines[#lines+1]='Diet reference: Wowhead Forever.' end
-    if dietSource and (s.diet or s.food) then lines[#lines+1]='Diet reference: '..dietSource..'.' end
-    if record and record.sources and s.info then lines[#lines+1]='Beast reference: '..(record.sources.name or record.sources.family or 'Unknown')..'.' end
-    if baseline then lines[#lines+1]='Classic baseline - Forever may differ.' end
+    if s.dietReference~=false and wowheadDiet and (s.diet or s.food) then lines[#lines+1]='Diet reference: Wowhead Forever.' end
+    if s.dietReference~=false and dietSource and (s.diet or s.food) then lines[#lines+1]='Diet reference: '..dietSource..'.' end
+    if s.beastReference~=false and record and record.sources and (s.beastReference==true or s.info) then lines[#lines+1]='Beast reference: '..(record.sources.name or record.sources.family or 'Unknown')..'.' end
+    if s.baseline~=false and baseline then lines[#lines+1]='Classic baseline - Forever may differ.' end
     return #lines>0 and table.concat(lines,'\n') or nil
 end
 function F.TargetPetDetails()

@@ -6,15 +6,16 @@ FeedomaticToo has morphed into HunterTools Forever due to the many great suggest
 
 HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dungeon checks, pet information, target range, and an ability browser together for World of Warcraft Forever. All tools can be individually enabled or disabled.
 
-## New in this update — 3.1.10
+## New in this update — 3.1.11
 
-- Fix repeated inventory loading retries and cache quest food names, reducing unnecessary background scans.
-- Cleaner pet-status text and compact abilities.
-- Temporary performance diagnostics removed from the release.
+- Sidebar settings navigation groups Feeding, My pet, Wild beasts, Tracking & aspects, Ammunition & weapons, Range & dungeon checks, and Finders in one window. Existing slash commands remain available.
+- Direct pet and wild-beast tooltip settings, with per-line controls independent of window settings. Additional beast controls include location, learned-rank labels, training options and reference lines.
+- Softer rounded tooltip-style borders, green buttons and 80% opaque menu backgrounds. Embedded pages share the main background to avoid stacked opacity.
 
 ## Bug fixes
 
-- Unrelated item-information events no longer reset food inventory confirmation or trigger unnecessary quest scans. Missing food data still retries normally.
+- Clearer category/page headings and specific enable labels make settings easier to locate. Existing character preferences are retained.
+
 
 ## Tools and controls
 

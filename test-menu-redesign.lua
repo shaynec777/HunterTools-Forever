@@ -65,7 +65,7 @@ C_Item={GetItemInfo=function(id) return id==1 and 'Test fish' or 'Test meat' end
 C_PetInfo={CanPetEatItem=function() return true end}
 local function find(text) for _,w in ipairs(all) do if w.text==text then return w end end;error('Missing '..text) end
 F.OpenConfig();local menu=F.configPanel
-assert(menu.bg[4]==1 and menu.width==760 and menu.scale<=1)
+assert(menu.bg[4]==0.80 and menu.width==760 and menu.scale<=1)
 local logo=false;for _,w in ipairs(all) do if w.texture=='Interface\\AddOns\\HunterTools\\Artwork\\HunterToolsLogo' then logo=true end end;assert(logo)
 menu.actions.weapons.scripts.OnClick();assert(F.weaponSettingsPanel.shown and not menu.shown)
 F.weaponSettingsPanel.scopeChoices.none.scripts.OnClick();assert(F.WeaponCompareSettings().scope=='none')
@@ -73,7 +73,7 @@ F.OpenConfig();assert(not F.weaponSettingsPanel.shown and menu.shown)
 for _,key in ipairs({'food','instance','ammo','range','pet','abilities'}) do assert(menu.checks[key] and menu.actions[key].menuStyled) end
 menu.actions.food.scripts.OnClick();local food=F.foodPanel
 assert(not menu.shown and food.activeTab=='catalog' and food.catalogPage.shown and not food.feedingPage.shown)
-assert(food.height==590 and food.bg[4]==1)
+assert(food.height==590 and food.bg[4]==0.80)
 food.tabs.feeding.scripts.OnClick();assert(food.feedingPage.shown and not food.catalogPage.shown)
 local wolf=find('Use default wolf sound').parent;assert(wolf.parent==food.feedingPage)
 wolf:SetChecked(true);wolf.scripts.OnClick(wolf);assert(F.db.wolfSound)
@@ -101,5 +101,5 @@ F.OpenConfig();menu.checks.range:SetChecked(false);menu.checks.range.scripts.OnC
 UIParent:SetSize(800,600);F.FinishMenu(menu,760,668);assert(menu.scale<=1 and menu.scale>0)
 for _,child in ipairs({menu:GetChildren()}) do if child.template=='UIPanelCloseButton' then assert(not child.menuStyled) end end
 combat=true;menu:Hide();F.OpenConfig();assert(not menu.shown)
-print('PASS: shared theme, six tool cards, navigation, opaque panels, food/ammo tabs, search/list edits, saved controls, small-screen scale and combat guard')
+print('PASS: shared theme, six tool cards, navigation, translucent panels, food/ammo tabs, search/list edits, saved controls, small-screen scale and combat guard')
 return {F=F,widgets=all}
