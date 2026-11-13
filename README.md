@@ -8,6 +8,8 @@ HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dunge
 
 ## New in this update
 
+- Forever pet health and focus displays remain live during combat through native resource bars.
+
 - Feeder text: choose Verbose, Simplified (Happy / Not happy), or Off in Food > Feeding & alerts. Simplified leaves unavailable happiness blank. The colored border remains visible.
 
 - Clearer colored pet-status and animal tooltips, preserving learned-ability indicators.

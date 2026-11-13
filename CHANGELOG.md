@@ -1,3 +1,19 @@
+# HunterTools Forever 3.1.11a
+
+## Bug fixes
+
+- Restore health and focus bar fills and numeric labels when Forever returns restricted resource values. Values go directly to supported native display widgets.
+- Keep enabled health and focus bars updating during combat. Other pet details retain their combat pause.
+- Clear stale resource fills when data becomes unavailable. Existing settings are preserved.
+
+## Validation
+
+The user confirmed the corrected bars look better in Forever. Focused Lua 5.1 tests cover opaque-value display, combat updates, zero/missing values, native setter failures, recovery, and existing pet-status behavior.
+
+This corrective release updates Forever only. HunterTools Classic remains at its existing 3.1.11a release.
+
+Thanks to [**AalSupes**](https://www.curseforge.com/members/aalsupes) and [**BluBuryPi**](https://www.curseforge.com/members/bluburypi) for their help testing and improving HunterTools.
+
 # HunterTools Forever 3.1.11
 
 ## New in this update

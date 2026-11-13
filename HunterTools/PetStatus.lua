@@ -135,6 +135,51 @@ function F.PetStatusData()
     return d
 end
 local labels={identity='Pet',role='Role',health='Health',focus='Focus',happiness='Happiness',loyalty='Loyalty',training='Training',abilities='Learned abilities',diet='Diet',food='Food',feeding='Feeding',lastFeed='Last fed'}
+-- Display-only values may be secret. Never format, compare, cache or do math on
+-- them in Lua; the native StatusBar and FontString setters accept them directly.
+local function displayValue(fn,...)
+    if type(fn)~='function' then return nil,false end
+    local ok,value=pcall(fn,...)
+    if not ok then return nil,false end
+    if safe(value) and (not number(value) or value<0) then return nil,false end
+    return value,true
+end
+function F.UpdatePetStatusResourceBars(panel)
+    local settings=F.PetStatusSettings()
+    local exists=query(UnitExists,'pet')==true
+    for _,spec in ipairs({{panel.health,'health',UnitHealth,UnitHealthMax},
+        {panel.focus,'focus',UnitPower,UnitPowerMax,2}}) do
+        local bar,key=spec[1],spec[2]
+        if settings.windowFields[key] and exists then
+            local current,currentOK,maximum,maximumOK
+            if key=='health' then
+                current,currentOK=displayValue(spec[3],'pet')
+                maximum,maximumOK=displayValue(spec[4],'pet')
+            else
+                current,currentOK=displayValue(spec[3],'pet',spec[5])
+                maximum,maximumOK=displayValue(spec[4],'pet',spec[5])
+            end
+            if maximumOK and safe(maximum) and maximum<=0 then maximumOK=false end
+            local displayed=false
+            if currentOK and maximumOK then
+                displayed=pcall(function()
+                    bar:SetMinMaxValues(0,maximum)
+                    bar:SetValue(current)
+                    if safe(current) and safe(maximum) then
+                        bar.label:SetText(labels[key]..': '..resource(current,maximum))
+                    else
+                        bar.label:SetFormattedText(labels[key]..': %d / %d',current,maximum)
+                    end
+                end)
+            end
+            if not displayed then
+                bar:SetMinMaxValues(0,1);bar:SetValue(0)
+                bar.label:SetText(labels[key]..': Unavailable')
+            end
+            bar:Show()
+        else bar:Hide() end
+    end
+end
 function F.PetStatusLines(data,fields)
     if data.paused then return {{'Combat','Updates paused until combat ends'}} end
     if data.missing then return {{'Pet','Summon a hunter pet to see its status'}} end
@@ -197,7 +242,8 @@ function F.UpdatePetStatusWindow()
     if InCombatLockdown() then
         if F.petStatusWindow and F.petStatusWindow:IsShown() then
             F.petStatusWindow.details:SetText('Combat: updates paused until combat ends')
-            F.petStatusWindow.health:Hide();F.petStatusWindow.focus:Hide()
+            if s.enabled then F.UpdatePetStatusResourceBars(F.petStatusWindow)
+            else F.petStatusWindow:Hide() end
         end
         return
     end
@@ -240,12 +286,13 @@ function F.UpdatePetStatusWindow()
         p.portrait:Show()
     else p.portrait:Hide();p.portraitReady=nil end
     local y=62
-    for _,spec in ipairs({{p.health,'health',d.hp,d.maxHP},{p.focus,'focus',d.focusValue,d.maxFocus}}) do
-        local b,key,current,maximum=spec[1],spec[2],spec[3],spec[4]
+    for _,spec in ipairs({{p.health,'health'},{p.focus,'focus'}}) do
+        local b,key=spec[1],spec[2]
         if s.windowFields[key] and not d.missing then
-            b:ClearAllPoints();b:SetPoint('TOPLEFT',12,-y);b:SetMinMaxValues(0,maximum or 1);b:SetValue(current or 0);b.label:SetText(labels[key]..': '..(d[key] or 'Unavailable'));b:Show();y=y+23
+            b:ClearAllPoints();b:SetPoint('TOPLEFT',12,-y);y=y+23
         else b:Hide() end
     end
+    F.UpdatePetStatusResourceBars(p)
     local fields={};for k,v in pairs(s.windowFields) do fields[k]=v end;fields.health=false;fields.focus=false
     local lines={}
     for _,line in ipairs(F.PetStatusLines(d,fields)) do

@@ -69,7 +69,11 @@ s.locked=true;p.scripts.OnDragStart();assert(not p.moving)
 F.ResetPetStatusPosition();assert(s.x==270 and s.y==-160)
 InCombatLockdown=function() return true end
 UnitName=function() error('restricted pet query') end
-assert(F.PetStatusData().paused);F.UpdatePetStatusWindow();assert(not p.health.shown and not p.focus.shown and p.details.text:find('paused',1,true))
+assert(F.PetStatusData().paused);F.UpdatePetStatusWindow()
+if F.UpdatePetStatusResourceBars then
+    assert(not p.health.shown and p.focus.shown,'Forever keeps enabled native resource bars live in combat')
+else assert(not p.health.shown and not p.focus.shown) end
+assert(p.details.text:find('paused',1,true))
 added={};tip.GetUnit=function() error('must not inspect tooltip unit in combat') end;postCall(tip);assert(#added==0)
 InCombatLockdown=function() return false end;UnitName=function() return 'Strider' end
 s.enabled=false;F.UpdatePetStatusWindow();assert(not p.shown)
