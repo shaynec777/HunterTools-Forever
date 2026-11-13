@@ -135,3 +135,8 @@ Classic 3.1.11a published at 7d62952: https://github.com/shaynec777/HunterTools-
 Published GitHub v3.1.11a at d3d2f039d033bf3c29611dcd6efbd6cf23bf6733: https://github.com/shaynec777/HunterTools-Forever/releases/tag/v3.1.11a . HunterToolsForever-3.1.11a.zip SHA256 f0f772f5285f0a4ad7e9ef3aaf1fef6ff868b35f24339bb13ddbcf8b502df074; uploaded asset digest verified. Forever-only corrective release; Classic unchanged. User confirmed the native health/focus bars look better. Focused resource/status/performance regressions, Lua syntax, TOC references and ZIP/source equality passed.
 
 CurseForge upload and website description update are pending: no local author API token found; Computer Use browser approval timed out before the Thorium session could be inspected. No upload attempted. Archive and release notes are ready in releases/. Resume project 1740323 upload for Forever 1.60.1, release type Release, automatic publication after approval when browser access is available.
+
+
+## CurseForge submission completed - November 13, 2026
+
+HunterTools Forever 3.1.11a uploaded successfully through the author dashboard. File ID 9595381, Release, Forever 1.60.1 only, automatic publication once approved. Dashboard status: Processing. Project description saved with the 3.1.11a heading and native resource-bar feature. This supersedes the earlier pending-upload note. GitHub release v3.1.11a is already published.
