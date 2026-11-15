@@ -1,3 +1,10 @@
+# HunterTools Forever 3.1.13
+
+- Synchronize the version with Classic 3.1.13, which corrects opening the world map from ammo-vendor selection.
+- Retain the existing Forever ammo-vendor finder and markers. This edition has no gameplay changes in this release.
+
+All 37 Forever regression suites and package checks pass.
+
 # HunterTools Forever 3.1.12
 
 - Find ammo sellers for your equipped weapon, level and faction without another addon.

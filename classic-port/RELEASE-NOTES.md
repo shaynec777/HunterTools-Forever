@@ -1,3 +1,10 @@
+# HunterTools Classic 3.1.13 beta
+
+- Fix selecting an ammo vendor failing to open the Classic world map. Open the native panel first, then select the vendor zone.
+- Preserve the working minimap marker and keep the Classic and Forever version numbers synchronized.
+
+The user confirmed that the world map now opens after the fix and that the Classic minimap looks good. A regression test reproduces the missing native map method and the map reset during opening. All 28 Classic suites and package checks pass.
+
 # HunterTools Classic 3.1.12
 
 - Find ammo sellers for your equipped weapon, level and faction without another addon.

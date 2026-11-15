@@ -2,7 +2,7 @@
 
 A configurable hunter toolkit for **WoW Classic Era**, with feeding, pet information, ammunition reminders, tracking, dungeon checks and nearby-unit finders.
 
-**Current beta: 3.1.12.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
+**Current beta: 3.1.13.** This is a separate addon with its own folder and saved settings.
 
 ## Current update — 3.1.12
 
@@ -14,16 +14,6 @@ A configurable hunter toolkit for **WoW Classic Era**, with feeding, pet informa
 
 Independent Classic vendor data and saved settings; no map or quest addon required.
 
-
-## Bug fixes — 3.1.12
-
-- Fix Classic's range window remaining at In range / Out of range when Auto Shot reports invalid spell bounds (observed minimum 35, maximum 0).
-- Use validated learned-shot bounds when available. Outside combat, retain live shot/follow-distance classification even if numeric bounds are unavailable, restoring Too close / In range / Too far without inventing yardage.
-- Carcasses and friendly targets display estimated distance bands without claiming shooting eligibility. In combat, unavailable secondary checks retain the honest Out of range fallback.
-
-## Validation
-
-User confirmed the Classic range window now shows Too close, In range and Too far at the tested positions outside combat. Dedicated regressions cover malformed metadata, missing fallback bounds, corpses, combat restrictions and recovery. Existing settings are preserved.
 
 Includes the 3.1.11 sidebar menus, per-line tooltip controls, green buttons and 80% opaque backgrounds.
 

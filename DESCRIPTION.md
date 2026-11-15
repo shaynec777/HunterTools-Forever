@@ -6,7 +6,7 @@ FeedomaticToo has morphed into HunterTools Forever due to the many great suggest
 
 HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dungeon checks, pet information, target range, and an ability browser together for World of Warcraft Forever. All tools can be individually enabled or disabled.
 
-## New in this update — 3.1.12
+## New in this update — 3.1.13
 
 - Find ammo sellers for your equipped weapon, level and faction without another addon.
 - Use **Nearest vendor for my level** in the Ammo config header to locate a seller of the best ordinary ammo tier you can use.

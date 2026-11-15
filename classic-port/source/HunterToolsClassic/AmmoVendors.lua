@@ -143,8 +143,12 @@ end
 function F.SelectAmmoVendor(v)
     if InCombatLockdown() or type(v)~='table' or not point(v.mapID,v.x,v.y) then return end
     F.ammoVendorDestination={id=v.id,name=v.name,mapID=v.mapID,x=v.x,y=v.y,shop=F.AmmoVendorShop(v)}
-    if OpenWorldMap then OpenWorldMap(v.mapID)
-    elseif WorldMapFrame then WorldMapFrame:Show();if WorldMapFrame.SetMapID then WorldMapFrame:SetMapID(v.mapID) end end
+    -- Era's OpenWorldMap can call the absent HandleUserActionOpenSelf method.
+    -- Show first: native OnShow selects the player's zone, then select the vendor.
+    if WorldMapFrame then
+        if ShowUIPanel then ShowUIPanel(WorldMapFrame) else WorldMapFrame:Show() end
+        if WorldMapFrame.SetMapID then WorldMapFrame:SetMapID(v.mapID) end
+    end
     F.UpdateAmmoVendorMarker()
     F.Print('Ammo seller: '..v.name..'. Marker clears when you talk to this NPC.')
     return true

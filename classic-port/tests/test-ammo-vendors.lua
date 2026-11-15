@@ -30,7 +30,13 @@ C_Map.GetAreaInfo=function() return 'New Forever Zone' end
 C_Map.GetMapChildrenInfo=function() return {{name='New Forever Zone',mapID=1429}} end
 local canvas=widget();WorldMapFrame=widget()
 WorldMapFrame.GetCanvas=function() return canvas end;WorldMapFrame.GetMapID=function() return map end
-OpenWorldMap=function(id) map=id;WorldMapFrame:Show() end
+OpenWorldMap=function() error("Era OpenWorldMap calls a missing method") end
+local panelOpens=0
+ShowUIPanel=function(frame)
+ assert(frame==WorldMapFrame);panelOpens=panelOpens+1
+ frame:Show();map=947 -- Native OnShow can reset the map before our selection.
+end
+WorldMapFrame.SetMapID=function(_,id) map=id end
 local npc=1285
 UnitGUID=function(unit) assert(unit=='npc');return npc and 'Creature-0-1-0-0-'..npc..'-000000001' end
 UnitName=function() return 'Visited vendor' end
@@ -67,6 +73,7 @@ c.baselineUnknown=true;assert(#F.AmmoVendorRows(c,true,true)==0);c.baselineUnkno
 local seller=rows[1].vendor
 assert(F.SelectAmmoVendor(seller));assert(F.ammoVendorDestination.id==1285)
 assert(F.ammoVendorDestination.shop=='Test shop')
+assert(panelOpens==1 and WorldMapFrame:IsShown() and map==seller.mapID,'Classic opens panel then selects vendor zone without broken helper')
 F.UpdateAmmoVendorMarker();assert(F.ammoVendorPin:IsShown(),'map marker drawn')
 assert(F.ammoVendorPin.label.text:find('Test shop',1,true),'known shop appears on map label')
 assert(F.AmmoVendorShop({id=1285})=='Test shop','existing observations can recover bundled shop names')
