@@ -58,6 +58,8 @@ F.ammoVendorCatalog={
  {id=8888,name='No location',zone='Unknown',faction='Alliance',items={3030}},
 }
 assert(loadfile('HunterTools/AmmoVendors.lua'))('test',F)
+local markerEvents=frames[#frames]
+assert(markerEvents.scripts.OnUpdate==nil,'no per-frame minimap callback while no vendor is marked')
 F.AmmoInfo=function(id) return 'Ammo '..id end
 local c={kind=2,level=25,faction='Alliance',current={dps=3.5},settings={}}
 F.AmmoUpgradeContext=function() return c end
@@ -88,7 +90,13 @@ assert(#F.AmmoVendorRows(c,false,true)==0)
 links={3030};npc=7777;F.ObserveAmmoMerchant();assert(F.db.ammoVendors[7777].items[1]==3030,'new sellers learned')
 combat=true;assert(not F.SelectAmmoVendor(seller));npc=1285;F.ObserveAmmoMerchant();assert(#F.db.ammoVendors[1285].items==0);combat=false
 npc=nil;F.AmmoVendorInteraction('GOSSIP_SHOW')
-F.SelectAmmoVendor(seller);F.ClearAmmoVendorMarker();assert(not F.ammoVendorDestination)
+F.SelectAmmoVendor(seller);assert(type(markerEvents.scripts.OnUpdate)=='function')
+local markerUpdates=0;local originalMarkerUpdate=F.UpdateAmmoVendorMarker
+F.UpdateAmmoVendorMarker=function() markerUpdates=markerUpdates+1 end
+markerEvents.scripts.OnUpdate(nil,.1);assert(markerUpdates==0)
+markerEvents.scripts.OnUpdate(nil,.1);assert(markerUpdates==1,'active marker keeps its five-Hz refresh')
+F.UpdateAmmoVendorMarker=originalMarkerUpdate
+F.ClearAmmoVendorMarker();assert(not F.ammoVendorDestination and markerEvents.scripts.OnUpdate==nil)
 assert(F.AmmoVendorChatLink():find('|Haddon:huntertoolsammo:nearby',1,true))
 linkCallback(nil,'addon:huntertoolsammo:nearby');assert(F.ammoVendorDestination.id==7777,'chat link finds a current local seller')
 F.ClearAmmoVendorMarker();linkCallback(nil,'addon:huntertoolsammo:nearby:forged');assert(not F.ammoVendorDestination)

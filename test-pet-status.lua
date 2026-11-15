@@ -63,6 +63,34 @@ hooks.OnTooltipCleared(tip);tip.GetUnit=function() return 'Other','target' end;a
 s.enabled=true;F.UpdatePetStatusWindow();local p=F.petStatusWindow;assert(p.shown and p.name.text=='Strider' and p.health.shown and p.focus.shown)
 F.OpenConfig=function() F.menuOpened=true end;p.scripts.OnMouseUp(nil,'RightButton');assert(F.menuOpened)
 s.windowFields.health=false;F.UpdatePetStatusWindow();assert(not p.health.shown and p.focus.shown)
+-- Repeated window ticks reuse descriptive data, but keep resource bars live.
+local originalTime,originalData=GetTime,F.PetStatusData
+local oldWindowAbilities,oldTipAbilities=s.windowFields.abilities,s.tooltipFields.abilities
+s.windowFields.abilities=false;s.tooltipFields.abilities=false
+local now,calls,writes,heights,barWrites=100,0,0,0,0
+local originalFoodScan=F.foodScanAt;F.foodScanAt=100
+GetTime=function() return now end
+F.PetStatusData=function() calls=calls+1;return originalData() end
+local originalText,originalHeight=p.details.SetText,p.SetHeight
+p.details.SetText=function(self,v) writes=writes+1;return originalText(self,v) end
+p.SetHeight=function(self,v) heights=heights+1;return originalHeight(self,v) end
+local originalBar=p.focus.SetValue;p.focus.SetValue=function(self,v) barWrites=barWrites+1;return originalBar(self,v) end
+F.bagsDirty=false;F.petAbilitiesDirty=false;F.petStatusDataDirty=true
+F.UpdatePetStatusWindow();assert(calls==1)
+writes=0;heights=0;barWrites=0
+now=100.2;F.UpdatePetStatusWindow();assert(calls==1 and barWrites>0 and writes==0 and heights==0)
+now=101.2;F.UpdatePetStatusWindow();assert(calls==2 and writes==0 and heights==0,'unchanged text must not trigger relayout even after refresh')
+F.petStatusDataDirty=true;F.UpdatePetStatusWindow();assert(calls==3,'events invalidate descriptive data immediately')
+F.bagsDirty=true;F.UpdatePetStatusWindow();assert(calls==4,'inventory invalidation bypasses cache')
+s.windowFields.diet=not s.windowFields.diet;F.UpdatePetStatusWindow();assert(calls==5,'field changes apply without waiting')
+s.windowFields.diet=not s.windowFields.diet
+UnitGUID=function() return 'pet-two' end;F.UpdatePetStatusWindow();assert(calls==6,'pet swaps bypass cache')
+UnitGUID=function() return 'pet-one' end
+F.PetStatusData=originalData;GetTime=originalTime;p.statusBuiltAt=nil
+F.foodScanAt=originalFoodScan
+F.petAbilitiesCache=nil;F.petAbilitiesDirty=true
+p.details.SetText=originalText;p.SetHeight=originalHeight;p.focus.SetValue=originalBar
+s.windowFields.abilities=oldWindowAbilities;s.tooltipFields.abilities=oldTipAbilities
 shift=false;p.scripts.OnDragStart();assert(p.moving~=true,'plain drag must not move')
 shift=true;p.scripts.OnDragStart();assert(p.moving);p.scripts.OnDragStop();assert(not p.moving and s.x==300 and s.y==200)
 s.locked=true;p.scripts.OnDragStart();assert(not p.moving)

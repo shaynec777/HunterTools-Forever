@@ -25,7 +25,7 @@ for p in (ROOT/'tests').glob('test-*.lua'):
 # Reuse behavior tests against the actual independent Classic source, adapting
 # only names/paths and API namespaces. Data-specific Forever tests are excluded.
 # Range is covered by tests/test-classic-range.lua; the shared test asserts the different client contract.
-names=['test-config-menu.lua','test-menu-redesign.lua','test-food-login.lua',
+names=['test-shared-food-scan.lua','test-performance.lua','test-ranged-weapons.lua','test-config-menu.lua','test-menu-redesign.lua','test-food-login.lua',
  'test-feedomatic-ammo.lua','test-feedomatic-quests.lua','test-feed-message.lua',
  'test-hunger-alerts.lua','test-ammo-upgrades.lua','test-weapon-comparisons.lua',
  'test-special-food.lua','test-instance-check.lua','test-pet-heal-range.lua',

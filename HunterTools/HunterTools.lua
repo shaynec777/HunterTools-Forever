@@ -152,6 +152,9 @@ loader:SetScript('OnEvent',function(_,event,a,b,c)
             if (text or ''):lower():match('^%s*beasts%s*$') then F.OpenBeastJournal();return end
             if (text or ''):lower():match('^%s*trainingdebug%s*$') then F.DebugPetTraining(); return end
             if (text or ''):lower():match('^%s*pet%s*$') then local s=F.PetStatusSettings();F.SetToolEnabled('pet',not s.enabled);return end
+            local perf=(text or ''):lower():match('^%s*perf%s*(.*)$')
+            if perf then F.PerformanceCommand(perf);return end
+            if (text or ''):lower():match('^%s*weaponlist%s*$') then F.OpenRangedWeapons();return end
             if (text or ''):lower():match('^%s*weapons%s*$') then F.OpenWeaponComparisonSettings();return end
             if (text or ''):lower():match('^%s*abilities%s*$') then F.OpenPetAbilityBrowser();return end
             if (text or ''):lower():match('^%s*petsettings%s*$') then F.OpenPetStatusSettings();return end
@@ -188,6 +191,7 @@ loader:SetScript('OnEvent',function(_,event,a,b,c)
     if event=='GET_ITEM_INFO_RECEIVED' and not relevantItem then
         return
     end
+    F.petStatusDataDirty=true
     if foodItem then F.pendingFoodItemIDs[a]=nil end
     if questItem then
         if F.InvalidateQuestItemName then F.InvalidateQuestItemName(a) end
@@ -217,7 +221,8 @@ loader:SetScript('OnEvent',function(_,event,a,b,c)
     if InCombatLockdown() or F.clickInProgress then return end
     if not F.button then
         F.BuildUI()
-        F.ticker=C_Timer.NewTicker(0.5,function() F.UpdateHappinessBorder(); F.Refresh(); F.CheckAmmoReminder(); F.CheckAmmoUpgradeNotifications(); F.CheckInstancePrompt(); F.CheckAspectPrompt(); F.UpdateAspectButton(); F.UpdateTrackingButton(); F.UpdateRangeWindow(); F.UpdatePetStatusWindow(); F.CheckPetAlerts() end)
+        local function periodic() F.UpdateHappinessBorder(); F.Refresh(); F.CheckAmmoReminder(); F.CheckAmmoUpgradeNotifications(); F.CheckInstancePrompt(); F.CheckAspectPrompt(); F.UpdateAspectButton(); F.UpdateTrackingButton(); F.UpdateRangeWindow(); F.UpdatePetStatusWindow(); F.CheckPetAlerts() end
+        F.ticker=C_Timer.NewTicker(0.5,F.WrapPerformanceCallback and F.WrapPerformanceCallback("periodic update",periodic) or periodic)
     end
     if F.dragging then
         F.button:StopMovingOrSizing(); F.dragging=false
@@ -231,6 +236,9 @@ loader:SetScript('OnEvent',function(_,event,a,b,c)
             if InCombatLockdown() or F.clickInProgress then return end
             F.Refresh();F.UpdatePetStatusWindow()
         end
-        if C_Timer.After then C_Timer.After(0,refresh) else refresh() end
+        local callback=F.WrapPerformanceCallback and F.WrapPerformanceCallback("queued event refresh:"..event,refresh) or refresh
+        if C_Timer.After then C_Timer.After(0,callback) else callback() end
     end
 end)
+
+if F.ProfileFrame then F.ProfileFrame(loader,"main event","OnEvent",true) end

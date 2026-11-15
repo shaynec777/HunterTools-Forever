@@ -6,7 +6,13 @@ FeedomaticToo has morphed into HunterTools Forever due to the many great suggest
 
 HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dungeon checks, pet information, target range, and an ability browser together for World of Warcraft Forever. All tools can be individually enabled or disabled.
 
-## New in this update — 3.1.13
+## Ranged weapons and performance improvements in 3.2.9
+
+Browse crafted, instance-drop and vendor ranged weapons with colored source labels, stats, seller/boss locations and purchase requirements. Suggested automatically selects your equipped weapon type; a level box filters usable levels, and Full list restores the selected category. Compare base damage and experimental Auto Shot estimates with equipped gear. Separate Forever and Era data; no Questie dependency.
+
+Food scanning and pet-status updates now share work, automatic scans coalesce, and vendor minimap updates stop while no seller is marked. Optional temporary performance tests and saved spike logs help diagnose slowdowns. Use /ht weaponlist or /ht perf start 120.
+
+## New in this update — 3.2.9
 
 - Find ammo sellers for your equipped weapon, level and faction without another addon.
 - Use **Nearest vendor for my level** in the Ammo config header to locate a seller of the best ordinary ammo tier you can use.

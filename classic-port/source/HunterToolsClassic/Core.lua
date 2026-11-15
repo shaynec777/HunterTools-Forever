@@ -1,5 +1,5 @@
 local _, F = ...
-F.VERSION = "3.1.13"
+F.VERSION = "3.2.9"
 F.FEED_SPELL = 6991
 F.FEED_EFFECT = 1539
 
@@ -329,10 +329,44 @@ function F.ConfirmFoodEntryScan(count,pending,locked)
     F.foodEntryPending=nil; F.foodEntrySnapshot=nil
 end
 
+-- Feeding and status share one inventory result. Explicit forced refreshes (such
+-- as a feed click) still validate synchronously; entry settling retries are paced.
+function F.EnsureFoodScan(force)
+    if InCombatLockdown and InCombatLockdown() then return end
+    local pet=UnitGUID and UnitGUID('pet')
+    local petChanged=public(pet) and pet~=F.foodScanPet
+    if petChanged then F.bagsDirty=true end
+    local now=GetTime and GetTime() or 0
+    local retry=F.foodEntryPending and (not F.foodScanAt or now-F.foodScanAt>=2)
+    if force or F.bagsDirty or F.foodCount==nil or retry then
+        if not force and not petChanged and F.foodCount~=nil then
+            if F.foodScanAt and now>=F.foodScanAt and now-F.foodScanAt<0.5 then
+                F.foodScanDeferUntil=F.foodScanAt+0.5
+            end
+            if F.foodScanDeferUntil and now<F.foodScanDeferUntil then
+                F.foodScanDeferred=true;return
+            end
+        end
+        return F.FindFood()
+    end
+    return F.food
+end
+
 function F.FindFood()
     if InCombatLockdown and InCombatLockdown() then return end
+    F.foodScanDeferUntil=nil;F.foodScanDeferred=nil
     if F.EnsureQuestFood then F.EnsureQuestFood() elseif F.ScanQuestFood then F.ScanQuestFood() end
     local best, count, pending, locked = nil, 0, false, false
+    local edibleCache,allowedCache,protectionCache={},{},{}
+    local function edible(id)
+        local value=edibleCache[id]
+        if value==nil then
+            value=F.ClassicPetInfo.CanPetEatItem(id)
+            if not public(value) or value==nil then value='pending' end
+            edibleCache[id]=value
+        end
+        return value
+    end
     F.pendingFoodItemIDs={}
     F.protectedFoodReasons={}
     for bag = 0, (NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4) do
@@ -343,21 +377,26 @@ function F.FindFood()
         for slot = 1, slots do
             local item = C_Container.GetContainerItemInfo(bag, slot)
             if item and public(item.itemID) and item.itemID and item.stackCount > 0 and F.FoodProtectionReason then
-                local protection=F.FoodProtectionReason(item.itemID)
+                local protection=protectionCache[item.itemID]
+                if protection==nil then protection=F.FoodProtectionReason(item.itemID) or false;protectionCache[item.itemID]=protection end
                 if protection then
-                    local edible=F.ClassicPetInfo.CanPetEatItem(item.itemID)
-                    if public(edible) and edible then
+                    if edible(item.itemID)==true then
                         F.protectedFoodReasons[protection]=(F.protectedFoodReasons[protection] or 0)+item.stackCount
                     end
                 end
             end
-            if item and public(item.itemID) and item.itemID and item.stackCount > 0 and F.FoodAllowed(item.itemID) then
+            local allowed=false
+            if item and public(item.itemID) and item.itemID and item.stackCount>0 then
+                allowed=allowedCache[item.itemID]
+                if allowed==nil then allowed=F.FoodAllowed(item.itemID) and true or false;allowedCache[item.itemID]=allowed end
+            end
+            if allowed then
                 -- Uncached weapons, quest items and other non-food must not hold
                 -- the entire food scan in a permanent loading state.
-                local edible=F.ClassicPetInfo.CanPetEatItem(item.itemID)
-                if not public(edible) or edible==nil then
+                local canEat=edible(item.itemID)
+                if canEat=='pending' then
                     pending=true;F.pendingFoodItemIDs[item.itemID]=true
-                elseif edible then
+                elseif canEat then
                     local name, link, quality, level = C_Item.GetItemInfo(item.itemID)
                     if not public(name) or not name then
                         pending=true;F.pendingFoodItemIDs[item.itemID]=true -- Retry only this missing food item.
@@ -378,6 +417,9 @@ function F.FindFood()
     end
     F.food, F.foodCount = best, count
     F.pendingItems, F.lockedFood, F.bagsDirty = pending, locked, false
+    local pet=UnitGUID and UnitGUID('pet')
+    F.foodScanPet=public(pet) and pet or nil
+    F.foodScanAt=GetTime and GetTime() or 0
     F.ConfirmFoodEntryScan(count,pending,locked)
     return best
 end
@@ -575,15 +617,16 @@ function F.Refresh(forceScan)
     if F.dragging then F.Disarm(); return end
     if not F.db.enabled then F.Disarm(); F.button:Hide(); return end
     F.FoodLists()
-    if F.foodEntryPending then forceScan=true end
     local state, reason = F.GetState()
     F.reason = reason
     F.CheckHungerSound(state, reason)
     F.Disarm()
     if reason == "Hunter only" then F.button:Hide(); return end
-    if reason == "Pet is happy" and (forceScan or F.bagsDirty) then F.FindFood() end
+    if reason == "Pet is happy" then F.EnsureFoodScan(forceScan) end
+    if state~='hungry' and F.foodScanDeferred then F.reason='Loading food information';F.Render('hidden');return end
     if state ~= "hungry" then F.CheckLowFood(state, reason); F.CheckTextReminder(state, reason); F.Render("hidden"); return end
-    if forceScan or F.bagsDirty then F.FindFood() end
+    F.EnsureFoodScan(forceScan)
+    if F.foodScanDeferred then F.reason='Loading food information';F.Render('hidden');return end
     F.CheckLowFood(state, reason)
     F.CheckTextReminder(state, reason)
     if F.food then

@@ -198,9 +198,9 @@ end
 if GameTooltip and GameTooltip.HookScript then
     GameTooltip:HookScript('OnTooltipCleared',function(t) t.HunterToolsAnimalTipAdded=nil end)
     if TooltipDataProcessor and TooltipDataProcessor.AddTooltipPostCall and Enum and Enum.TooltipDataType then
-        TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit,F.AddAnimalTip)
+        TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit,F.WrapPerformanceCallback and F.WrapPerformanceCallback("animal tooltip",F.AddAnimalTip) or F.AddAnimalTip)
     elseif GameTooltip.HasScript and GameTooltip:HasScript('OnTooltipSetUnit') then
-        GameTooltip:HookScript('OnTooltipSetUnit',F.AddAnimalTip)
+        GameTooltip:HookScript('OnTooltipSetUnit',F.WrapPerformanceCallback and F.WrapPerformanceCallback('animal tooltip',F.AddAnimalTip) or F.AddAnimalTip)
     end
 end
 

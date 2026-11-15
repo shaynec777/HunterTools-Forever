@@ -1,4 +1,5 @@
 local _,F=...
+local setMarkerUpdates
 local function public(v) return not issecretvalue or not issecretvalue(v) end
 local function query(fn,...)
     if type(fn)~='function' then return end
@@ -127,6 +128,7 @@ function F.MarkLevelAmmoVendor()
 end
 function F.ClearAmmoVendorMarker()
     F.ammoVendorDestination=nil
+    if setMarkerUpdates then setMarkerUpdates(false) end
     if F.ammoVendorPin then F.ammoVendorPin:Hide() end
     if F.ammoVendorMiniPin then F.ammoVendorMiniPin:Hide() end
     if F.ammoVendorPanel and F.ammoVendorPanel:IsShown() then F.ammoVendorPanel:Refresh() end
@@ -142,6 +144,7 @@ end
 function F.SelectAmmoVendor(v)
     if InCombatLockdown() or type(v)~='table' or not point(v.mapID,v.x,v.y) then return end
     F.ammoVendorDestination={id=v.id,name=v.name,mapID=v.mapID,x=v.x,y=v.y,shop=F.AmmoVendorShop(v)}
+    if setMarkerUpdates then setMarkerUpdates(true) end
     if OpenWorldMap then OpenWorldMap(v.mapID)
     elseif WorldMapFrame then WorldMapFrame:Show();if WorldMapFrame.SetMapID then WorldMapFrame:SetMapID(v.mapID) end end
     F.UpdateAmmoVendorMarker()
@@ -342,7 +345,17 @@ for _,event in ipairs({'GOSSIP_SHOW','MERCHANT_SHOW','MERCHANT_UPDATE'}) do
     if not C_EventUtils or not C_EventUtils.IsEventValid or C_EventUtils.IsEventValid(event) then events:RegisterEvent(event) end
 end
 events:SetScript('OnEvent',function(_,event) F.AmmoVendorInteraction(event) end)
-local elapsed=0;events:SetScript('OnUpdate',function(_,dt)
+local elapsed=0
+local function updateMarker(_,dt)
     elapsed=elapsed+dt;if elapsed<.2 then return end;elapsed=0
     if F.ammoVendorDestination then F.UpdateAmmoVendorMarker() end
-end)
+end
+local markerUpdate=F.WrapPerformanceCallback and F.WrapPerformanceCallback('vendor minimap update',updateMarker) or updateMarker
+setMarkerUpdates=function(active)
+    elapsed=0
+    events:SetScript('OnUpdate',active and markerUpdate or nil)
+end
+-- There is no per-frame callback while no destination is marked.
+setMarkerUpdates(F.ammoVendorDestination~=nil)
+
+if F.ProfileFrame then F.ProfileFrame(events,"AmmoVendors event","OnEvent",true) end

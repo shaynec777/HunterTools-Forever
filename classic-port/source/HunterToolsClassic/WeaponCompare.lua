@@ -208,9 +208,9 @@ for _,tooltip in ipairs({GameTooltip,ItemRefTooltip}) do
     end
 end
 if TooltipDataProcessor and TooltipDataProcessor.AddTooltipPostCall and Enum and Enum.TooltipDataType and Enum.TooltipDataType.Item then
-    TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item,F.AddWeaponComparison)
+    TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item,F.WrapPerformanceCallback and F.WrapPerformanceCallback("weapon tooltip",F.AddWeaponComparison) or F.AddWeaponComparison)
 elseif GameTooltip and GameTooltip.HasScript and GameTooltip:HasScript('OnTooltipSetItem') then
-    GameTooltip:HookScript('OnTooltipSetItem',F.AddWeaponComparison)
+    GameTooltip:HookScript('OnTooltipSetItem',F.WrapPerformanceCallback and F.WrapPerformanceCallback('weapon tooltip',F.AddWeaponComparison) or F.AddWeaponComparison)
 end
 local events=CreateFrame('Frame')
 for _,event in ipairs({'GET_ITEM_INFO_RECEIVED','PLAYER_EQUIPMENT_CHANGED','PLAYER_ENTERING_WORLD'}) do events:RegisterEvent(event) end
@@ -219,3 +219,5 @@ events:SetScript('OnEvent',function(_,event)
     if event=='PLAYER_ENTERING_WORLD' then F.weaponComparisonReadyAt=GetTime()+3
     elseif event=='PLAYER_EQUIPMENT_CHANGED' then F.weaponComparisonReadyAt=GetTime()+0.5 end
 end)
+
+if F.ProfileFrame then F.ProfileFrame(events,"WeaponCompare event","OnEvent",true) end

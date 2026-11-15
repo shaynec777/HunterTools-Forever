@@ -108,12 +108,10 @@ function F.PetStatusData()
         d.abilities=cache.text
     end
     if s.windowFields.food or (s.tooltipEnabled and s.tooltipFields.food) then
-        if d.guid~=F.petStatusFoodPet then
-            F.bagsDirty=true; F.petStatusFoodPet=d.guid
-        end
-        if F.FindFood and (F.bagsDirty or F.foodCount==nil or F.foodEntryPending) then F.FindFood() end
+        if F.EnsureFoodScan then F.EnsureFoodScan()
+        elseif F.FindFood and (F.bagsDirty or F.foodCount==nil or F.foodEntryPending) then F.FindFood() end
     end
-    if F.foodEntryPending or F.pendingItems or F.lockedFood or F.foodCount==nil then
+    if F.foodScanDeferred or F.foodEntryPending or F.pendingItems or F.lockedFood or F.foodCount==nil then
         d.food='Inventory settling...'
     else
         d.food=('%d suitable item%s'):format(F.foodCount,F.foodCount==1 and '' or 's')
@@ -191,12 +189,25 @@ function F.ResetPetStatusPosition()
     local s=F.PetStatusSettings();s.x=270;s.y=-160
     if F.petStatusWindow then F.petStatusWindow:ClearAllPoints(); F.petStatusWindow:SetPoint('CENTER',UIParent,'CENTER',s.x,s.y) end
 end
+local function updateResourceBars(p,s)
+    local exists=query(UnitExists,'pet')
+    for _,spec in ipairs({{p.health,'health',UnitHealth,UnitHealthMax},{p.focus,'focus',UnitPower,UnitPowerMax,2}}) do
+        local b,key=spec[1],spec[2]
+        if s.windowFields[key] and exists then
+            local current,maximum=query(spec[3],'pet',spec[5]),query(spec[4],'pet',spec[5])
+            b:SetMinMaxValues(0,number(maximum) and maximum>0 and maximum or 1)
+            b:SetValue(number(current) and current or 0)
+            b.label:SetText(labels[key]..': '..resource(current,maximum));b:Show()
+        else b:Hide() end
+    end
+end
 function F.UpdatePetStatusWindow()
     if not F.db then return end
     local s=F.PetStatusSettings()
     if InCombatLockdown() then
         if F.petStatusWindow and F.petStatusWindow:IsShown() then
-            F.petStatusWindow.details:SetText('Combat: updates paused until combat ends')
+            local p=F.petStatusWindow
+            if p.combatPaused~=true then p.details:SetText('Combat: updates paused until combat ends');p.combatPaused=true;p.statusBuiltAt=nil end
             F.petStatusWindow.health:Hide();F.petStatusWindow.focus:Hide()
         end
         return
@@ -232,7 +243,24 @@ function F.UpdatePetStatusWindow()
         p:SetScript('OnLeave',function() GameTooltip:Hide() end)
         p:SetScript('OnHide',function() GameTooltip:Hide() end)
     end
-    local p=F.petStatusWindow;local d=F.PetStatusData();p.name:SetText(d.name)
+    local p=F.petStatusWindow
+    updateResourceBars(p,s)
+    local now=query(GetTime)
+    local guid=query(UnitGUID,'pet');local exists=query(UnitExists,'pet')
+    local signature={}
+    for _,field in ipairs(F.petStatusFields) do signature[#signature+1]=s.windowFields[field[1]] and '1' or '0' end
+    signature=table.concat(signature)..(s.tooltipEnabled and '1' or '0')
+    if number(now) and number(p.statusBuiltAt) and now>=p.statusBuiltAt and now-p.statusBuiltAt<1
+        and p.statusGUID==guid and p.statusExists==exists and p.statusSignature==signature
+        and p.statusFoodScan==F.foodScanAt and not F.bagsDirty and not F.petAbilitiesDirty
+        and not F.petStatusDataDirty and p.combatPaused~=true then
+        p:Show();return
+    end
+    local d=F.PetStatusData()
+    p.statusBuiltAt=number(now) and now or nil;p.statusGUID=guid;p.statusExists=exists
+    p.statusSignature=signature;p.statusFoodScan=F.foodScanAt;F.petStatusDataDirty=nil
+    local resumed=p.combatPaused==true;p.combatPaused=nil
+    if p.statusName~=d.name then p.name:SetText(d.name);p.statusName=d.name end
     if not d.missing and SetPortraitTexture then
         if not p.portraitReady or p.portraitGUID~=d.guid then
             SetPortraitTexture(p.portrait,'pet');p.portraitGUID=d.guid;p.portraitReady=true
@@ -240,10 +268,10 @@ function F.UpdatePetStatusWindow()
         p.portrait:Show()
     else p.portrait:Hide();p.portraitReady=nil end
     local y=62
-    for _,spec in ipairs({{p.health,'health',d.hp,d.maxHP},{p.focus,'focus',d.focusValue,d.maxFocus}}) do
-        local b,key,current,maximum=spec[1],spec[2],spec[3],spec[4]
+    for _,spec in ipairs({{p.health,'health'},{p.focus,'focus'}}) do
+        local b,key=spec[1],spec[2]
         if s.windowFields[key] and not d.missing then
-            b:ClearAllPoints();b:SetPoint('TOPLEFT',12,-y);b:SetMinMaxValues(0,maximum or 1);b:SetValue(current or 0);b.label:SetText(labels[key]..': '..(d[key] or 'Unavailable'));b:Show();y=y+23
+            if b.statusY~=y then b:ClearAllPoints();b:SetPoint('TOPLEFT',12,-y);b.statusY=y end;y=y+23
         else b:Hide() end
     end
     local fields={};for k,v in pairs(s.windowFields) do fields[k]=v end;fields.health=false;fields.focus=false
@@ -264,6 +292,11 @@ function F.UpdatePetStatusWindow()
         end
         lines[#lines+1]='|cffc9b77d'..label..':|r '..value
     end
-    p.details:ClearAllPoints();p.details:SetPoint('TOPLEFT',12,-y);p.details:SetText(table.concat(lines,'\n'))
-    p:SetHeight(math.max(78,y+p.details:GetStringHeight()+14));p:Show()
+    local details=table.concat(lines,'\n')
+    local moved=p.statusY~=y
+    if moved then p.details:ClearAllPoints();p.details:SetPoint('TOPLEFT',12,-y);p.statusY=y end
+    if resumed or p.statusText~=details then p.details:SetText(details);p.statusText=details
+        p:SetHeight(math.max(78,y+p.details:GetStringHeight()+14))
+    elseif moved then p:SetHeight(math.max(78,y+p.details:GetStringHeight()+14)) end
+    p:Show()
 end
