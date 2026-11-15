@@ -138,11 +138,11 @@ function F.ShowAmmoReminder(id,count,test)
     local message=(test and 'Test: ' or '')..'Low ammo: '..(id and F.AmmoInfo(id) or 'ammunition')
         ..' - '..tostring(count or 0)..' left (minimum '..F.AmmoMinimum(id)..').'
     local delivered=false
-    if a.mode=='chat' or a.mode=='both' then F.Print(message); delivered=true end
+    if a.mode=='chat' or a.mode=='both' then F.Print(message..(F.AmmoVendorChatLink and F.AmmoVendorChatLink() or '')); delivered=true end
     if a.mode=='screen' or a.mode=='both' then
         if RaidNotice_AddMessage and RaidWarningFrame then
             RaidNotice_AddMessage(RaidWarningFrame,message,{r=1,g=0.35,b=0.15},5)
-        elseif a.mode~='both' then F.Print(message) end
+        elseif a.mode~='both' then F.Print(message..(F.AmmoVendorChatLink and F.AmmoVendorChatLink() or '')) end
         delivered=true
     end
     if a.sound and PlaySound then

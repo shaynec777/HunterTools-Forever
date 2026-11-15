@@ -50,6 +50,7 @@ function F.OpenAmmoSettings()
         return b
     end
     label('Ammunition',25,22,590,'GameFontNormalLarge')
+    p.nearestVendorButton=button('Nearest vendor for my level',280,20,330,function() F.MarkLevelAmmoVendor() end)
     content=p.alertPage
     check('Enable ammo reminders',25,53,'enabled')
     check('Play warning sound (Master)',310,53,'sound')

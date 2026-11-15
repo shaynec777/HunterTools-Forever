@@ -2,6 +2,7 @@ from pathlib import Path
 import os, sys, json, hashlib, re
 ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT.parent/'.test-tools'))
+sys.path.insert(0,str(ROOT.parent.parent/'.test-tools'))
 from lupa.lua51 import LuaRuntime
 os.chdir(ROOT)
 ADDON=ROOT/'source/HunterToolsClassic'
@@ -23,11 +24,12 @@ for p in (ROOT/'tests').glob('test-*.lua'):
     except Exception as e:failures.append((p.name,str(e)))
 # Reuse behavior tests against the actual independent Classic source, adapting
 # only names/paths and API namespaces. Data-specific Forever tests are excluded.
+# Range is covered by tests/test-classic-range.lua; the shared test asserts the different client contract.
 names=['test-config-menu.lua','test-menu-redesign.lua','test-food-login.lua',
  'test-feedomatic-ammo.lua','test-feedomatic-quests.lua','test-feed-message.lua',
  'test-hunger-alerts.lua','test-ammo-upgrades.lua','test-weapon-comparisons.lua',
- 'test-special-food.lua','test-instance-check.lua','test-range.lua','test-pet-heal-range.lua',
- 'test-pet-alerts.lua','test-movable-alerts.lua','test-aspect-reminder.lua','test-aspect-button.lua',
+ 'test-special-food.lua','test-instance-check.lua','test-pet-heal-range.lua',
+ 'test-settings-navigation.lua','test-pet-alerts.lua','test-movable-alerts.lua','test-aspect-reminder.lua','test-aspect-button.lua',
  'test-tracking-button.lua','test-pet-list-manager.lua','test-pet-status.lua','test-mob-finder.lua']
 for name in names:
     t=(FOREVER/name).read_text(encoding='utf-8-sig')

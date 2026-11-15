@@ -35,10 +35,10 @@ local function engineeringSkill()
     end
     return nil
 end
-function F.AmmoUpgradeContext(scanOK)
+function F.AmmoUpgradeContext(scanOK,forVendors)
     local s=F.AmmoUpgradeSettings()
-    if not s.enabled then return nil,'Enable upgrade recommendations to compare ammunition.' end
-    if not F.db.ammo.enabled then return nil,'Enable Ammo Reminder to use upgrade recommendations.' end
+    if not s.enabled and not forVendors then return nil,'Enable upgrade recommendations to compare ammunition.' end
+    if not F.db.ammo.enabled and not forVendors then return nil,'Enable Ammo Reminder to use upgrade recommendations.' end
     if InCombatLockdown() then return nil,'Updates resume after combat.' end
     local _,class=query(UnitClass,'player');if class~='HUNTER' then return nil,'Ammo upgrade recommendations are for hunters.' end
     local level=query(UnitLevel,'player')
@@ -178,10 +178,10 @@ function F.ShowAmmoUpgradeNotification(c,id,entry)
         else message=message..F.AmmoUpgradeSource(id,entry,c) end
     elseif c.baselineUnknown then message=message..'Carried ammo stats are unverified; comparison unavailable.' end
     local mode=c.settings.mode
-    if mode=='chat' or mode=='both' then F.Print(message) end
+    if mode=='chat' or mode=='both' then F.Print(message..(F.AmmoVendorChatLink and F.AmmoVendorChatLink() or '')) end
     if mode=='screen' or mode=='both' then
         if RaidNotice_AddMessage and RaidWarningFrame then RaidNotice_AddMessage(RaidWarningFrame,message,{r=1,g=0.8,b=0.2},5)
-        elseif mode=='screen' then F.Print(message) end
+        elseif mode=='screen' then F.Print(message..(F.AmmoVendorChatLink and F.AmmoVendorChatLink() or '')) end
     end
 end
 function F.CheckAmmoUpgradeNotifications()
@@ -251,7 +251,9 @@ function F.OpenAmmoUpgradeSettings()
         end)
         text('0.1-120 minutes. Alerts for depleted ammo or usable upgrades. Enter saves.',-211)
         text('Compares equipped ammo and carried stock for your weapon, level and faction.\nThe ammo list marks lower-damage choices red [Obsolete] only while recommendations and Ammo Reminder are enabled.',-244)
-        p.advice=text('',-296);p.advice:SetHeight(300)
+        p.advice=text('',-296);p.advice:SetHeight(265)
+        local sellers=CreateFrame('Button',nil,p,'UIPanelButtonTemplate');sellers:SetSize(250,26);sellers:SetPoint('BOTTOM',0,68);sellers:SetText('Find nearby ammo sellers')
+        sellers:SetScript('OnClick',function() if F.OpenAmmoVendors then F.OpenAmmoVendors() end end)
         local back=CreateFrame('Button',nil,p,'UIPanelButtonTemplate');back:SetSize(210,26);back:SetPoint('BOTTOM',0,28);back:SetText('Back to Ammo Reminder')
         back:SetScript('OnClick',function() p:Hide();F.OpenAmmoSettings() end)
         function p:Refresh()

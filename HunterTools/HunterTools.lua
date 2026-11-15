@@ -160,6 +160,7 @@ loader:SetScript('OnEvent',function(_,event,a,b,c)
             if (text or ''):lower():match('^%s*$') or (text or ''):lower():match('^%s*config%s*$') then F.OpenConfig(); return end
             if (text or ''):lower():match('^%s*instance%s*$') then F.OpenInstanceSettings(); return end
             if (text or ''):lower():match('^%s*questdebug%s*$') then F.DebugQuestFood(); return end
+            if (text or ''):lower():match('^%s*ammovendors%s*$') then F.OpenAmmoVendors(); return end
             if (text or ''):lower():match('^%s*ammo%s*$') then F.OpenAmmoSettings(); return end
             if (text or ''):lower():match('^%s*foods%s*$') then F.OpenFoodList(); return end
             if F.ListCommand(text or '') then return end

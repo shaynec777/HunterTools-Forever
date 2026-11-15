@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-15",
+  "source": "https://ptgmedia.pearsoncmg.com/imprint_downloads/brady/connected/wowatlas/RegionalIndices_hr.pdf",
+  "note": "Named-building references from the official original-world atlas; building names have not been independently confirmed in Forever. No stock or coordinates are taken from this atlas.",
+  "shops": {
+    "1285": "Everyday Merchandise",
+    "1297": "The Empty Quiver",
+    "1298": "The Empty Quiver",
+    "1287": "Weller's Arsenal",
+    "3313": "Orgrimmar General Store",
+    "5101": "Fizzlespinner's General Goods",
+    "5122": "Goldfury's Hunting Supplies",
+    "5123": "Goldfury's Hunting Supplies",
+    "7976": "Timberline Arms"
+  }
+}

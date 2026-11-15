@@ -2,11 +2,20 @@
 
 A configurable hunter toolkit for **WoW Classic Era**, with feeding, pet information, ammunition reminders, tracking, dungeon checks and nearby-unit finders.
 
-**Current beta: 3.1.11a.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
+**Current beta: 3.1.12.** Track Beasts has been confirmed in game; feeding, later-level features and combat behavior still need broader Classic testing. This is a separate addon with its own folder and saved settings.
 
-## Current update — 3.1.11a
+## Current update — 3.1.12
 
-## Bug fixes — 3.1.11a
+- Find ammo sellers for your equipped weapon, level and faction without another addon.
+- Use **Nearest vendor for my level** in the Ammo config header to locate a seller of the best ordinary ammo tier you can use.
+- Click **Mark nearby ammo seller** in chat reminders to mark a local seller, or the nearest known suitable seller on the same continent.
+- Compact world-map and minimap markers clear when you speak to the selected NPC. Known shop names appear on map labels and minimap tooltips.
+- Locally observed shop stock updates the bundled reference. Distances are straight-line estimates, not travel routes.
+
+Independent Classic vendor data and saved settings; no map or quest addon required.
+
+
+## Bug fixes — 3.1.12
 
 - Fix Classic's range window remaining at In range / Out of range when Auto Shot reports invalid spell bounds (observed minimum 35, maximum 0).
 - Use validated learned-shot bounds when available. Outside combat, retain live shot/follow-distance classification even if numeric bounds are unavailable, restoring Too close / In range / Too far without inventing yardage.

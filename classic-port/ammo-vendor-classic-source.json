@@ -1,0 +1,1590 @@
+{
+  "source": "https://github.com/cmangos/classic-db/blob/master/Full_DB/ClassicDB_1_12_1_z2815.sql.gz",
+  "license": "GPL-3.0",
+  "records": [
+    {
+      "id": 151,
+      "name": "Brog Hamfist",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 0,
+      "worldX": -9465.29,
+      "worldY": 9.63314,
+      "faction": "Alliance"
+    },
+    {
+      "id": 152,
+      "name": "Brother Danil",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 0,
+      "worldX": -8901.59,
+      "worldY": -112.716,
+      "faction": "Alliance"
+    },
+    {
+      "id": 227,
+      "name": "Mabel Solaj",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033
+      ],
+      "instance": 0,
+      "worldX": -10531.8,
+      "worldY": -1155.08,
+      "faction": "Alliance"
+    },
+    {
+      "id": 228,
+      "name": "Avette Fellwood",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -10516.2,
+      "worldY": -1138.54,
+      "faction": "Alliance"
+    },
+    {
+      "id": 491,
+      "name": "Quartermaster Lewis",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "instance": 0,
+      "worldX": -10500.6,
+      "worldY": 1021.59,
+      "faction": "Alliance"
+    },
+    {
+      "id": 734,
+      "name": "Corporal Bluth",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -11295.8,
+      "worldY": -201.343,
+      "faction": "Alliance"
+    },
+    {
+      "id": 789,
+      "name": "Kimberly Hiett",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -9234.49,
+      "worldY": -2158.75,
+      "faction": "Alliance"
+    },
+    {
+      "id": 791,
+      "name": "Lindsay Ashlock",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "instance": 0,
+      "worldX": -9260.25,
+      "worldY": -2195.37,
+      "faction": "Alliance"
+    },
+    {
+      "id": 829,
+      "name": "Adlin Pridedrift",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 0,
+      "worldX": -6225.24,
+      "worldY": 320.372,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1149,
+      "name": "Uthok",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -12358.0,
+      "worldY": 207.355,
+      "faction": "Horde"
+    },
+    {
+      "id": 1198,
+      "name": "Rallic Finn",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 0,
+      "worldX": -9469.28,
+      "worldY": -1355.24,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1243,
+      "name": "Hegnar Rumbleshot",
+      "items": [
+        2516,
+        2519
+      ],
+      "instance": 0,
+      "worldX": -6015.51,
+      "worldY": -201.511,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1250,
+      "name": "Drake Lindgren",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 0,
+      "worldX": -9483.1,
+      "worldY": -1356.25,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1285,
+      "name": "Thurman Mullby",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -8831.75,
+      "worldY": 596.355,
+      "faction": "Alliance",
+      "shop": "Everyday Merchandise"
+    },
+    {
+      "id": 1287,
+      "name": "Marda Weller",
+      "items": [
+        2512,
+        2515,
+        3030
+      ],
+      "instance": 0,
+      "worldX": -8787.69,
+      "worldY": 609.631,
+      "faction": "Alliance",
+      "shop": "Weller's Arsenal"
+    },
+    {
+      "id": 1297,
+      "name": "Lina Stover",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284
+      ],
+      "instance": 0,
+      "worldX": -8791.82,
+      "worldY": 702.675,
+      "faction": "Alliance",
+      "shop": "The Empty Quiver"
+    },
+    {
+      "id": 1298,
+      "name": "Frederick Stover",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -8795.48,
+      "worldY": 709.113,
+      "faction": "Alliance",
+      "shop": "The Empty Quiver"
+    },
+    {
+      "id": 1448,
+      "name": "Neal Allen",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033
+      ],
+      "instance": 0,
+      "worldX": -3712.16,
+      "worldY": -834.066,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1452,
+      "name": "Gruham Rumdnul",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033
+      ],
+      "instance": 0,
+      "worldX": -3746.03,
+      "worldY": -888.592,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1459,
+      "name": "Naela Trance",
+      "items": [
+        2512,
+        2515,
+        3030
+      ],
+      "instance": 0,
+      "worldX": -3758.33,
+      "worldY": -855.729,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1461,
+      "name": "Murndan Derth",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "instance": 0,
+      "worldX": -3790.24,
+      "worldY": -857.93,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1462,
+      "name": "Edwina Monzor",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -3755.34,
+      "worldY": -849.345,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1469,
+      "name": "Vrok Blunderblast",
+      "items": [
+        2516,
+        2519
+      ],
+      "instance": 0,
+      "worldX": -5286.92,
+      "worldY": -2981.99,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1668,
+      "name": "William MacGregor",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 0,
+      "worldX": -10658.5,
+      "worldY": 996.851,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1682,
+      "name": "Yanni Stoutheart",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "instance": 0,
+      "worldX": -5381.88,
+      "worldY": -2952.48,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1685,
+      "name": "Xandar Goodbeard",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "instance": 0,
+      "worldX": -5652.9,
+      "worldY": -4268.63,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1686,
+      "name": "Irene Sureshot",
+      "items": [
+        2516,
+        2519,
+        3033
+      ],
+      "instance": 0,
+      "worldX": -5654.18,
+      "worldY": -4287.37,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1687,
+      "name": "Cliff Hadin",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 0,
+      "worldX": -5645.74,
+      "worldY": -4283.84,
+      "faction": "Alliance"
+    },
+    {
+      "id": 1691,
+      "name": "Kreg Bilmn",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 0,
+      "worldX": -5597.66,
+      "worldY": -521.852,
+      "faction": "Alliance"
+    },
+    {
+      "id": 2084,
+      "name": "Natheril Raincaller",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 7073.94,
+      "worldY": -3969.67,
+      "faction": "Alliance"
+    },
+    {
+      "id": 2115,
+      "name": "Joshua Kien",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 0,
+      "worldX": 1866.02,
+      "worldY": 1574.45,
+      "faction": "Horde"
+    },
+    {
+      "id": 2134,
+      "name": "Mrs. Winters",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 0,
+      "worldX": 2253.21,
+      "worldY": 269.817,
+      "faction": "Horde"
+    },
+    {
+      "id": 2140,
+      "name": "Edwin Harly",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "instance": 0,
+      "worldX": 549.582,
+      "worldY": 1602.99,
+      "faction": "Horde"
+    },
+    {
+      "id": 2401,
+      "name": "Kayren Soothallow",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -24.7877,
+      "worldY": -935.177,
+      "faction": "Horde"
+    },
+    {
+      "id": 2685,
+      "name": "Mazk Snipeshot",
+      "items": [
+        2516,
+        2519,
+        3033
+      ],
+      "instance": 0,
+      "worldX": -14364.5,
+      "worldY": 402.075,
+      "faction": "Neutral"
+    },
+    {
+      "id": 2803,
+      "name": "Malygen",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 6150.43,
+      "worldY": -1941.85,
+      "faction": "Alliance"
+    },
+    {
+      "id": 2806,
+      "name": "Bale",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 5092.96,
+      "worldY": -356.463,
+      "faction": "Horde"
+    },
+    {
+      "id": 2808,
+      "name": "Vikki Lonsav",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -1275.75,
+      "worldY": -2538.73,
+      "faction": "Alliance"
+    },
+    {
+      "id": 2820,
+      "name": "Graud",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -910.288,
+      "worldY": -3534.85,
+      "faction": "Horde"
+    },
+    {
+      "id": 2839,
+      "name": "Haren Kanmae",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -14340.6,
+      "worldY": 414.604,
+      "faction": "Neutral"
+    },
+    {
+      "id": 2908,
+      "name": "Grawl",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -6651.26,
+      "worldY": -2156.89,
+      "faction": "Horde"
+    },
+    {
+      "id": 2997,
+      "name": "Jyn Stonehoof",
+      "items": [
+        2516,
+        2519
+      ],
+      "instance": 1,
+      "worldX": -1283.92,
+      "worldY": 84.3608,
+      "faction": "Horde"
+    },
+    {
+      "id": 3015,
+      "name": "Kuna Thunderhorn",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -1168.01,
+      "worldY": 26.1251,
+      "faction": "Horde"
+    },
+    {
+      "id": 3018,
+      "name": "Hogor Thunderhoof",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "instance": 1,
+      "worldX": -1247.13,
+      "worldY": -63.1144,
+      "faction": "Horde"
+    },
+    {
+      "id": 3053,
+      "name": "Synge",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "instance": 1,
+      "worldX": -6225.51,
+      "worldY": -3970.78,
+      "faction": "Neutral"
+    },
+    {
+      "id": 3072,
+      "name": "Kawnie Softbreeze",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 1,
+      "worldX": -2893.72,
+      "worldY": -279.332,
+      "faction": "Horde"
+    },
+    {
+      "id": 3076,
+      "name": "Moorat Longstride",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 1,
+      "worldX": -2247.81,
+      "worldY": -308.157,
+      "faction": "Horde"
+    },
+    {
+      "id": 3078,
+      "name": "Kennah Hawkseye",
+      "items": [
+        2516,
+        2519
+      ],
+      "instance": 1,
+      "worldX": -2275.53,
+      "worldY": -289.265,
+      "faction": "Horde"
+    },
+    {
+      "id": 3088,
+      "name": "Henry Chapal",
+      "items": [
+        2516,
+        2519,
+        3033
+      ],
+      "instance": 0,
+      "worldX": -9173.33,
+      "worldY": -2088.29,
+      "faction": "Alliance"
+    },
+    {
+      "id": 3158,
+      "name": "Duokna",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 1,
+      "worldX": -565.428,
+      "worldY": -4214.2,
+      "faction": "Horde"
+    },
+    {
+      "id": 3164,
+      "name": "Jark",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 1,
+      "worldX": 321.548,
+      "worldY": -4838.4,
+      "faction": "Horde"
+    },
+    {
+      "id": 3165,
+      "name": "Ghrawt",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 1,
+      "worldX": 362.105,
+      "worldY": -4763.84,
+      "faction": "Horde"
+    },
+    {
+      "id": 3186,
+      "name": "K'waii",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 1,
+      "worldX": -779.031,
+      "worldY": -4938.93,
+      "faction": "Horde"
+    },
+    {
+      "id": 3313,
+      "name": "Trak'gen",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 1520.54,
+      "worldY": -4355.58,
+      "faction": "Horde",
+      "shop": "Orgrimmar General Store"
+    },
+    {
+      "id": 3322,
+      "name": "Kaja",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "instance": 1,
+      "worldX": 1692.69,
+      "worldY": -4412.03,
+      "faction": "Horde"
+    },
+    {
+      "id": 3350,
+      "name": "Asoran",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 1891.6,
+      "worldY": -4326.75,
+      "faction": "Horde"
+    },
+    {
+      "id": 3409,
+      "name": "Zendo'jian",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 1,
+      "worldX": 2099.23,
+      "worldY": -4818.85,
+      "faction": "Horde"
+    },
+    {
+      "id": 3410,
+      "name": "Jin'sora",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 1914.16,
+      "worldY": -4775.87,
+      "faction": "Horde"
+    },
+    {
+      "id": 3481,
+      "name": "Barg",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "instance": 1,
+      "worldX": -410.837,
+      "worldY": -2612.91,
+      "faction": "Horde"
+    },
+    {
+      "id": 3488,
+      "name": "Uthrok",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "instance": 1,
+      "worldX": -351.184,
+      "worldY": -2556.51,
+      "faction": "Horde"
+    },
+    {
+      "id": 3498,
+      "name": "Jazzik",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "instance": 1,
+      "worldX": -1008.67,
+      "worldY": -3651.95,
+      "faction": "Neutral"
+    },
+    {
+      "id": 3541,
+      "name": "Sarah Raycroft",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -774.517,
+      "worldY": -505.746,
+      "faction": "Alliance"
+    },
+    {
+      "id": 3587,
+      "name": "Lyrai",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 1,
+      "worldX": 10442.9,
+      "worldY": 783.989,
+      "faction": "Alliance"
+    },
+    {
+      "id": 3589,
+      "name": "Keina",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 1,
+      "worldX": 10436.7,
+      "worldY": 794.837,
+      "faction": "Alliance"
+    },
+    {
+      "id": 3608,
+      "name": "Aldia",
+      "items": [
+        2512,
+        2516
+      ],
+      "instance": 1,
+      "worldX": 9891.88,
+      "worldY": 988.308,
+      "faction": "Alliance"
+    },
+    {
+      "id": 3610,
+      "name": "Jeena Featherbow",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 1,
+      "worldX": 9821.98,
+      "worldY": 968.831,
+      "faction": "Alliance"
+    },
+    {
+      "id": 3951,
+      "name": "Bhaldaran Ravenshade",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 1,
+      "worldX": 2087.08,
+      "worldY": -1199.17,
+      "faction": "Alliance"
+    },
+    {
+      "id": 3962,
+      "name": "Haljan Oakheart",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033
+      ],
+      "instance": 1,
+      "worldX": 2717.7,
+      "worldY": -309.66,
+      "faction": "Alliance"
+    },
+    {
+      "id": 4082,
+      "name": "Grawnal",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "instance": 1,
+      "worldX": 1006.41,
+      "worldY": 1005.47,
+      "faction": "Horde"
+    },
+    {
+      "id": 4084,
+      "name": "Chylina",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "instance": 1,
+      "worldX": 2715.86,
+      "worldY": 1512.97,
+      "faction": "Alliance"
+    },
+    {
+      "id": 4170,
+      "name": "Ellandrieth",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 9864.51,
+      "worldY": 2253.27,
+      "faction": "Alliance"
+    },
+    {
+      "id": 4173,
+      "name": "Landria",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 9770.63,
+      "worldY": 2268.83,
+      "faction": "Alliance"
+    },
+    {
+      "id": 4182,
+      "name": "Dalmond",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "instance": 1,
+      "worldX": 6564.99,
+      "worldY": 488.889,
+      "faction": "Alliance"
+    },
+    {
+      "id": 4203,
+      "name": "Ariyell Skyshadow",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 1,
+      "worldX": 9924.3,
+      "worldY": 2316.45,
+      "faction": "Alliance"
+    },
+    {
+      "id": 4241,
+      "name": "Mydrannul",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 9918.06,
+      "worldY": 2190.34,
+      "faction": "Alliance"
+    },
+    {
+      "id": 4555,
+      "name": "Eleanor Rusk",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": 1564.76,
+      "worldY": 209.601,
+      "faction": "Horde"
+    },
+    {
+      "id": 4602,
+      "name": "Benijah Fenner",
+      "items": [
+        2512,
+        2515,
+        3030
+      ],
+      "instance": 0,
+      "worldX": 1667.85,
+      "worldY": 308.892,
+      "faction": "Horde"
+    },
+    {
+      "id": 4603,
+      "name": "Nicholas Atwood",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "instance": 0,
+      "worldX": 1706.63,
+      "worldY": 271.476,
+      "faction": "Horde"
+    },
+    {
+      "id": 4604,
+      "name": "Abigail Sawyer",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 0,
+      "worldX": 1629.87,
+      "worldY": 348.382,
+      "faction": "Horde"
+    },
+    {
+      "id": 4876,
+      "name": "Jawn Highmesa",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033
+      ],
+      "instance": 1,
+      "worldX": -5476.7,
+      "worldY": -2453.51,
+      "faction": "Horde"
+    },
+    {
+      "id": 4889,
+      "name": "Torq Ironblast",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "instance": 1,
+      "worldX": -3712.46,
+      "worldY": -4519.1,
+      "faction": "Alliance"
+    },
+    {
+      "id": 4892,
+      "name": "Jensen Farran",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -3779.61,
+      "worldY": -4542.27,
+      "faction": "Alliance"
+    },
+    {
+      "id": 4896,
+      "name": "Charity Mipsy",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -3843.46,
+      "worldY": -4516.15,
+      "faction": "Alliance"
+    },
+    {
+      "id": 5101,
+      "name": "Bryllia Ironbrand",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -4962.1,
+      "worldY": -1023.77,
+      "faction": "Alliance",
+      "shop": "Fizzlespinner's General Goods"
+    },
+    {
+      "id": 5122,
+      "name": "Skolmin Goldfury",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -4921.13,
+      "worldY": -1280.97,
+      "faction": "Alliance",
+      "shop": "Goldfury's Hunting Supplies"
+    },
+    {
+      "id": 5123,
+      "name": "Bretta Goldfury",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "instance": 0,
+      "worldX": -4913.43,
+      "worldY": -1284.47,
+      "faction": "Alliance",
+      "shop": "Goldfury's Hunting Supplies"
+    },
+    {
+      "id": 5510,
+      "name": "Thulman Flintcrag",
+      "items": [
+        2516,
+        2519
+      ],
+      "instance": 0,
+      "worldX": -8419.3,
+      "worldY": 646.603,
+      "faction": "Alliance"
+    },
+    {
+      "id": 6028,
+      "name": "Burkrum",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 2354.76,
+      "worldY": -2540.69,
+      "faction": "Horde"
+    },
+    {
+      "id": 7942,
+      "name": "Faralorn",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -4379.03,
+      "worldY": 3311.83,
+      "faction": "Alliance"
+    },
+    {
+      "id": 7976,
+      "name": "Thalgus Thunderfist",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030
+      ],
+      "instance": 0,
+      "worldX": -5041.1,
+      "worldY": -1200.23,
+      "faction": "Alliance",
+      "shop": "Timberline Arms"
+    },
+    {
+      "id": 8131,
+      "name": "Blizrik Buckshot",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "instance": 1,
+      "worldX": -7141.49,
+      "worldY": -3719.69,
+      "faction": "Neutral"
+    },
+    {
+      "id": 8139,
+      "name": "Jabbey",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -6886.48,
+      "worldY": -4842.28,
+      "faction": "Neutral"
+    },
+    {
+      "id": 8362,
+      "name": "Kuruk",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -1300.17,
+      "worldY": 110.54,
+      "faction": "Horde"
+    },
+    {
+      "id": 9548,
+      "name": "Cawind Trueaim",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -4484.55,
+      "worldY": 233.527,
+      "faction": "Horde"
+    },
+    {
+      "id": 9549,
+      "name": "Borand",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 1,
+      "worldX": 992.181,
+      "worldY": 1030.96,
+      "faction": "Horde"
+    },
+    {
+      "id": 9551,
+      "name": "Starn",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -5453.35,
+      "worldY": -2408.38,
+      "faction": "Horde"
+    },
+    {
+      "id": 9552,
+      "name": "Zanara",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -3086.6,
+      "worldY": -2838.95,
+      "faction": "Horde"
+    },
+    {
+      "id": 9553,
+      "name": "Nadia Vernon",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 0,
+      "worldX": 566.309,
+      "worldY": 1559.6,
+      "faction": "Horde"
+    },
+    {
+      "id": 9555,
+      "name": "Mu'uta",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -933.85,
+      "worldY": -3477.47,
+      "faction": "Horde"
+    },
+    {
+      "id": 10369,
+      "name": "Trayexir",
+      "items": [
+        2512,
+        2515
+      ],
+      "instance": 1,
+      "worldX": -769.15,
+      "worldY": -4948.53,
+      "faction": "Horde"
+    },
+    {
+      "id": 11038,
+      "name": "Caretaker Alen",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": 2151.72,
+      "worldY": -5264.51,
+      "faction": "Neutral"
+    },
+    {
+      "id": 11184,
+      "name": "Wixxrak",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "instance": 1,
+      "worldX": 6733.39,
+      "worldY": -4699.04,
+      "faction": "Neutral"
+    },
+    {
+      "id": 12021,
+      "name": "Daeolyn Summerleaf",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 7956.8,
+      "worldY": -2424.43,
+      "faction": "Neutral"
+    },
+    {
+      "id": 12027,
+      "name": "Tukk",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -1701.76,
+      "worldY": 3112.57,
+      "faction": "Horde"
+    },
+    {
+      "id": 12029,
+      "name": "Narianna",
+      "items": [
+        2512,
+        2515,
+        3030
+      ],
+      "instance": 1,
+      "worldX": 7834.28,
+      "worldY": -2612.63,
+      "faction": "Neutral"
+    },
+    {
+      "id": 12959,
+      "name": "Nergal",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -6157.44,
+      "worldY": -1067.73,
+      "faction": "Neutral"
+    },
+    {
+      "id": 12960,
+      "name": "Christi Galvanis",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 243.016,
+      "worldY": 1238.59,
+      "faction": "Alliance"
+    },
+    {
+      "id": 14301,
+      "name": "Brinna Valanaar",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 1,
+      "worldX": 2691.34,
+      "worldY": -3885.63,
+      "faction": "Alliance"
+    },
+    {
+      "id": 14624,
+      "name": "Master Smith Burninate",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -6524.04,
+      "worldY": -1188.72,
+      "faction": "Neutral"
+    },
+    {
+      "id": 15174,
+      "name": "Calandrath",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "instance": 1,
+      "worldX": -6868.04,
+      "worldY": 729.914,
+      "faction": "Neutral"
+    },
+    {
+      "id": 17598,
+      "name": "Renn'az",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "instance": 0,
+      "worldX": -622.67,
+      "worldY": -4533.81,
+      "faction": "Horde"
+    }
+  ],
+  "source_sha256": "4f92db520868ab4e566726f68b5b2e380ae781209beaf22237b4f7f04600d0c0"
+}

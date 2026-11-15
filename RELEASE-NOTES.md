@@ -1,3 +1,19 @@
+# HunterTools Forever 3.1.12
+
+- Find ammo sellers for your equipped weapon, level and faction without another addon.
+- Use **Nearest vendor for my level** in the Ammo config header to locate a seller of the best ordinary ammo tier you can use.
+- Click **Mark nearby ammo seller** in chat reminders to mark a local seller, or the nearest known suitable seller on the same continent.
+- Compact world-map and minimap markers clear when you speak to the selected NPC. Known shop names appear on map labels and minimap tooltips.
+- Locally observed shop stock updates the bundled reference. Distances are straight-line estimates, not travel routes.
+
+Includes 128 Forever-listed sellers, with map coordinates for 126. The user verified the current-level button and compact shop-name layout in Forever.
+
+## Validation
+
+37 Forever suites pass, including vendor filtering, map/minimap markers, chat links, current-level selection, sidebar navigation and existing addon behavior. Lua 5.1 syntax and TOC references checked.
+
+Thanks to [**AalSupes**](https://www.curseforge.com/members/aalsupes) and [**BluBuryPi**](https://www.curseforge.com/members/bluburypi) for their help testing and improving HunterTools.
+
 # HunterTools Forever 3.1.11a
 
 ## Bug fixes

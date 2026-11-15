@@ -1,3 +1,11 @@
+# 3.1.12 — November 15, 2026
+
+- Add independent ammo-vendor lookup, current-level vendor button and clickable chat marker links.
+- Add compact world-map/minimap destinations, nearest same-continent fallback, shop labels and conversation-based clearing.
+- Bundle separate vendor data and settings for each edition, with a native Classic map/minimap adapter.
+- Retain existing pet resource bar and Classic range fixes.
+- Validation: 37 Forever suites and 28 Classic suites pass; Classic live verification remains pending.
+
 # HunterTools Forever 3.1.11a
 
 ## Bug fixes

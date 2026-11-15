@@ -1,25 +1,23 @@
 # HunterTools Forever
 
-![HunterTools jackknife logo](https://raw.githubusercontent.com/shaynec777/HunterTools/main/artwork/HunterToolsLogo.png)
+![HunterTools Forever jackknife logo](https://raw.githubusercontent.com/shaynec777/HunterTools-Forever/main/artwork/HunterToolsLogo.png)
 
-FeedomaticToo has morphed into HunterTools due to the many great suggestions we've received!
+FeedomaticToo has morphed into HunterTools Forever due to the many great suggestions we've received!
 
-HunterTools brings pet feeding, ammunition reminders and upgrades, dungeon checks, pet information, target range, and an ability browser together for World of Warcraft Forever. All tools can be individually enabled or disabled.
+HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dungeon checks, pet information, target range, and an ability browser together for World of Warcraft Forever. All tools can be individually enabled or disabled.
 
-## New in this update
+## New in this update — 3.1.12
 
-- Compact aspect and tracking lists open beneath their floating buttons on right-click. Green markers identify active choices; opening either list closes the other. Automatic reminder dialogs remain separate.
-- Favorite aspects and tracking abilities with the star beside each choice. Favorites save per character and appear first; aspect favorites survive learning a higher rank. Favorites can be changed outside combat.
-- Native spell tooltips on aspect/tracking choices, aspect reminder choices, and the active spell on each floating button.
-- Beast details and name search for every class. `/ht beastdetail` or `/ht beastdetails` inspects a targeted wild beast, or opens search when no suitable beast is targeted. Add a full or partial name to search directly; `/ht beastsearch` also opens search.
-- Search the bundled beast references and your character's journal by name, with paged results and distinct NPC identities for beasts sharing a name. Detail windows include a search box and preserve data-source labels and unknown fields.
-- Pet Abilities includes a beast-name search that displays results and scrollable details inside the ability browser, with optional portraits and a Back control. Selecting an ability or clearing the beast search returns to teaching animals.
+- Find ammo sellers for your equipped weapon, level and faction without another addon.
+- Use **Nearest vendor for my level** in the Ammo config header to locate a seller of the best ordinary ammo tier you can use.
+- Click **Mark nearby ammo seller** in chat reminders to mark a local seller, or the nearest known suitable seller on the same continent.
+- Compact world-map and minimap markers clear when you speak to the selected NPC. Known shop names appear on map labels and minimap tooltips.
+- Locally observed shop stock updates the bundled reference. Distances are straight-line estimates, not travel routes.
 
-## Bug fixes and refinements
+## Bug fixes
 
-- Keep Pet Abilities searches and details in the ability browser rather than switching to the standalone beast window.
-- Give the embedded beast-details panel a solid dark background and raise it above the ability controls for readability.
-- Non-hunters can inspect beast information without enabling hunter display options; hunter learned-ability labels are omitted for other classes. HunterTools itself must be enabled for that character.
+- Clearer category/page headings and specific enable labels make settings easier to locate. Existing character preferences are retained.
+
 
 ## Tools and controls
 
@@ -37,6 +35,8 @@ Use `/ht` or `/huntertools` for the tool menu; `/ht tracking` (tracking chooser/
 
 ## Experimental ranged comparison formula
 
+Estimates assume stationary Auto Shot; firing requires standing still for 0.5 seconds.
+
 **Character Auto Shot DPS = ((estimated minimum shot damage + estimated maximum shot damage) / 2) / effective shot interval in seconds.**
 
 For example, `(17.9 + 24.9) / 2 / 2.03` is approximately **10.5 character Auto Shot DPS**. The weapon's own listed DPS uses base weapon damage and base speed. Our estimate includes your character's ranged attack power, ammo, scope and retained live damage/attack-speed bonuses, so it can be higher than the weapon's listed DPS.
@@ -47,7 +47,7 @@ Candidate weapons start from your live equipped damage range and add the weapon-
 
 ## Installation and updating
 
-Extract both folders in the release ZIP into Interface/AddOns, replacing the existing addon files, then restart WoW to load the new modules and logo. HunterTools is the addon; FeedomaticToo is a settings-only compatibility loader. Enable both entries for the first migration and keep the compatibility folder until your characters have migrated. Existing per-character settings, food lists and positions are retained. Back up settings before manual installation.
+Extract both folders in the release ZIP into Interface/AddOns, replacing the existing addon files, then restart WoW to load the new modules and logo. HunterTools Forever is the addon; FeedomaticToo is a settings-only compatibility loader. Enable both entries for the first migration and keep the compatibility folder until your characters have migrated. Existing per-character settings, food lists and positions are retained. Back up settings before manual installation.
 
 Open Beast Training to seed or refresh learned ranks. Learned and missing labels reflect cached information; incomplete scans or filters can affect confidence. Reference coverage includes 32 abilities / 152 ranks and 297 Classic teaching creatures. Partial Wowhead Forever data supplements creature identities and family diets but does not verify all teaching ranks or locations.
 
@@ -67,5 +67,4 @@ Food and partial Forever reference: Wowhead Forever. Beast/family data: [Petopia
 
 Thanks to Raytchel Bates and Vanauge Imnewtorp for their suggestions!
 
-3.1.5: Finder tools are under Finders in the main menu, or /ht mobfinder and /ht playerfinder. Detection offers a user-clicked Target button; visible targeted nameplates receive a brief highlight. Map markers/arrows require public location data and are unavailable for ordinary detections without it. No Questie dependency. Player names support Forever surnames; optional partial matching is available. Current pet details can show learned pet spellbook abilities.
-Auto Shot comparisons assume stationary firing; the October 15 update requires standing still for 0.5 seconds before firing. Pet damage, expertise and critical strikes are not simulated.
+Thanks to [**AalSupes**](https://www.curseforge.com/members/aalsupes) and [**BluBuryPi**](https://www.curseforge.com/members/bluburypi) for their help testing and improving HunterTools.

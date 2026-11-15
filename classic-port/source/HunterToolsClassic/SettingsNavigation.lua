@@ -26,6 +26,7 @@ local categories={
  {'Ammunition & weapons',{
   {'Stock alerts','OpenAmmoSettings','ammoPanel','stock','ammo','Enable ammo stock alerts'},
   {'Ammo upgrades','OpenAmmoUpgradeSettings','ammoUpgradePanel'},
+  {'Ammo sellers','OpenAmmoVendors','ammoVendorPanel'},
   {'Weapon comparisons (Experimental)','OpenWeaponComparisonSettings','weaponSettingsPanel'},
  }},
  {'Range & dungeon checks',{

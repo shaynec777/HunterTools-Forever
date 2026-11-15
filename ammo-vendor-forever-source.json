@@ -1,0 +1,2316 @@
+{
+  "date": "2026-11-15",
+  "source": "Wowhead Forever visible item sold-by tables and NPC map pins",
+  "records": [
+    {
+      "id": 151,
+      "name": "Brog Hamfist",
+      "url": "https://www.wowhead.com/forever/npc=151/brog-hamfist",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Alliance",
+      "areaID": 12,
+      "zone": "Elwynn Forest",
+      "x": 0.43799999999999994,
+      "y": 0.66,
+      "mapID": 1429,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 152,
+      "name": "Brother Danil",
+      "url": "https://www.wowhead.com/forever/npc=152/brother-danil",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Alliance",
+      "areaID": 12,
+      "zone": "Elwynn Forest",
+      "x": 0.474,
+      "y": 0.414,
+      "mapID": 1429,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 227,
+      "name": "Mabel Solaj",
+      "url": "https://www.wowhead.com/forever/npc=227/mabel-solaj",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033
+      ],
+      "faction": "Alliance",
+      "areaID": 10,
+      "zone": "Duskwood",
+      "x": 0.738,
+      "y": 0.456,
+      "mapID": 1431,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 228,
+      "name": "Avette Fellwood",
+      "url": "https://www.wowhead.com/forever/npc=228/avette-fellwood",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Alliance",
+      "areaID": 10,
+      "zone": "Duskwood",
+      "x": 0.73,
+      "y": 0.444,
+      "mapID": 1431,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 491,
+      "name": "Quartermaster Lewis",
+      "url": "https://www.wowhead.com/forever/npc=491/quartermaster-lewis",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Neutral",
+      "areaID": 40,
+      "zone": "Westfall",
+      "x": 0.568,
+      "y": 0.47200000000000003,
+      "mapID": 1436,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 734,
+      "name": "Corporal Bluth",
+      "url": "https://www.wowhead.com/forever/npc=734/corporal-bluth",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 33,
+      "zone": "Stranglethorn Vale",
+      "x": 0.38,
+      "y": 0.03,
+      "mapID": 1434,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 789,
+      "name": "Kimberly Hiett",
+      "url": "https://www.wowhead.com/forever/npc=789/kimberly-hiett",
+      "items": [
+        2512,
+        2515,
+        3030
+      ],
+      "faction": "Alliance",
+      "areaID": 44,
+      "zone": "Redridge Mountains",
+      "x": 0.218,
+      "y": 0.45399999999999996,
+      "mapID": 1433,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 791,
+      "name": "Lindsay Ashlock",
+      "url": "https://www.wowhead.com/forever/npc=791/lindsay-ashlock",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Neutral",
+      "areaID": 44,
+      "zone": "Redridge Mountains",
+      "x": 0.23399999999999999,
+      "y": 0.474,
+      "mapID": 1433,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 829,
+      "name": "Adlin Pridedrift",
+      "url": "https://www.wowhead.com/forever/npc=829/adlin-pridedrift",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Alliance",
+      "areaID": 1,
+      "zone": "Dun Morogh",
+      "x": 0.3,
+      "y": 0.7140000000000001,
+      "mapID": 1426,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1149,
+      "name": "Uthok",
+      "url": "https://www.wowhead.com/forever/npc=1149/uthok",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 33,
+      "zone": "Stranglethorn Vale",
+      "x": 0.314,
+      "y": 0.28,
+      "mapID": 1434,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1198,
+      "name": "Rallic Finn",
+      "url": "https://www.wowhead.com/forever/npc=1198/rallic-finn",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Alliance",
+      "areaID": 12,
+      "zone": "Elwynn Forest",
+      "x": 0.8320000000000001,
+      "y": 0.66,
+      "mapID": 1429,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1243,
+      "name": "Hegnar Rumbleshot",
+      "url": "https://www.wowhead.com/forever/npc=1243/hegnar-rumbleshot",
+      "items": [
+        2516,
+        2519
+      ],
+      "faction": "Alliance",
+      "areaID": 1,
+      "zone": "Dun Morogh",
+      "x": 0.406,
+      "y": 0.65,
+      "mapID": 1426,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1250,
+      "name": "Drake Lindgren",
+      "url": "https://www.wowhead.com/forever/npc=1250/drake-lindgren",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Alliance",
+      "areaID": 12,
+      "zone": "Elwynn Forest",
+      "x": 0.83,
+      "y": 0.664,
+      "mapID": 1429,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1285,
+      "name": "Thurman Mullby",
+      "url": "https://www.wowhead.com/forever/npc=1285/thurman-mullby",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Alliance",
+      "areaID": 1519,
+      "zone": "Stormwind City",
+      "x": 0.58,
+      "y": 0.616,
+      "mapID": 1453,
+      "source": "Wowhead Forever",
+      "shop": "Everyday Merchandise"
+    },
+    {
+      "id": 1287,
+      "name": "Marda Weller",
+      "url": "https://www.wowhead.com/forever/npc=1287/marda-weller",
+      "items": [
+        2512,
+        2515,
+        3030
+      ],
+      "faction": "Alliance",
+      "areaID": 1519,
+      "zone": "Stormwind City",
+      "x": 0.5720000000000001,
+      "y": 0.57,
+      "mapID": 1453,
+      "source": "Wowhead Forever",
+      "shop": "Weller's Arsenal"
+    },
+    {
+      "id": 1297,
+      "name": "Lina Stover",
+      "url": "https://www.wowhead.com/forever/npc=1297/lina-stover",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284
+      ],
+      "faction": "Alliance",
+      "areaID": 1519,
+      "zone": "Stormwind City",
+      "x": 0.504,
+      "y": 0.574,
+      "mapID": 1453,
+      "source": "Wowhead Forever",
+      "shop": "The Empty Quiver"
+    },
+    {
+      "id": 1298,
+      "name": "Frederick Stover",
+      "url": "https://www.wowhead.com/forever/npc=1298/frederick-stover",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Alliance",
+      "areaID": 1519,
+      "zone": "Stormwind City",
+      "x": 0.502,
+      "y": 0.574,
+      "mapID": 1453,
+      "source": "Wowhead Forever",
+      "shop": "The Empty Quiver"
+    },
+    {
+      "id": 1448,
+      "name": "Neal Allen",
+      "url": "https://www.wowhead.com/forever/npc=1448/neal-allen",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033
+      ],
+      "faction": "Alliance",
+      "areaID": 11,
+      "zone": "Wetlands",
+      "x": 0.106,
+      "y": 0.568,
+      "mapID": 1437,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1452,
+      "name": "Gruham Rumdnul",
+      "url": "https://www.wowhead.com/forever/npc=1452/gruham-rumdnul",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033
+      ],
+      "faction": "Alliance",
+      "areaID": 11,
+      "zone": "Wetlands",
+      "x": 0.12,
+      "y": 0.578,
+      "mapID": 1437,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1459,
+      "name": "Naela Trance",
+      "url": "https://www.wowhead.com/forever/npc=1459/naela-trance",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Neutral",
+      "areaID": 11,
+      "zone": "Wetlands",
+      "x": 0.11199999999999999,
+      "y": 0.584,
+      "mapID": 1437,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1461,
+      "name": "Murndan Derth",
+      "url": "https://www.wowhead.com/forever/npc=1461/murndan-derth",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "faction": "Neutral",
+      "areaID": 11,
+      "zone": "Wetlands",
+      "x": 0.114,
+      "y": 0.594,
+      "mapID": 1437,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1462,
+      "name": "Edwina Monzor",
+      "url": "https://www.wowhead.com/forever/npc=1462/edwina-monzor",
+      "items": [
+        2512,
+        2515,
+        3030
+      ],
+      "faction": "Neutral",
+      "areaID": 11,
+      "zone": "Wetlands",
+      "x": 0.11,
+      "y": 0.584,
+      "mapID": 1437,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1469,
+      "name": "Vrok Blunderblast",
+      "url": "https://www.wowhead.com/forever/npc=1469/vrok-blunderblast",
+      "items": [
+        2516,
+        2519
+      ],
+      "faction": "Alliance",
+      "areaID": 38,
+      "zone": "Loch Modan",
+      "x": 0.35200000000000004,
+      "y": 0.426,
+      "mapID": 1432,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1668,
+      "name": "William MacGregor",
+      "url": "https://www.wowhead.com/forever/npc=1668/william-macgregor",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Neutral",
+      "areaID": 40,
+      "zone": "Westfall",
+      "x": 0.574,
+      "y": 0.5379999999999999,
+      "mapID": 1436,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1682,
+      "name": "Yanni Stoutheart",
+      "url": "https://www.wowhead.com/forever/npc=1682/yanni-stoutheart",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Alliance",
+      "areaID": 38,
+      "zone": "Loch Modan",
+      "x": 0.348,
+      "y": 0.484,
+      "mapID": 1432,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1685,
+      "name": "Xandar Goodbeard",
+      "url": "https://www.wowhead.com/forever/npc=1685/xandar-goodbeard",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Alliance",
+      "areaID": 38,
+      "zone": "Loch Modan",
+      "x": 0.8240000000000001,
+      "y": 0.634,
+      "mapID": 1432,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1686,
+      "name": "Irene Sureshot",
+      "url": "https://www.wowhead.com/forever/npc=1686/irene-sureshot",
+      "items": [
+        2516,
+        2519,
+        3033
+      ],
+      "faction": "Alliance",
+      "areaID": 38,
+      "zone": "Loch Modan",
+      "x": 0.83,
+      "y": 0.634,
+      "mapID": 1432,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1687,
+      "name": "Cliff Hadin",
+      "url": "https://www.wowhead.com/forever/npc=1687/cliff-hadin",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Alliance",
+      "areaID": 38,
+      "zone": "Loch Modan",
+      "x": 0.83,
+      "y": 0.63,
+      "mapID": 1432,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 1691,
+      "name": "Kreg Bilmn",
+      "url": "https://www.wowhead.com/forever/npc=1691/kreg-bilmn",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Alliance",
+      "areaID": 1,
+      "zone": "Dun Morogh",
+      "x": 0.47200000000000003,
+      "y": 0.524,
+      "mapID": 1426,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2084,
+      "name": "Natheril Raincaller",
+      "url": "https://www.wowhead.com/forever/npc=2084/natheril-raincaller",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 618,
+      "zone": "Winterspring",
+      "x": 0.514,
+      "y": 0.308,
+      "mapID": 1452,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2115,
+      "name": "Joshua Kien",
+      "url": "https://www.wowhead.com/forever/npc=2115/joshua-kien",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Horde",
+      "areaID": 85,
+      "zone": "Tirisfal Glades",
+      "x": 0.322,
+      "y": 0.654,
+      "mapID": 1420,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2134,
+      "name": "Mrs. Winters",
+      "url": "https://www.wowhead.com/forever/npc=2134/mrs-winters",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Neutral",
+      "areaID": 85,
+      "zone": "Tirisfal Glades",
+      "x": 0.61,
+      "y": 0.524,
+      "mapID": 1420,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2140,
+      "name": "Edwin Harly",
+      "url": "https://www.wowhead.com/forever/npc=2140/edwin-harly",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Horde",
+      "areaID": 130,
+      "zone": "Silverpine Forest",
+      "x": 0.44,
+      "y": 0.4,
+      "mapID": 1421,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2401,
+      "name": "Kayren Soothallow",
+      "url": "https://www.wowhead.com/forever/npc=2401/kayren-soothallow",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 267,
+      "zone": "Hillsbrad Foothills",
+      "x": 0.624,
+      "y": 0.198,
+      "mapID": 1424,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2803,
+      "name": "Malygen",
+      "url": "https://www.wowhead.com/forever/npc=2803/malygen",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 361,
+      "zone": "Felwood",
+      "x": 0.622,
+      "y": 0.254,
+      "mapID": 1448,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2806,
+      "name": "Bale",
+      "url": "https://www.wowhead.com/forever/npc=2806/bale",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 361,
+      "zone": "Felwood",
+      "x": 0.348,
+      "y": 0.532,
+      "mapID": 1448,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2808,
+      "name": "Vikki Lonsav",
+      "url": "https://www.wowhead.com/forever/npc=2808/vikki-lonsav",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Alliance",
+      "areaID": 45,
+      "zone": "Arathi Highlands",
+      "x": 0.46399999999999997,
+      "y": 0.474,
+      "mapID": 1417,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2820,
+      "name": "Graud",
+      "url": "https://www.wowhead.com/forever/npc=2820/graud",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 45,
+      "zone": "Arathi Highlands",
+      "x": 0.74,
+      "y": 0.324,
+      "mapID": 1417,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2839,
+      "name": "Haren Kanmae",
+      "url": "https://www.wowhead.com/forever/npc=2839/haren-kanmae",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 33,
+      "zone": "Stranglethorn Vale",
+      "x": 0.282,
+      "y": 0.7440000000000001,
+      "mapID": 1434,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2908,
+      "name": "Grawl",
+      "url": "https://www.wowhead.com/forever/npc=2908/grawl",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 3,
+      "zone": "Badlands",
+      "x": 0.03,
+      "y": 0.46,
+      "mapID": 1418,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 2997,
+      "name": "Jyn Stonehoof",
+      "url": "https://www.wowhead.com/forever/npc=2997/jyn-stonehoof",
+      "items": [
+        2516,
+        2519
+      ],
+      "faction": "Horde",
+      "areaID": 1638,
+      "zone": "Thunder Bluff",
+      "x": 0.41200000000000003,
+      "y": 0.62,
+      "mapID": 1456,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3015,
+      "name": "Kuna Thunderhorn",
+      "url": "https://www.wowhead.com/forever/npc=3015/kuna-thunderhorn",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 1638,
+      "zone": "Thunder Bluff",
+      "x": 0.46399999999999997,
+      "y": 0.446,
+      "mapID": 1456,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3018,
+      "name": "Hogor Thunderhoof",
+      "url": "https://www.wowhead.com/forever/npc=3018/hogor-thunderhoof",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "faction": "Horde",
+      "areaID": 1638,
+      "zone": "Thunder Bluff",
+      "x": 0.5539999999999999,
+      "y": 0.564,
+      "mapID": 1456,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3053,
+      "name": "Synge",
+      "url": "https://www.wowhead.com/forever/npc=3053/synge",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "faction": "Neutral",
+      "areaID": 400,
+      "zone": "Thousand Needles",
+      "x": 0.804,
+      "y": 0.768,
+      "mapID": 1441,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3072,
+      "name": "Kawnie Softbreeze",
+      "url": "https://www.wowhead.com/forever/npc=3072/kawnie-softbreeze",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Horde",
+      "areaID": 215,
+      "zone": "Mulgore",
+      "x": 0.44799999999999995,
+      "y": 0.77,
+      "mapID": 1412,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3076,
+      "name": "Moorat Longstride",
+      "url": "https://www.wowhead.com/forever/npc=3076/moorat-longstride",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Horde",
+      "areaID": 215,
+      "zone": "Mulgore",
+      "x": 0.452,
+      "y": 0.614,
+      "mapID": 1412,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3078,
+      "name": "Kennah Hawkseye",
+      "url": "https://www.wowhead.com/forever/npc=3078/kennah-hawkseye",
+      "items": [
+        2516,
+        2519
+      ],
+      "faction": "Horde",
+      "areaID": 215,
+      "zone": "Mulgore",
+      "x": 0.45,
+      "y": 0.618,
+      "mapID": 1412,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3088,
+      "name": "Henry Chapal",
+      "url": "https://www.wowhead.com/forever/npc=3088/henry-chapal",
+      "items": [
+        2516,
+        2519,
+        3033
+      ],
+      "faction": "Alliance",
+      "areaID": 44,
+      "zone": "Redridge Mountains",
+      "x": 0.18600000000000003,
+      "y": 0.414,
+      "mapID": 1433,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3158,
+      "name": "Duokna",
+      "url": "https://www.wowhead.com/forever/npc=3158/duokna",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Horde",
+      "areaID": 14,
+      "zone": "Durotar",
+      "x": 0.426,
+      "y": 0.674,
+      "mapID": 1411,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3164,
+      "name": "Jark",
+      "url": "https://www.wowhead.com/forever/npc=3164/jark",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Horde",
+      "areaID": 14,
+      "zone": "Durotar",
+      "x": 0.542,
+      "y": 0.42200000000000004,
+      "mapID": 1411,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3165,
+      "name": "Ghrawt",
+      "url": "https://www.wowhead.com/forever/npc=3165/ghrawt",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Horde",
+      "areaID": 14,
+      "zone": "Durotar",
+      "x": 0.53,
+      "y": 0.41,
+      "mapID": 1411,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3186,
+      "name": "K'waii",
+      "url": "https://www.wowhead.com/forever/npc=3186/kwaii",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Horde",
+      "areaID": 14,
+      "zone": "Durotar",
+      "x": 0.562,
+      "y": 0.7340000000000001,
+      "mapID": 1411,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3313,
+      "name": "Trak'gen",
+      "url": "https://www.wowhead.com/forever/npc=3313/trakgen",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 1637,
+      "zone": "Orgrimmar",
+      "x": 0.48,
+      "y": 0.802,
+      "mapID": 1454,
+      "source": "Wowhead Forever",
+      "shop": "Orgrimmar General Store"
+    },
+    {
+      "id": 3322,
+      "name": "Kaja",
+      "url": "https://www.wowhead.com/forever/npc=3322/kaja",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "faction": "Neutral",
+      "areaID": 1637,
+      "zone": "Orgrimmar",
+      "x": 0.522,
+      "y": 0.624,
+      "mapID": 1454,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3350,
+      "name": "Asoran",
+      "url": "https://www.wowhead.com/forever/npc=3350/asoran",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 1637,
+      "zone": "Orgrimmar",
+      "x": 0.46,
+      "y": 0.40399999999999997,
+      "mapID": 1454,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3409,
+      "name": "Zendo'jian",
+      "url": "https://www.wowhead.com/forever/npc=3409/zendojian",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Horde",
+      "areaID": 1637,
+      "zone": "Orgrimmar",
+      "x": 0.81,
+      "y": 0.196,
+      "mapID": 1454,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3410,
+      "name": "Jin'sora",
+      "url": "https://www.wowhead.com/forever/npc=3410/jinsora",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 1637,
+      "zone": "Orgrimmar",
+      "x": 0.774,
+      "y": 0.386,
+      "mapID": 1454,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3481,
+      "name": "Barg",
+      "url": "https://www.wowhead.com/forever/npc=3481/barg",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Neutral",
+      "areaID": 17,
+      "zone": "The Barrens",
+      "x": 0.516,
+      "y": 0.3,
+      "mapID": 1413,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3488,
+      "name": "Uthrok",
+      "url": "https://www.wowhead.com/forever/npc=3488/uthrok",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Neutral",
+      "areaID": 17,
+      "zone": "The Barrens",
+      "x": 0.51,
+      "y": 0.29,
+      "mapID": 1413,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3498,
+      "name": "Jazzik",
+      "url": "https://www.wowhead.com/forever/npc=3498/jazzik",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Neutral",
+      "areaID": 17,
+      "zone": "The Barrens",
+      "x": 0.618,
+      "y": 0.38799999999999996,
+      "mapID": 1413,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3541,
+      "name": "Sarah Raycroft",
+      "url": "https://www.wowhead.com/forever/npc=3541/sarah-raycroft",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Alliance",
+      "areaID": 267,
+      "zone": "Hillsbrad Foothills",
+      "x": 0.49,
+      "y": 0.552,
+      "mapID": 1424,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3587,
+      "name": "Lyrai",
+      "url": "https://www.wowhead.com/forever/npc=3587/lyrai",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Alliance",
+      "areaID": 141,
+      "zone": "Teldrassil",
+      "x": 0.594,
+      "y": 0.41,
+      "mapID": 1438,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3589,
+      "name": "Keina",
+      "url": "https://www.wowhead.com/forever/npc=3589/keina",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Alliance",
+      "areaID": 141,
+      "zone": "Teldrassil",
+      "x": 0.594,
+      "y": 0.41200000000000003,
+      "mapID": 1438,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3608,
+      "name": "Aldia",
+      "url": "https://www.wowhead.com/forever/npc=3608/aldia",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Alliance",
+      "areaID": 141,
+      "zone": "Teldrassil",
+      "x": 0.5539999999999999,
+      "y": 0.5720000000000001,
+      "mapID": 1438,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3610,
+      "name": "Jeena Featherbow",
+      "url": "https://www.wowhead.com/forever/npc=3610/jeena-featherbow",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Alliance",
+      "areaID": 141,
+      "zone": "Teldrassil",
+      "x": 0.5579999999999999,
+      "y": 0.5920000000000001,
+      "mapID": 1438,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3625,
+      "name": "Rarck",
+      "url": "https://www.wowhead.com/forever/npc=3625/rarck",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "zone": "Alterac Valley",
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3951,
+      "name": "Bhaldaran Ravenshade",
+      "url": "https://www.wowhead.com/forever/npc=3951/bhaldaran-ravenshade",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Neutral",
+      "areaID": 331,
+      "zone": "Ashenvale",
+      "x": 0.502,
+      "y": 0.672,
+      "mapID": 1440,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 3962,
+      "name": "Haljan Oakheart",
+      "url": "https://www.wowhead.com/forever/npc=3962/haljan-oakheart",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033
+      ],
+      "faction": "Neutral",
+      "areaID": 331,
+      "zone": "Ashenvale",
+      "x": 0.348,
+      "y": 0.508,
+      "mapID": 1440,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4082,
+      "name": "Grawnal",
+      "url": "https://www.wowhead.com/forever/npc=4082/grawnal",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Horde",
+      "areaID": 406,
+      "zone": "Stonetalon Mountains",
+      "x": 0.45799999999999996,
+      "y": 0.586,
+      "mapID": 1442,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4084,
+      "name": "Chylina",
+      "url": "https://www.wowhead.com/forever/npc=4084/chylina",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Neutral",
+      "areaID": 406,
+      "zone": "Stonetalon Mountains",
+      "x": 0.354,
+      "y": 0.062,
+      "mapID": 1442,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4170,
+      "name": "Ellandrieth",
+      "url": "https://www.wowhead.com/forever/npc=4170/ellandrieth",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033
+      ],
+      "faction": "Alliance",
+      "areaID": 1657,
+      "zone": "Darnassus",
+      "x": 0.644,
+      "y": 0.53,
+      "mapID": 1457,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4173,
+      "name": "Landria",
+      "url": "https://www.wowhead.com/forever/npc=4173/landria",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Alliance",
+      "areaID": 1657,
+      "zone": "Darnassus",
+      "x": 0.63,
+      "y": 0.6759999999999999,
+      "mapID": 1457,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4182,
+      "name": "Dalmond",
+      "url": "https://www.wowhead.com/forever/npc=4182/dalmond",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Alliance",
+      "areaID": 148,
+      "zone": "Darkshore",
+      "x": 0.374,
+      "y": 0.40399999999999997,
+      "mapID": 1439,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4203,
+      "name": "Ariyell Skyshadow",
+      "url": "https://www.wowhead.com/forever/npc=4203/ariyell-skyshadow",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Alliance",
+      "areaID": 1657,
+      "zone": "Darnassus",
+      "x": 0.584,
+      "y": 0.444,
+      "mapID": 1457,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4241,
+      "name": "Mydrannul",
+      "url": "https://www.wowhead.com/forever/npc=4241/mydrannul",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Alliance",
+      "areaID": 1657,
+      "zone": "Darnassus",
+      "x": 0.7,
+      "y": 0.444,
+      "mapID": 1457,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4555,
+      "name": "Eleanor Rusk",
+      "url": "https://www.wowhead.com/forever/npc=4555/eleanor-rusk",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 1497,
+      "zone": "Undercity",
+      "x": 0.682,
+      "y": 0.484,
+      "mapID": 1458,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4602,
+      "name": "Benijah Fenner",
+      "url": "https://www.wowhead.com/forever/npc=4602/benijah-fenner",
+      "items": [
+        2512,
+        2515,
+        3030
+      ],
+      "faction": "Horde",
+      "areaID": 1497,
+      "zone": "Undercity",
+      "x": 0.584,
+      "y": 0.324,
+      "mapID": 1458,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4603,
+      "name": "Nicholas Atwood",
+      "url": "https://www.wowhead.com/forever/npc=4603/nicholas-atwood",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "faction": "Horde",
+      "areaID": 1497,
+      "zone": "Undercity",
+      "x": 0.62,
+      "y": 0.276,
+      "mapID": 1458,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4604,
+      "name": "Abigail Sawyer",
+      "url": "https://www.wowhead.com/forever/npc=4604/abigail-sawyer",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 1497,
+      "zone": "Undercity",
+      "x": 0.5479999999999999,
+      "y": 0.38,
+      "mapID": 1458,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4876,
+      "name": "Jawn Highmesa",
+      "url": "https://www.wowhead.com/forever/npc=4876/jawn-highmesa",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033
+      ],
+      "faction": "Horde",
+      "areaID": 400,
+      "zone": "Thousand Needles",
+      "x": 0.46,
+      "y": 0.514,
+      "mapID": 1441,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4889,
+      "name": "Torq Ironblast",
+      "url": "https://www.wowhead.com/forever/npc=4889/torq-ironblast",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "faction": "Alliance",
+      "areaID": 15,
+      "zone": "Dustwallow Marsh",
+      "x": 0.674,
+      "y": 0.48,
+      "mapID": 1445,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4892,
+      "name": "Jensen Farran",
+      "url": "https://www.wowhead.com/forever/npc=4892/jensen-farran",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Alliance",
+      "areaID": 15,
+      "zone": "Dustwallow Marsh",
+      "x": 0.6779999999999999,
+      "y": 0.498,
+      "mapID": 1445,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 4896,
+      "name": "Charity Mipsy",
+      "url": "https://www.wowhead.com/forever/npc=4896/charity-mipsy",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 15,
+      "zone": "Dustwallow Marsh",
+      "x": 0.674,
+      "y": 0.514,
+      "mapID": 1445,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 5101,
+      "name": "Bryllia Ironbrand",
+      "url": "https://www.wowhead.com/forever/npc=5101/bryllia-ironbrand",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Alliance",
+      "areaID": 1537,
+      "zone": "Ironforge",
+      "x": 0.39,
+      "y": 0.7340000000000001,
+      "mapID": 1455,
+      "source": "Wowhead Forever",
+      "shop": "Fizzlespinner's General Goods"
+    },
+    {
+      "id": 5122,
+      "name": "Skolmin Goldfury",
+      "url": "https://www.wowhead.com/forever/npc=5122/skolmin-goldfury",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Alliance",
+      "areaID": 1537,
+      "zone": "Ironforge",
+      "x": 0.7120000000000001,
+      "y": 0.6759999999999999,
+      "mapID": 1455,
+      "source": "Wowhead Forever",
+      "shop": "Goldfury's Hunting Supplies"
+    },
+    {
+      "id": 5123,
+      "name": "Bretta Goldfury",
+      "url": "https://www.wowhead.com/forever/npc=5123/bretta-goldfury",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "faction": "Alliance",
+      "areaID": 1537,
+      "zone": "Ironforge",
+      "x": 0.722,
+      "y": 0.6579999999999999,
+      "mapID": 1455,
+      "source": "Wowhead Forever",
+      "shop": "Goldfury's Hunting Supplies"
+    },
+    {
+      "id": 5134,
+      "name": "Jonivera Farmountain",
+      "url": "https://www.wowhead.com/forever/npc=5134/jonivera-farmountain",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "zone": "Alterac Valley",
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 5510,
+      "name": "Thulman Flintcrag",
+      "url": "https://www.wowhead.com/forever/npc=5510/thulman-flintcrag",
+      "items": [
+        2516,
+        2519
+      ],
+      "faction": "Alliance",
+      "areaID": 1519,
+      "zone": "Stormwind City",
+      "x": 0.544,
+      "y": 0.152,
+      "mapID": 1453,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 7942,
+      "name": "Faralorn",
+      "url": "https://www.wowhead.com/forever/npc=7942/faralorn",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 357,
+      "zone": "Feralas",
+      "x": 0.306,
+      "y": 0.434,
+      "mapID": 1444,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 7976,
+      "name": "Thalgus Thunderfist",
+      "url": "https://www.wowhead.com/forever/npc=7976/thalgus-thunderfist",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030
+      ],
+      "faction": "Alliance",
+      "areaID": 1537,
+      "zone": "Ironforge",
+      "x": 0.608,
+      "y": 0.898,
+      "mapID": 1455,
+      "source": "Wowhead Forever",
+      "shop": "Timberline Arms"
+    },
+    {
+      "id": 8131,
+      "name": "Blizrik Buckshot",
+      "url": "https://www.wowhead.com/forever/npc=8131/blizrik-buckshot",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "faction": "Neutral",
+      "areaID": 440,
+      "zone": "Tanaris",
+      "x": 0.508,
+      "y": 0.27399999999999997,
+      "mapID": 1446,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 8139,
+      "name": "Jabbey",
+      "url": "https://www.wowhead.com/forever/npc=8139/jabbey",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 440,
+      "zone": "Tanaris",
+      "x": 0.67,
+      "y": 0.22,
+      "mapID": 1446,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 8362,
+      "name": "Kuruk",
+      "url": "https://www.wowhead.com/forever/npc=8362/kuruk",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 1638,
+      "zone": "Thunder Bluff",
+      "x": 0.39,
+      "y": 0.642,
+      "mapID": 1456,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 9548,
+      "name": "Cawind Trueaim",
+      "url": "https://www.wowhead.com/forever/npc=9548/cawind-trueaim",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 357,
+      "zone": "Feralas",
+      "x": 0.748,
+      "y": 0.45399999999999996,
+      "mapID": 1444,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 9549,
+      "name": "Borand",
+      "url": "https://www.wowhead.com/forever/npc=9549/borand",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Horde",
+      "areaID": 406,
+      "zone": "Stonetalon Mountains",
+      "x": 0.452,
+      "y": 0.5920000000000001,
+      "mapID": 1442,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 9551,
+      "name": "Starn",
+      "url": "https://www.wowhead.com/forever/npc=9551/starn",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 400,
+      "zone": "Thousand Needles",
+      "x": 0.45,
+      "y": 0.504,
+      "mapID": 1441,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 9552,
+      "name": "Zanara",
+      "url": "https://www.wowhead.com/forever/npc=9552/zanara",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 15,
+      "zone": "Dustwallow Marsh",
+      "x": 0.354,
+      "y": 0.302,
+      "mapID": 1445,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 9553,
+      "name": "Nadia Vernon",
+      "url": "https://www.wowhead.com/forever/npc=9553/nadia-vernon",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Horde",
+      "areaID": 130,
+      "zone": "Silverpine Forest",
+      "x": 0.45,
+      "y": 0.39399999999999996,
+      "mapID": 1421,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 9555,
+      "name": "Mu'uta",
+      "url": "https://www.wowhead.com/forever/npc=9555/muuta",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 45,
+      "zone": "Arathi Highlands",
+      "x": 0.7240000000000001,
+      "y": 0.33399999999999996,
+      "mapID": 1417,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 10369,
+      "name": "Trayexir",
+      "url": "https://www.wowhead.com/forever/npc=10369/trayexir",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Horde",
+      "areaID": 14,
+      "zone": "Durotar",
+      "x": 0.564,
+      "y": 0.732,
+      "mapID": 1411,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 11038,
+      "name": "Caretaker Alen",
+      "url": "https://www.wowhead.com/forever/npc=11038/caretaker-alen",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 139,
+      "zone": "Eastern Plaguelands",
+      "x": 0.794,
+      "y": 0.638,
+      "mapID": 1423,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 11184,
+      "name": "Wixxrak",
+      "url": "https://www.wowhead.com/forever/npc=11184/wixxrak",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "faction": "Neutral",
+      "areaID": 618,
+      "zone": "Winterspring",
+      "x": 0.616,
+      "y": 0.38,
+      "mapID": 1452,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 11555,
+      "name": "Gorn One Eye",
+      "url": "https://www.wowhead.com/forever/npc=11555/gorn-one-eye",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 361,
+      "zone": "Felwood",
+      "x": 0.652,
+      "y": 0.026000000000000002,
+      "mapID": 1448,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 12021,
+      "name": "Daeolyn Summerleaf",
+      "url": "https://www.wowhead.com/forever/npc=12021/daeolyn-summerleaf",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 493,
+      "zone": "Moonglade",
+      "x": 0.452,
+      "y": 0.344,
+      "mapID": 1450,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 12027,
+      "name": "Tukk",
+      "url": "https://www.wowhead.com/forever/npc=12027/tukk",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 405,
+      "zone": "Desolace",
+      "x": 0.25,
+      "y": 0.718,
+      "mapID": 1443,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 12029,
+      "name": "Narianna",
+      "url": "https://www.wowhead.com/forever/npc=12029/narianna",
+      "items": [
+        2512,
+        2515,
+        3030
+      ],
+      "faction": "Neutral",
+      "areaID": 493,
+      "zone": "Moonglade",
+      "x": 0.532,
+      "y": 0.426,
+      "mapID": 1450,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 12246,
+      "name": "Super-Seller 680",
+      "url": "https://www.wowhead.com/forever/npc=12246/super-seller-680",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 405,
+      "zone": "Desolace",
+      "x": 0.40399999999999997,
+      "y": 0.792,
+      "mapID": 1443,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 12959,
+      "name": "Nergal",
+      "url": "https://www.wowhead.com/forever/npc=12959/nergal",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 490,
+      "zone": "Un'Goro Crater",
+      "x": 0.43200000000000005,
+      "y": 0.078,
+      "mapID": 1449,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 12960,
+      "name": "Christi Galvanis",
+      "url": "https://www.wowhead.com/forever/npc=12960/christi-galvanis",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Alliance",
+      "areaID": 405,
+      "zone": "Desolace",
+      "x": 0.664,
+      "y": 0.068,
+      "mapID": 1443,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 14301,
+      "name": "Brinna Valanaar",
+      "url": "https://www.wowhead.com/forever/npc=14301/brinna-valanaar",
+      "items": [
+        2512,
+        2515,
+        3030,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 16,
+      "zone": "Azshara",
+      "x": 0.12,
+      "y": 0.782,
+      "mapID": 1447,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 14624,
+      "name": "Master Smith Burninate",
+      "url": "https://www.wowhead.com/forever/npc=14624/master-smith-burninate",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 51,
+      "zone": "Searing Gorge",
+      "x": 0.384,
+      "y": 0.284,
+      "mapID": 1427,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 15174,
+      "name": "Calandrath",
+      "url": "https://www.wowhead.com/forever/npc=15174/calandrath",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 1377,
+      "zone": "Silithus",
+      "x": 0.518,
+      "y": 0.39,
+      "mapID": 1451,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 17598,
+      "name": "Renn'az",
+      "url": "https://www.wowhead.com/forever/npc=17598/rennaz",
+      "items": [
+        2512,
+        2515,
+        3030
+      ],
+      "faction": "Horde",
+      "areaID": 47,
+      "zone": "The Hinterlands",
+      "x": 0.768,
+      "y": 0.812,
+      "mapID": 1425,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 28989,
+      "name": "Aemara",
+      "url": "https://www.wowhead.com/forever/npc=28989/aemara",
+      "items": [
+        2512,
+        2515,
+        3030
+      ],
+      "faction": "Neutral",
+      "areaID": 36,
+      "zone": "Alterac Mountains",
+      "x": 0.172,
+      "y": 0.7140000000000001,
+      "mapID": 1416,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 43411,
+      "name": "Lenedil Moonwing",
+      "url": "https://www.wowhead.com/forever/npc=43411/lenedil-moonwing",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 616,
+      "zone": "Mount Hyjal",
+      "x": 0.708,
+      "y": 0.508,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 207743,
+      "name": "Netali Proudwind",
+      "url": "https://www.wowhead.com/forever/npc=207743/netali-proudwind",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Horde",
+      "areaID": 1638,
+      "zone": "Thunder Bluff",
+      "x": 0.284,
+      "y": 0.182,
+      "mapID": 1456,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 244512,
+      "name": "Ortak Lomgok",
+      "url": "https://www.wowhead.com/forever/npc=244512/ortak-lomgok",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Horde",
+      "areaID": 616,
+      "zone": "Mount Hyjal",
+      "x": 0.13,
+      "y": 0.528,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 251537,
+      "name": "Uualia Suncrest",
+      "url": "https://www.wowhead.com/forever/npc=251537/uualia-suncrest",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Neutral",
+      "areaID": 16593,
+      "zone": "Zephras Isle",
+      "x": 0.428,
+      "y": 0.244,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 252390,
+      "name": "Antelariaa Cloudgaze",
+      "url": "https://www.wowhead.com/forever/npc=252390/antelariaa-cloudgaze",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Neutral",
+      "areaID": 16593,
+      "zone": "Zephras Isle",
+      "x": 0.63,
+      "y": 0.778,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 254358,
+      "name": "Veena Vericloud",
+      "url": "https://www.wowhead.com/forever/npc=254358/veena-vericloud",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Neutral",
+      "areaID": 16593,
+      "zone": "Zephras Isle",
+      "x": 0.446,
+      "y": 0.45399999999999996,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 255895,
+      "name": "Grizzek",
+      "url": "https://www.wowhead.com/forever/npc=255895/grizzek",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 16591,
+      "zone": "Riverglades",
+      "x": 0.7659999999999999,
+      "y": 0.532,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 255897,
+      "name": "Friz Frazzlespark",
+      "url": "https://www.wowhead.com/forever/npc=255897/friz-frazzlespark",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Neutral",
+      "areaID": 16591,
+      "zone": "Riverglades",
+      "x": 0.772,
+      "y": 0.528,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 257421,
+      "name": "Tephri Thriceforged",
+      "url": "https://www.wowhead.com/forever/npc=257421/tephri-thriceforged",
+      "items": [
+        2512,
+        2515
+      ],
+      "faction": "Neutral",
+      "areaID": 16593,
+      "zone": "Zephras Isle",
+      "x": 0.44799999999999995,
+      "y": 0.442,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 258380,
+      "name": "Caitir Flinthew",
+      "url": "https://www.wowhead.com/forever/npc=258380/caitir-flinthew",
+      "items": [
+        2512,
+        2516
+      ],
+      "faction": "Alliance",
+      "areaID": 616,
+      "zone": "Mount Hyjal",
+      "x": 0.156,
+      "y": 0.504,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 259860,
+      "name": "Martha Wellsworth",
+      "url": "https://www.wowhead.com/forever/npc=259860/martha-wellsworth",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Alliance",
+      "areaID": 16591,
+      "zone": "Riverglades",
+      "x": 0.642,
+      "y": 0.84,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 260343,
+      "name": "Maka",
+      "url": "https://www.wowhead.com/forever/npc=260343/maka",
+      "items": [
+        2515,
+        2519,
+        3030,
+        3033,
+        11284,
+        11285
+      ],
+      "faction": "Horde",
+      "areaID": 16591,
+      "zone": "Riverglades",
+      "x": 0.5820000000000001,
+      "y": 0.45799999999999996,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 260566,
+      "name": "Fizzix Boomshot",
+      "url": "https://www.wowhead.com/forever/npc=260566/fizzix-boomshot",
+      "items": [
+        2516,
+        2519,
+        3033,
+        11284
+      ],
+      "faction": "Neutral",
+      "areaID": 16591,
+      "zone": "Riverglades",
+      "x": 0.784,
+      "y": 0.536,
+      "source": "Wowhead Forever"
+    },
+    {
+      "id": 268238,
+      "name": "Nordun Steadysight",
+      "url": "https://www.wowhead.com/forever/npc=268238/nordun-steadysight",
+      "items": [
+        2512,
+        2515,
+        2516,
+        2519
+      ],
+      "faction": "Alliance",
+      "areaID": 12,
+      "zone": "Elwynn Forest",
+      "x": 0.42,
+      "y": 0.664,
+      "mapID": 1429,
+      "source": "Wowhead Forever"
+    }
+  ]
+}

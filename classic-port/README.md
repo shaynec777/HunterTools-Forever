@@ -47,3 +47,11 @@ October 21 source cleanup: all runtime lookups/links use Classic sources, with C
 Publication, October 22: submitted as the initial public beta to CurseForge project HunterTools Classic (1760155), file 9291909, for Classic Era 1.15.9. Automatic publication after moderator approval is enabled. Project/file approval was still pending at submission.
 
 October 25 tameability fix: imported explicit Petopia Classic flags for all 622 NPCs on its family/look pages (552 tameable, including two Horde-only; 70 not tameable). Search now includes non-teaching creatures. Exact source links and faction restrictions are shown. New PetopiaTameability.lua module requires a full game restart. Run build-petopia-tameability.py to rebuild the separate edition datasets; --refresh redownloads the sources. The published beta1 ZIP remains unchanged; fixed local preview is HunterToolsClassic-tameability-preview.zip.
+
+## Ammo vendor finder — 3.1.12
+
+- Find ammo sellers for your equipped weapon, level and faction without another addon.
+- Use **Nearest vendor for my level** in the Ammo config header to locate a seller of the best ordinary ammo tier you can use.
+- Click **Mark nearby ammo seller** in chat reminders to mark a local seller, or the nearest known suitable seller on the same continent.
+- Compact world-map and minimap markers clear when you speak to the selected NPC. Known shop names appear on map labels and minimap tooltips.
+- Locally observed shop stock updates the bundled reference. Distances are straight-line estimates, not travel routes.

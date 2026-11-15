@@ -6,7 +6,14 @@ FeedomaticToo has morphed into HunterTools Forever due to the many great suggest
 
 HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dungeon checks, pet information, target range, and an ability browser together for World of Warcraft Forever. All tools can be individually enabled or disabled.
 
-## New in this update
+## New in this update — 3.1.12
+
+- Find ammo sellers for your equipped weapon, level and faction without another addon.
+- Use **Nearest vendor for my level** in the Ammo config header to locate a seller of the best ordinary ammo tier you can use.
+- Click **Mark nearby ammo seller** in chat reminders to mark a local seller, or the nearest known suitable seller on the same continent.
+- Compact world-map and minimap markers clear when you speak to the selected NPC. Known shop names appear on map labels and minimap tooltips.
+- Locally observed shop stock updates the bundled reference. Distances are straight-line estimates, not travel routes.
+
 
 - Forever pet health and focus displays remain live during combat through native resource bars.
 
