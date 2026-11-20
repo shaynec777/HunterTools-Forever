@@ -1,7 +1,9 @@
 local F={db={},Print=function() end,HideConfigPages=function() end,ScanAmmo=function() return true end}
 local frames={}
-local function widget()
+local secureNativeClick=function() end
+local function widget(_,_,_,template)
  local w={scripts={},shown=false}
+ if template and template:find("SecureActionButtonTemplate",1,true) then w.scripts.OnClick=secureNativeClick end
  setmetatable(w,{__index=function(_,k) if k=='CreateFontString' or k=='CreateTexture' then return widget end;if k:match('^[A-Z]') then return function() end end end})
  function w:SetScript(k,f) self.scripts[k]=f end
  function w:RegisterEvent(e) assert(e~='UNIT_GUILD_UPDATE') end
@@ -16,6 +18,8 @@ local function widget()
  frames[#frames+1]=w;return w
 end
 CreateFrame=widget;UIParent={};UISpecialFrames={}
+F.SetupAmmoVendorMarkButton=function(b) assert(b.scripts.OnClick==secureNativeClick,'preserve native secure Mark OnClick') end
+F.SetupAmmoVendorClearButton=function(b) assert(b.scripts.OnClick==secureNativeClick,'preserve native secure Clear OnClick') end
 local linkCallback
 EventRegistry={RegisterCallback=function(_,event,fn) assert(event=='SetItemRef');linkCallback=fn end}
 local combat=false
@@ -102,7 +106,7 @@ linkCallback(nil,'addon:huntertoolsammo:nearby');assert(F.ammoVendorDestination.
 F.ClearAmmoVendorMarker();linkCallback(nil,'addon:huntertoolsammo:nearby:forged');assert(not F.ammoVendorDestination)
 combat=true;linkCallback(nil,'addon:huntertoolsammo:nearby');assert(not F.ammoVendorDestination);combat=false
 linkCallback(nil,secret);assert(not F.ammoVendorDestination)
-F.OpenAmmoVendors();assert(F.ammoVendorPanel:IsShown());assert(F.ammoVendorPanel.rows[1].vendor.id==7777)
+F.OpenAmmoVendors();assert(F.ammoVendorPanel.restock==true,"vendor finder defaults to include restocking");assert(F.ammoVendorPanel:IsShown());assert(F.ammoVendorPanel.rows[1].vendor.id==7777)
 -- Zone changes refresh the visible list and hide pins on an unrelated map.
 map=1439;F.ammoVendorPanel:Refresh();assert(not F.ammoVendorPanel.rows[1]:IsShown())
 C_Map.GetWorldPosFromMapPos=function(id)
@@ -115,6 +119,7 @@ F.ammoVendorCatalog[#F.ammoVendorCatalog+1]={id=12000,name='Other continent',map
 assert(F.NearestAmmoVendor(c,true).vendor.id==151,'nearest restocking seller by comparable world distance, not higher damage farther away')
 assert(F.NearestAmmoVendor(c,false).vendor.id==9999,'upgrade-only search retains damage requirement')
 local nearest=F.NearestAmmoVendor(c,false);assert(nearest.worldDistance==100,'world distances are yards')
+F.ammoVendorPanel.restock=false -- Explicitly exercise the optional upgrades-only filter.
 F.ammoVendorPanel:Refresh();assert(F.ammoVendorPanel.rows[1].vendor.id==9999 and F.ammoVendorPanel.status.text:find('Closest known',1,true),'UI suggests closest upgrade when zone has none')
 linkCallback(nil,'addon:huntertoolsammo:nearby');assert(F.ammoVendorDestination.id==151 and map==1429,'chat fallback marks nearest usable seller in another zone')
 npc=151;F.AmmoVendorInteraction('GOSSIP_SHOW');assert(not F.ammoVendorDestination,'cross-zone destination still clears on matching interaction')

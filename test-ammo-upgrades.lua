@@ -33,6 +33,14 @@ F.AmmoInfo=function(id) return F.ammoCatalog[id] and F.ammoCatalog[id].name or '
 F.ScanAmmo=function() return true end
 local s=F.AmmoUpgradeSettings();assert(not s.enabled and not s.includeEngineered)
 s.enabled=true
+F.ammoEntryReadyAt=100
+local savedCount=C_Item.GetItemCount
+C_Item.GetItemCount=function() error('restock must not query inventory totals') end
+local restock=F.AmmoUpgradeContext(false,true,true)
+assert(restock and restock.kind==3 and restock.level==15 and restock.faction=='Alliance' and not restock.current)
+assert(not F.AmmoUpgradeContext(false,true,false),'upgrades still require inventory readiness')
+combat=true;assert(not F.AmmoUpgradeContext(false,true,true));combat=false
+C_Item.GetItemCount=savedCount;F.ammoEntryReadyAt=nil
 local c=F.AmmoUpgradeContext(true);local id,best=F.AmmoUpgradeBest(c)
 assert(id==2519 and best.dps==3.5)
 assert(F.AmmoUpgradeAdvice(c):find('Thurman Mullby',1,true))

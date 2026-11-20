@@ -90,6 +90,7 @@ assert(F.ClassicPlayerNameMatches('dari','Darius-SomeRealm',true))
 print('PASS: all TOC Lua modules load, level-1/no-pet startup, periodic refresh, menu, separate settings/commands and realm names')
 
 -- Era may omit spell IDs or inactive spells from minimap tracking rows.
+F.trackingChoicesCache=nil -- simulate spellbook invalidation after fixture changes
 F.ClassicSpellBook.IsSpellKnown=function(id) return id==1494 end
 F.ClassicSpell.GetSpellName=function(id) if id==1494 then return 'Localized Track Beasts' end end
 F.ClassicMinimap.GetNumTrackingTypes=function() return 0 end
@@ -100,6 +101,7 @@ F.ClassicMinimap.GetTrackingInfo=function() return {name='Localized Track Beasts
 tracking=F.TrackingState()
 assert(#tracking.choices==1 and tracking.active.id==1494,'localized row without spellID must resolve without duplicates')
 F.ClassicSpellBook.IsSpellKnown=function() return false end
+F.trackingChoicesCache=nil -- SPELLS_CHANGED invalidates learned choices
 assert(#F.TrackingState().choices==0,'unlearned tracking must not be offered')
 
 local petopia,wowhead=F.BeastSourceURLs(3099)

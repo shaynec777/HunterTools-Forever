@@ -163,6 +163,7 @@ loader:SetScript('OnEvent',function(_,event,a,b,c)
             if (text or ''):lower():match('^%s*$') or (text or ''):lower():match('^%s*config%s*$') then F.OpenConfig(); return end
             if (text or ''):lower():match('^%s*instance%s*$') then F.OpenInstanceSettings(); return end
             if (text or ''):lower():match('^%s*questdebug%s*$') then F.DebugQuestFood(); return end
+            if (text or ''):lower():match('^%s*trainers%s*$') then F.OpenTrainers(); return end
             if (text or ''):lower():match('^%s*ammovendors%s*$') then F.OpenAmmoVendors(); return end
             if (text or ''):lower():match('^%s*ammo%s*$') then F.OpenAmmoSettings(); return end
             if (text or ''):lower():match('^%s*foods%s*$') then F.OpenFoodList(); return end
@@ -184,6 +185,7 @@ loader:SetScript('OnEvent',function(_,event,a,b,c)
     -- Unit events for other players/nameplates cannot change our feeder.
     if event:match('^UNIT_') and a~='pet' and a~='player' then return end
     if event=='UNIT_PET' and a~='player' then return end
+    if event=='SPELLS_CHANGED' or event=='PLAYER_ENTERING_WORLD' then F.aspectChoicesCache=nil;F.trackingChoicesCache=nil end
     if event=='UNIT_PET' or event=='SPELLS_CHANGED' or event=='PET_BAR_UPDATE' or event=='PLAYER_ENTERING_WORLD' then F.petAbilitiesDirty=true end
     local foodItem=event=='GET_ITEM_INFO_RECEIVED' and F.pendingFoodItemIDs and F.pendingFoodItemIDs[a]
     local questItem=event=='GET_ITEM_INFO_RECEIVED' and F.questFoodPendingIDs and F.questFoodPendingIDs[a]

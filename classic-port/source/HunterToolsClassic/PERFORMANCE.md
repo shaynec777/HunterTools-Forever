@@ -1,4 +1,30 @@
-# Temporary performance diagnostics (3.2.7)
+# Temporary performance diagnostics (3.2.10 local test)
+
+## Local test build 3.2.10
+
+Range checks still run on the existing half-second cadence, but unchanged labels,
+colors, portrait selection and layout are not redrawn. Portrait metadata refreshes
+on target GUID changes with a five-second refresh fallback. Pet details and Mend
+Pet warnings are still evaluated live; their appearance/disappearance relayouts
+the window.
+
+Ammo-upgrade checks reuse the existing ammo counts until a bag/equipment/combat
+recovery event marks them dirty. Explicit ScanAmmo callers and zoning's readiness
+confirmation retain fresh scans. A 30-second fallback handles missed invalidation
+events. Cached counts are never accepted while combat or zoning blocks scans.
+
+Tracking/aspect spell discovery is cached for up to five seconds, invalidated by
+SPELLS_CHANGED and PLAYER_ENTERING_WORLD. Active tracking flags, aura ownership and
+aspect cancellation state are read live. Incomplete Classic localized-name caches
+retry rather than freezing partial spell lists; the Era learned-tracker fallback
+is retained. Dropdown render-stamp behavior and favorites are unchanged.
+
+Watch for stale target names/portraits or stuck Mend Pet layout; ammo counts and
+warnings failing to update after shooting/buying/equipping or zoning; missing new
+spell ranks/profession trackers; wrong active icons/stars; and changed intentional
+aspect-cancellation behavior. Missed spell events should self-correct within five
+seconds; missed inventory events have a 30-second fallback. These are guardrails,
+not intended delays for normal native events. No public release is requested.
 
 ## Shared automatic scan coalescing (3.2.6)
 

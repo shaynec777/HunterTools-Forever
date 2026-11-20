@@ -33,6 +33,11 @@ function F.TrackingState()
     if not (api and api.GetNumTrackingTypes and api.GetTrackingInfo) then return end
     local count=query(api.GetNumTrackingTypes)
     if type(count)~='number' or count<0 or count>512 then return end
+    local now=query(GetTime)
+    local cache=F.trackingChoicesCache
+    if type(now)~='number' or not cache or cache.count~=count or now<cache.at or now-cache.at>=5 then
+        cache={count=count,at=now or 0,known={},rows={}};F.trackingChoicesCache=cache
+    end
     local state={choices={},uncertain=false};local seen={}
     for i=1,count do
         local info=query(api.GetTrackingInfo,i)
@@ -50,10 +55,17 @@ function F.TrackingState()
                 -- Native spell-backed tracking includes learned profession abilities;
                 -- omit minimap service filters, which are not castable tracking spells.
                 local known=true
-                if C_SpellBook and C_SpellBook.IsSpellKnown then local value=query(C_SpellBook.IsSpellKnown,id);if value==nil then state.uncertain=true end;known=value==true end
+                if C_SpellBook and C_SpellBook.IsSpellKnown then
+                    local value=cache.known[id]
+                    if value==nil then value=query(C_SpellBook.IsSpellKnown,id);if value~=nil then cache.known[id]=value end end
+                    if value==nil then state.uncertain=true end;known=value==true
+                end
                 if known and #state.choices<32 then
                     local active=safe(info.active) and info.active==true
-                    local row={id=id,name=name,active=active,texture=safe(info.texture) and info.texture or nil}
+                    local texture=safe(info.texture) and info.texture or nil
+                    local row=cache.rows[id]
+                    if not row or row.name~=name or row.texture~=texture then row={id=id,name=name,texture=texture};cache.rows[id]=row end
+                    row.active=active
                     state.choices[#state.choices+1]=row;seen[id]=true
                     if active and (not state.active or (state.active.id==2481 and id~=2481)) then state.active=row end
                 end

@@ -109,9 +109,9 @@ local function nearestDescription(row)
     return row.vendor.name..' - '..(info and info.name or row.vendor.zone or 'another zone')
         ..(' (~%d yd straight-line; travel route may be longer)'):format(row.worldDistance)
 end
-function F.MarkLevelAmmoVendor()
+function F.LevelAmmoVendorRow()
     if InCombatLockdown() then F.Print('Find an ammo seller after combat.');return end
-    local c,reason=F.AmmoUpgradeContext(F.ScanAmmo(),true)
+    local c,reason=F.AmmoUpgradeContext(nil,true,true)
     if not c then F.Print(reason or 'Ammo data is unavailable.');return end
     -- This action asks for the current level's best ordinary vendor tier,
     -- independent of carried stock or whether it would count as an upgrade.
@@ -124,7 +124,11 @@ function F.MarkLevelAmmoVendor()
     local row=F.NearestAmmoVendor(context,true,desired)
     if not row then F.Print('No known seller of your current-level ammo could be located on this continent.');return end
     F.Print('Current-level ammo: '..F.AmmoInfo(row.itemID)..'. Closest known seller: '..nearestDescription(row)..'.')
-    F.SelectAmmoVendor(row.vendor)
+    return row
+end
+function F.MarkLevelAmmoVendor()
+    local row=F.LevelAmmoVendorRow()
+    if row then F.SelectAmmoVendor(row.vendor) end
     return row
 end
 function F.ClearAmmoVendorMarker()
@@ -283,6 +287,7 @@ function F.HandleAmmoVendorLink(link)
     if not public(link) or type(link)~='string' or link~='addon:huntertoolsammo:nearby' then return end
     if InCombatLockdown() then F.Print('Mark an ammo seller after combat.');return end
     local c,reason=F.AmmoUpgradeContext(F.ScanAmmo(),true)
+    if not c then c,reason=F.AmmoUpgradeContext(nil,true,true) end
     if not c then F.Print(reason or 'Ammo data is unavailable.');return end
     local rows=F.AmmoVendorRows(c,false,false)
     if #rows==0 then rows=F.AmmoVendorRows(c,false,true) end
@@ -304,27 +309,32 @@ function F.OpenAmmoVendors()
     F.HideConfigPages()
     if not F.ammoVendorPanel then
         local p=CreateFrame('Frame','HunterToolsClassicAmmoVendors',UIParent,'BackdropTemplate');F.ammoVendorPanel=p
+        p.restock=true -- Find sellers by default, including equal/lower-tier ammo.
         p:SetSize(650,560);p:SetPoint('CENTER');p:SetFrameStrata('DIALOG');p:SetClampedToScreen(true)
         p:SetBackdrop({bgFile='Interface\\DialogFrame\\UI-DialogBox-Background',edgeFile='Interface\\DialogFrame\\UI-DialogBox-Border',edgeSize=24})
         local close=CreateFrame('Button',nil,p,'UIPanelCloseButton');close:SetPoint('TOPRIGHT',-4,-4);table.insert(UISpecialFrames,'HunterToolsClassicAmmoVendors')
         local function label(y) local t=p:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall');t:SetPoint('TOPLEFT',24,y);t:SetWidth(600);t:SetJustifyH('LEFT');return t end
         label(-25):SetText('Ammunition | Find a seller')
         p.status=label(-100);p.status:SetHeight(48);p.destination=label(-470)
-        local function button(text,x,y,width,fn)
-            local b=CreateFrame('Button',nil,p,'UIPanelButtonTemplate');b:SetSize(width,25);b:SetPoint('TOPLEFT',x,y);b:SetText(text);b:SetScript('OnClick',fn);return b
+        local function button(text,x,y,width,fn,secure)
+            local b=CreateFrame('Button',nil,p,secure and 'UIPanelButtonTemplate,SecureActionButtonTemplate' or 'UIPanelButtonTemplate');b:SetSize(width,25);b:SetPoint('TOPLEFT',x,y);b:SetText(text);if not secure then b:SetScript('OnClick',fn) end;return b
         end
         p.zones=button('Current zone',24,-60,180,function() p.allZones=not p.allZones;p.page=1;p:Refresh() end)
         p.stock=button('Upgrades only',215,-60,180,function() p.restock=not p.restock;p.page=1;p:Refresh() end)
-        button('Clear marker',406,-60,218,function() F.ClearAmmoVendorMarker() end)
+        p.clearVendorButton=button('Clear Vendor Mark',406,-60,218,function() F.ClearAmmoVendorMarker() end,true)
+        if F.SetupAmmoVendorClearButton then F.SetupAmmoVendorClearButton(p.clearVendorButton) end
         p.rows={};for i=1,6 do
-            local row=button('',24,-154-(i-1)*48,600,function(self) if self.vendor then F.SelectAmmoVendor(self.vendor);p:Refresh() end end)
+            local row=button('',24,-154-(i-1)*48,600,function(self) if self.vendor then F.SelectAmmoVendor(self.vendor);p:Refresh() end end,true)
+            if F.SetupAmmoVendorMarkButton then
+                F.SetupAmmoVendorMarkButton(row,function() return row.vendor end,function() p:Refresh() end)
+            end
             row:SetHeight(42);p.rows[i]=row
         end
         button('Previous',24,-510,110,function() p.page=math.max(1,(p.page or 1)-1);p:Refresh() end)
         button('Next',145,-510,110,function() p.page=(p.page or 1)+1;p:Refresh() end)
         button('Back to upgrade advice',370,-510,254,function() p:Hide();F.OpenAmmoUpgradeSettings() end)
         function p:Refresh()
-            local c,reason=F.AmmoUpgradeContext(not InCombatLockdown() and F.ScanAmmo(),true)
+            local c,reason=F.AmmoUpgradeContext(not self.restock and not InCombatLockdown() and F.ScanAmmo(),true,self.restock)
             local rows=F.AmmoVendorRows(c,self.allZones,self.restock)
             local nearest
             if c and #rows==0 and not self.allZones then nearest=F.NearestAmmoVendor(c,self.restock);if nearest then rows={nearest} end end

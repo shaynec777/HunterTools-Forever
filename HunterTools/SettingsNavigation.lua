@@ -26,7 +26,6 @@ local categories={
  {'Ammunition & weapons',{
   {'Stock alerts','OpenAmmoSettings','ammoPanel','stock','ammo','Enable ammo stock alerts'},
   {'Ammo upgrades','OpenAmmoUpgradeSettings','ammoUpgradePanel'},
-  {'Ammo sellers','OpenAmmoVendors','ammoVendorPanel'},
   {'Weapon catalog & suggestions','OpenRangedWeapons','rangedWeaponsPanel'},
   {'Weapon comparisons (Experimental)','OpenWeaponComparisonSettings','weaponSettingsPanel'},
  }},
@@ -36,6 +35,8 @@ local categories={
   {'Growl & Pack checks','OpenInstanceSettings','instanceSettingsPanel',nil,'instance','Enable dungeon checks'},
  }},
  {'Finders',{
+  {'Ammo Vendors','OpenAmmoVendors','ammoVendorPanel'},
+  {'Trainers','OpenTrainers','trainerPanel'},
   {'Mob Finder','OpenMobFinder','mobFinderPanel'},
   {'Player Finder','OpenPlayerFinder','playerFinderPanel'},
  }},

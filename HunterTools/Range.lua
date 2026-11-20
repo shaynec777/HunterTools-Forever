@@ -157,24 +157,58 @@ function F.UpdateRangeWindow()
         end)
         p:SetScript('OnLeave',function() GameTooltip:Hide() end)
     end
+    local p=F.rangeWindow
+    if type(p.renderState)~='table' then p.renderState={} end
+    local cache=p.renderState
+    local function changed(key,value)
+        local old=cache[key]
+        if not old or old.value~=value then cache[key]={value=value};return true end
+        return false
+    end
     local exists=UnitExists('target')
     local name=exists and UnitName('target')
     if not safe(name) or type(name)~='string' then name=exists and 'Target' or 'No target' end
-    F.rangeWindow.targetName:SetText(name)
+    if changed('name',name) then p.targetName:SetText(name) end
+    local guid=query(UnitGUID,'target')
+    local portraitKey=exists and (guid or name) or false
+    local now=query(GetTime)
+    local portraitChanged=changed('portrait',portraitKey)
     if exists and SetPortraitTexture then
-        SetPortraitTexture(F.rangeWindow.portrait,'target')
-        F.rangeWindow.portrait:Show()
-    else F.rangeWindow.portrait:Hide() end
+        if portraitChanged or (type(now)=='number' and (not cache.portraitAt or now<cache.portraitAt or now-cache.portraitAt>=5)) then
+            SetPortraitTexture(p.portrait,'target');cache.portraitAt=type(now)=='number' and now or nil
+        end
+        if portraitChanged then p.portrait:Show() end
+    elseif portraitChanged then p.portrait:Hide() end
     local details=F.TargetPetDetails and F.TargetPetDetails()
     local heal=F.PetHealRangeWarning()
-    F.rangeWindow.petHeal:SetText(heal or '');F.rangeWindow.petHeal:SetShown(heal~=nil)
-    local healSpace=heal and (F.rangeWindow.petHeal:GetStringHeight()+8) or 0
-    F.rangeWindow.petDetails:ClearAllPoints();F.rangeWindow.petDetails:SetPoint('TOPLEFT',12,-96-healSpace)
-    F.rangeWindow.petDetails:SetText(details or '')
-    F.rangeWindow.petDetails:SetShown(details~=nil)
-    F.rangeWindow:SetHeight((details and (110+F.rangeWindow.petDetails:GetStringHeight()) or 94)+healSpace)
+    local healChanged=changed('heal',heal)
+    if healChanged then
+        p.petHeal:SetText(heal or '');p.petHeal:SetShown(heal~=nil)
+        cache.healSpace=heal and (p.petHeal:GetStringHeight()+8) or 0
+    end
+    local detailsChanged=changed('details',details)
+    if detailsChanged then
+        p.petDetails:SetText(details or '');p.petDetails:SetShown(details~=nil)
+        cache.detailsHeight=details and p.petDetails:GetStringHeight() or 0
+    end
+    if healChanged or detailsChanged then
+        p.petDetails:ClearAllPoints();p.petDetails:SetPoint('TOPLEFT',12,-96-cache.healSpace)
+        p:SetHeight((details and (110+cache.detailsHeight) or 94)+cache.healSpace)
+    end
     local text,r,g,b=F.TargetRangeStatus()
-    F.rangeWindow.portrait:SetDesaturated(F.rangeNonEnemy and true or false)
-    F.rangeWindow.targetName:SetTextColor(F.rangeNonEnemy and 0.7 or 1,F.rangeNonEnemy and 0.7 or 0.82,F.rangeNonEnemy and 0.7 or 0)
-    F.rangeWindow:SetAlpha((F.rangeNonEnemy and not heal) and 0.65 or 1); F.rangeWindow.distance:SetTextColor(F.rangeNonEnemy and 0.65 or 1,F.rangeNonEnemy and 0.65 or 1,F.rangeNonEnemy and 0.65 or 1); F.rangeWindow.distance:SetText(F.TargetDistanceEstimate(text)); F.rangeWindow.text:SetText(text); F.rangeWindow.text:SetTextColor(F.rangeNonEnemy and 0.7 or r,F.rangeNonEnemy and 0.7 or g,F.rangeNonEnemy and 0.7 or b); F.rangeWindow:Show()
+    local muted=F.rangeNonEnemy and true or false
+    if changed('muted',muted) then
+        p.portrait:SetDesaturated(muted)
+        p.targetName:SetTextColor(muted and 0.7 or 1,muted and 0.7 or 0.82,muted and 0.7 or 0)
+        p.distance:SetTextColor(muted and 0.65 or 1,muted and 0.65 or 1,muted and 0.65 or 1)
+    end
+    local alpha=(muted and not heal) and 0.65 or 1
+    if changed('alpha',alpha) then p:SetAlpha(alpha) end
+    local distance=F.TargetDistanceEstimate(text)
+    if changed('distance',distance) then p.distance:SetText(distance) end
+    if changed('text',text) then p.text:SetText(text) end
+    local red,green,blue=muted and 0.7 or r,muted and 0.7 or g,muted and 0.7 or b
+    if changed('color',table.concat({red,green,blue},':')) then p.text:SetTextColor(red,green,blue) end
+    p:Show()
+
 end

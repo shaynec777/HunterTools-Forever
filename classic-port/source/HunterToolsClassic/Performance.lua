@@ -1,6 +1,6 @@
 local addon,F=...
 -- Temporary, opt-in instrumentation. No timer or wrappers exist while disabled.
-local names={'UpdateHappinessBorder','Refresh','FindFood','CheckAmmoReminder','CheckAmmoUpgradeNotifications','CheckInstancePrompt','CheckAspectPrompt','UpdateAspectButton','UpdateTrackingButton','UpdateRangeWindow','UpdatePetStatusWindow','CheckPetAlerts','AddWeaponComparison','BuildWeaponComparison','ReadComparisonWeapon','FilterRangedWeapons','UpdateAmmoVendorPins','UpdateAmmoVendorMinimap','UpdateAnimalTooltip','UpdatePetTooltip'}
+local names={'ScanAmmo','EnsureAmmoScan','TrackingState','AspectState','UpdateHappinessBorder','Refresh','FindFood','CheckAmmoReminder','CheckAmmoUpgradeNotifications','CheckInstancePrompt','CheckAspectPrompt','UpdateAspectButton','UpdateTrackingButton','UpdateRangeWindow','UpdatePetStatusWindow','CheckPetAlerts','AddWeaponComparison','BuildWeaponComparison','ReadComparisonWeapon','FilterRangedWeapons','UpdateAmmoVendorPins','UpdateAmmoVendorMinimap','UpdateAnimalTooltip','UpdatePetTooltip'}
 local session
 local measured
 local function safe(fn,...)

@@ -54,6 +54,14 @@ function F.QueueAmmoEntryScan()
     F.ammoDirty=true
 end
 
+function F.EnsureAmmoScan()
+    if InCombatLockdown() then return false end
+    local now=GetTime and GetTime()
+    if not F.ammoDirty and F.ammoCounts and not F.ammoEntryReadyAt
+        and type(now)=='number' and F.ammoScanAt and now>=F.ammoScanAt and now-F.ammoScanAt<30 then return true end
+    return F.ScanAmmo()
+end
+
 function F.ScanAmmo()
     if F.ammoEntryReadyAt and GetTime()<F.ammoEntryReadyAt then return false end
     if InCombatLockdown() then return false end
@@ -96,7 +104,7 @@ function F.ScanAmmo()
             end
         end
     end
-    F.ammoCounts=counts; F.ammoDirty=false
+    F.ammoCounts=counts; F.ammoDirty=false;F.ammoScanAt=GetTime and GetTime() or nil
     return true
 end
 

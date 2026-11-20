@@ -16,7 +16,7 @@ local function panel(name,title,w,h)
     return p
 end
 function F.HideConfigPages()
-    for _,key in ipairs({'configPanel','foodPanel','ammoPanel','instanceSettingsPanel','rangeSettingsPanel','petStatusSettingsPanel','petListPanel','animalSettingsPanel','petAbilityBrowser','ammoUpgradePanel','ammoVendorPanel','protectionPanel','weaponSettingsPanel','rangedWeaponsPanel','beastJournalPanel','aspectSettingsPanel','aspectPrompt','aspectPicker','petAlertPanel','trackingSettingsPanel','tooltipSettingsPanel','trackingPicker','mobFinderPanel','playerFinderPanel'}) do
+    for _,key in ipairs({'configPanel','foodPanel','ammoPanel','instanceSettingsPanel','rangeSettingsPanel','petStatusSettingsPanel','petListPanel','animalSettingsPanel','petAbilityBrowser','ammoUpgradePanel','ammoVendorPanel','trainerPanel','protectionPanel','weaponSettingsPanel','rangedWeaponsPanel','beastJournalPanel','aspectSettingsPanel','aspectPrompt','aspectPicker','petAlertPanel','trackingSettingsPanel','tooltipSettingsPanel','trackingPicker','mobFinderPanel','playerFinderPanel'}) do
         if F[key] then F[key]:Hide() end
     end
 end

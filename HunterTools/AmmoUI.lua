@@ -33,12 +33,12 @@ function F.OpenAmmoSettings()
         t:SetPoint('TOPLEFT',x,-y); t:SetWidth(width); t:SetJustifyH('LEFT'); t:SetText(text)
         return t
     end
-    local function button(text,x,y,w,click)
-        local b=CreateFrame('Button',nil,content,'UIPanelButtonTemplate')
-        b:SetSize(w,24); b:SetPoint('TOPLEFT',x,-y); b:SetText(text); b:SetScript('OnClick',function()
+    local function button(text,x,y,w,click,secure)
+        local b=CreateFrame('Button',nil,content,secure and 'UIPanelButtonTemplate,SecureActionButtonTemplate' or 'UIPanelButtonTemplate')
+        b:SetSize(w,24); b:SetPoint('TOPLEFT',x,-y); b:SetText(text); if not secure then b:SetScript('OnClick',function()
             for _,r in ipairs(p.rows or {}) do if r.minimum:HasFocus() then r.minimum:ClearFocus() end end
             click()
-        end)
+        end) end
         return b
     end
     local function check(text,x,y,key)
@@ -50,7 +50,13 @@ function F.OpenAmmoSettings()
         return b
     end
     label('Ammunition',25,22,590,'GameFontNormalLarge')
-    p.nearestVendorButton=button('Nearest vendor for my level',280,20,330,function() F.MarkLevelAmmoVendor() end)
+    p.nearestVendorButton=button('Nearest vendor for my level',230,20,245,function() F.MarkLevelAmmoVendor() end,true)
+    if F.SetupAmmoVendorMarkButton then
+        F.SetupAmmoVendorMarkButton(p.nearestVendorButton,function() local row=F.LevelAmmoVendorRow();return row and row.vendor end)
+    end
+    p.clearVendorButton=CreateFrame('Button',nil,p,'UIPanelButtonTemplate,SecureActionButtonTemplate')
+    p.clearVendorButton:SetSize(165,24);p.clearVendorButton:SetPoint('TOPLEFT',480,-20);p.clearVendorButton:SetText('Clear Vendor Mark')
+    if F.SetupAmmoVendorClearButton then F.SetupAmmoVendorClearButton(p.clearVendorButton) end
     content=p.alertPage
     check('Enable ammo reminders',25,53,'enabled')
     check('Play warning sound (Master)',310,53,'sound')

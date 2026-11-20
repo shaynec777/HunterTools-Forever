@@ -38,28 +38,37 @@ end
 function F.AspectState()
     if query(InCombatLockdown) then return end
     if not (F.ClassicSpellBook and F.ClassicSpellBook.IsSpellKnown and F.ClassicAuras and F.ClassicAuras.GetAuraDataBySpellName) then return end
-    local result={choices={},uncertain=false}
-    for _,family in ipairs(aspects) do
-        local choice
-        for _,id in ipairs(family.ids) do
-            local known=query(F.ClassicSpellBook.IsSpellKnown,id)
-            if known==nil then result.uncertain=true end
-            if known then
-                local name=query(F.ClassicSpell and F.ClassicSpell.GetSpellName,id)
-                if type(name)=='string' and name~='' and not name:find('[\r\n]') then choice={key=family.key,id=id,name=name}
-                else result.uncertain=true end
+    local now=query(GetTime)
+    local cache=F.aspectChoicesCache
+    local valid=type(now)=='number' and cache and now>=cache.at and now-cache.at<5
+    local result={choices=valid and cache.choices or {},uncertain=false}
+    if not valid then
+        for _,family in ipairs(aspects) do
+            local choice
+            for _,id in ipairs(family.ids) do
+                local known=query(F.ClassicSpellBook.IsSpellKnown,id)
+                if known==nil then result.uncertain=true end
+                if known then
+                    local name=query(F.ClassicSpell and F.ClassicSpell.GetSpellName,id)
+                    if type(name)=='string' and name~='' and not name:find('[\r\n]') then choice={key=family.key,id=id,name=name}
+                    else result.uncertain=true end
+                end
             end
+            if choice then result.choices[#result.choices+1]=choice end
         end
-        if choice then
-            result.choices[#result.choices+1]=choice
-            local aura,_,readable=query(F.ClassicAuras.GetAuraDataBySpellName,'player',choice.name,'HELPFUL')
-            if not readable then result.uncertain=true end
-            if type(aura)=='table' then
-                if safe(aura.sourceUnit) and aura.sourceUnit=='player' then
-                    result.active=choice
-                    if safe(aura.auraInstanceID) and type(aura.auraInstanceID)=='number' then result.activeAuraID=aura.auraInstanceID end
-                elseif not safe(aura.sourceUnit) or aura.sourceUnit==nil then result.uncertain=true end
-            end
+        if not result.uncertain and type(now)=='number' then F.aspectChoicesCache={at=now,choices=result.choices}
+        else F.aspectChoicesCache=nil end
+    end
+    -- Aura ownership and cancellation state are always read live; only learned
+    -- spell metadata is cached, never the currently active aspect.
+    for _,choice in ipairs(result.choices) do
+        local aura,_,readable=query(F.ClassicAuras.GetAuraDataBySpellName,'player',choice.name,'HELPFUL')
+        if not readable then result.uncertain=true end
+        if type(aura)=='table' then
+            if safe(aura.sourceUnit) and aura.sourceUnit=='player' then
+                result.active=choice
+                if safe(aura.auraInstanceID) and type(aura.auraInstanceID)=='number' then result.activeAuraID=aura.auraInstanceID end
+            elseif not safe(aura.sourceUnit) or aura.sourceUnit==nil then result.uncertain=true end
         end
     end
     if result.active and not result.uncertain then
@@ -185,7 +194,7 @@ function F.ShowAspectChooser(reason,e,state)
     p:Show()
 end
 function F.AspectMenuOpen(exclude)
-    for _,key in ipairs({'configPanel','aspectSettingsPanel','instanceSettingsPanel','foodPanel','ammoPanel','rangeSettingsPanel','petStatusSettingsPanel','petAbilityBrowser','beastJournalPanel','aspectPicker','petAlertPanel','trackingSettingsPanel','trackingPicker','trackingDropdown','petListPanel','animalSettingsPanel','ammoUpgradePanel','protectionPanel','weaponSettingsPanel'}) do
+    for _,key in ipairs({'configPanel','aspectSettingsPanel','instanceSettingsPanel','foodPanel','ammoPanel','rangeSettingsPanel','petStatusSettingsPanel','petAbilityBrowser','beastJournalPanel','aspectPicker','petAlertPanel','trackingSettingsPanel','trackingPicker','trackingDropdown','petListPanel','animalSettingsPanel','ammoUpgradePanel','protectionPanel','weaponSettingsPanel','trainerPanel'}) do
         local p=F[key];if key~=exclude and p and p:IsShown() then return true end
     end
     return false

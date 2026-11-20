@@ -35,7 +35,7 @@ local function engineeringSkill()
     end
     return nil
 end
-function F.AmmoUpgradeContext(scanOK,forVendors)
+function F.AmmoUpgradeContext(scanOK,forVendors,restock)
     local s=F.AmmoUpgradeSettings()
     if not s.enabled and not forVendors then return nil,'Enable upgrade recommendations to compare ammunition.' end
     if not F.db.ammo.enabled and not forVendors then return nil,'Enable Ammo Reminder to use upgrade recommendations.' end
@@ -49,6 +49,10 @@ function F.AmmoUpgradeContext(scanOK,forVendors)
     if type(itemClass)~='number' or type(subclass)~='number' then return nil,'Ranged weapon data is loading.' end
     local kind=itemClass==2 and ((subclass==2 or subclass==18) and 2 or subclass==3 and 3 or nil)
     if not kind then return nil,'This ranged weapon does not use arrows or bullets.' end
+    -- Restocking needs weapon compatibility and level, not an inventory baseline.
+    if forVendors and restock then
+        return {level=level,kind=kind,faction=query(UnitFactionGroup,'player'),settings=s,counts={},baselineUnknown=false}
+    end
     if not scanOK or F.ammoEntryReadyAt then return nil,'Inventory is settling; recommendations will update when ready.' end
     local equipmentOK,equipped=pcall(GetInventoryItemID,'player',0)
     if not equipmentOK or not public(equipped) then return nil,'Equipped ammo is unavailable; try again after inventory settles.' end
@@ -199,7 +203,9 @@ function F.CheckAmmoUpgradeNotifications()
     if F.ammoUpgradeLastNotice and now-F.ammoUpgradeLastNotice<s.minutes*60 then return end
     if F.ammoUpgradeNextCheck and now<F.ammoUpgradeNextCheck then return end
     F.ammoUpgradeNextCheck=now+5
-    local c=F.AmmoUpgradeContext(F.ScanAmmo())
+    local scanOK
+    if F.EnsureAmmoScan then scanOK=F.EnsureAmmoScan() else scanOK=F.ScanAmmo() end
+    local c=F.AmmoUpgradeContext(scanOK)
     if not c then F.ammoUpgradePending=nil;return end
     local id,entry=F.AmmoUpgradeBest(c)
     local upgrade=entry and entry.dps>(c.current and c.current.dps or 0)

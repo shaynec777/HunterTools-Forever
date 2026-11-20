@@ -33,12 +33,20 @@ function F.TrackingState()
     local api=F.ClassicMinimap
     local count=api and api.GetNumTrackingTypes and query(api.GetNumTrackingTypes) or 0
     if type(count)~='number' or count<0 or count>512 then return end
-    local state={choices={},uncertain=false};local seen={};local byName={}
-    for _,id in ipairs(classicTrackingIDs) do
-        local known=query(F.ClassicSpellBook and F.ClassicSpellBook.IsSpellKnown,id)
-        local name=known and query(F.ClassicSpell and F.ClassicSpell.GetSpellName,id)
-        if type(name)=='string' and name~='' then byName[name]=id end
+    local now=query(GetTime)
+    local cache=F.trackingChoicesCache
+    if type(now)~='number' or not cache or cache.count~=count or now<cache.at or now-cache.at>=5 then
+        cache={count=count,at=now or 0,byName={},names={},known={},textures={},rows={},uncertain=false};F.trackingChoicesCache=cache
+        for _,id in ipairs(classicTrackingIDs) do
+            local known=query(F.ClassicSpellBook and F.ClassicSpellBook.IsSpellKnown,id)
+            if known==nil then cache.uncertain=true end
+            cache.known[id]=known
+            local name=known and query(F.ClassicSpell and F.ClassicSpell.GetSpellName,id)
+            if known and (type(name)~='string' or name=='') then cache.incomplete=true end
+            if type(name)=='string' and name~='' then cache.byName[name]=id;cache.names[id]=name end
+        end
     end
+    local state={choices={},uncertain=cache.uncertain};local seen={};local byName=cache.byName
     for i=1,count do
         local info=query(api.GetTrackingInfo,i)
         if type(info)~='table' then state.uncertain=true end
@@ -58,10 +66,13 @@ function F.TrackingState()
                 -- Native spell-backed tracking includes learned profession abilities;
                 -- omit minimap service filters, which are not castable tracking spells.
                 local known=true
-                if F.ClassicSpellBook and F.ClassicSpellBook.IsSpellKnown then local value=query(F.ClassicSpellBook.IsSpellKnown,id);if value==nil then state.uncertain=true end;known=value==true end
+                if F.ClassicSpellBook and F.ClassicSpellBook.IsSpellKnown then local value=cache.known[id];if value==nil then value=query(F.ClassicSpellBook.IsSpellKnown,id);if value~=nil then cache.known[id]=value end end;if value==nil then state.uncertain=true end;known=value==true end
                 if known and #state.choices<32 then
                     local active=safe(info.active) and info.active==true
-                    local row={id=id,name=name,active=active,texture=safe(info.texture) and info.texture or nil}
+                    local texture=safe(info.texture) and info.texture or nil
+                    local row=cache.rows[id]
+                    if not row or row.name~=name or row.texture~=texture then row={id=id,name=name,texture=texture};cache.rows[id]=row end
+                    row.active=active
                     state.choices[#state.choices+1]=row;seen[id]=true
                     if active and (not state.active or (state.active.id==2481 and id~=2481)) then state.active=row end
                 end
@@ -71,19 +82,23 @@ function F.TrackingState()
     -- Some Era tracking APIs expose only the active tracker. Keep all learned
     -- tracking spells available even when they have no native minimap row.
     for _,id in ipairs(classicTrackingIDs) do
-        local name=query(F.ClassicSpell and F.ClassicSpell.GetSpellName,id)
+        local name=cache.names[id]
         if type(name)=='string' and byName[name]==id and not seen[id] and #state.choices<32 then
-            local texture=query(F.ClassicSpell and F.ClassicSpell.GetSpellTexture,id)
+            local texture=cache.textures[id]
+            if texture==nil then texture=query(F.ClassicSpell and F.ClassicSpell.GetSpellTexture,id);cache.textures[id]=texture or false end
             local aura=query(F.ClassicAuras and F.ClassicAuras.GetAuraDataBySpellName,'player',name,'HELPFUL')
             local active=type(aura)=='table'
             if not active and not state.active and texture then
                 active=query(GetTrackingTexture)==texture
             end
-            local row={id=id,name=name,texture=texture,active=active}
+            local row=cache.rows[id]
+            if not row or row.name~=name or row.texture~=texture then row={id=id,name=name,texture=texture};cache.rows[id]=row end
+            row.active=active
             state.choices[#state.choices+1]=row;seen[id]=true
             if active and (not state.active or (state.active.id==2481 and id~=2481)) then state.active=row end
         end
     end
+    if state.uncertain or cache.incomplete then F.trackingChoicesCache=nil end
     return state
 end
 function F.BuildTrackingButton()

@@ -108,6 +108,7 @@ F.ammoVendorCatalog[#F.ammoVendorCatalog+1]={id=12000,name='Other continent',map
 assert(F.NearestAmmoVendor(c,true).vendor.id==151,'nearest restocking seller by comparable world distance, not higher damage farther away')
 assert(F.NearestAmmoVendor(c,false).vendor.id==9999,'upgrade-only search retains damage requirement')
 local nearest=F.NearestAmmoVendor(c,false);assert(nearest.worldDistance==100,'world distances are yards')
+F.ammoVendorPanel.restock=false
 F.ammoVendorPanel:Refresh();assert(F.ammoVendorPanel.rows[1].vendor.id==9999 and F.ammoVendorPanel.status.text:find('Closest known',1,true),'UI suggests closest upgrade when zone has none')
 linkCallback(nil,'addon:huntertoolsammo:nearby');assert(F.ammoVendorDestination.id==151 and map==1429,'chat fallback marks nearest usable seller in another zone')
 npc=151;F.AmmoVendorInteraction('GOSSIP_SHOW');assert(not F.ammoVendorDestination,'cross-zone destination still clears on matching interaction')

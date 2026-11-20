@@ -1,3 +1,12 @@
+# 3.2.18 — 2026-11-19
+
+- Added hunter and pet trainer finders with red map and minimap markers.
+- Grouped Ammo Vendors and Trainers under Finders.
+- Added secure red X marking and Clear Vendor Mark, including remembered vendor identity across reloads.
+- Ammo Vendors now includes restocking by default; finding a restocking seller no longer waits for bag inventory readiness.
+
+Vendor red X marking and clearing confirmed in-game.
+
 # HunterTools Forever and Classic Era 3.2.9
 
 - Add an independent ranged-weapon catalog for Forever and Classic Era: crafted weapons, instance drops, ordinary vendors, reputation and PvP purchases. Display stats, acquisition locations and requirements with clear source labels and colors.
