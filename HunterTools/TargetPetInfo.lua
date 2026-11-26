@@ -41,43 +41,83 @@ function F.PetRole(family)
     if current and current.role then return current.role..' (Petopia Forever)' end
     return family and roles[family] and (roles[family]..' (Classic baseline)') or 'Unknown'
 end
-local foodCache={}
-function F.AnimalFoodCounts(diet,level)
-    if type(diet)~='string' then return 'Diet unknown; counts unavailable.' end
-    local cacheKey=diet..':'..tostring(level)
-    local now=GetTime and GetTime() or 0
-    local cached=foodCache[cacheKey]
-    if cached and now-cached.at<2 then return cached.text end
-    local counts,usable={},0
-    for kind in diet:gmatch('[^,]+') do counts[kind:match('^%s*(.-)%s*$')]=0 end
-    local pending,unclassified=false,false
-    if not C_Container or not C_Item then return 'Inventory information unavailable.' end
+local foodCache,inventoryCache={},nil
+F.characterContextResets=F.characterContextResets or {}
+table.insert(F.characterContextResets,function() foodCache={};inventoryCache=nil end)
+function F.AnimalFoodInventory()
+    local now=query(GetTime)
+    if type(now)~='number' then now=0 end
+    if inventoryCache and now>=inventoryCache.at and now-inventoryCache.at<(inventoryCache.pending and 2 or 30) then return inventoryCache end
+    foodCache={}
+    local result={at=now,items={},pendingIDs={},pending=false,unclassified=false}
+    if not C_Container or not C_Item then result.unavailable=true;return result end
     for bag=0,(NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4) do
         local slots=query(C_Container.GetContainerNumSlots,bag)
-        if type(slots)~='number' or (bag==0 and slots==0) then pending=true;slots=0 end
+        if type(slots)~='number' or slots<0 or (bag==0 and slots==0) then result.pending=true;slots=0 end
         for slot=1,slots do
             local item=query(C_Container.GetContainerItemInfo,bag,slot)
             if type(item)=='table' then
                 local id,count=item.itemID,item.stackCount
                 if safe(id) and safe(count) and type(id)=='number' and type(count)=='number' and count>0 then
                     local kind=F.petFoodTypes and F.petFoodTypes[id]
-                    if kind and counts[kind] then
-                        counts[kind]=counts[kind]+count
-                        local name,_,_,foodLevel=query(C_Item.GetItemInfo,id)
-                        if not safe(name) or not name or not safe(foodLevel) or type(foodLevel)~='number' then pending=true
-                        elseif type(level)=='number' and level>0 and foodLevel>=level-30 then usable=usable+count end
-                    elseif not kind and F.foodCatalog and F.foodCatalog[id] then unclassified=true end
-                else pending=true end
+                    if kind then
+                        local row=result.items[id]
+                        if not row then
+                            local name,_,_,level=query(C_Item.GetItemInfo,id)
+                            if not name or type(level)~='number' then result.pending=true;result.pendingIDs[id]=true;level=nil end
+                            row={kind=kind,count=0,level=level};result.items[id]=row
+                        end
+                        row.count=row.count+count
+                    elseif F.foodCatalog and F.foodCatalog[id] then result.unclassified=true end
+                else result.pending=true end
             end
+        end
+    end
+    inventoryCache=result
+    return result
+end
+function F.AnimalFoodCounts(diet,level)
+    if type(diet)~='string' then return 'Diet unknown; counts unavailable.' end
+    local inventory=F.AnimalFoodInventory()
+    if inventory.unavailable then return 'Inventory information unavailable.' end
+    local cacheKey=diet..':'..tostring(level)
+    if foodCache[cacheKey] then return foodCache[cacheKey] end
+    local counts,usable={},0
+    for kind in diet:gmatch('[^,]+') do counts[kind:match('^%s*(.-)%s*$')]=0 end
+    for _,row in pairs(inventory.items) do
+        if counts[row.kind] then
+            counts[row.kind]=counts[row.kind]+row.count
+            if row.level and type(level)=='number' and level>0 and row.level>=level-30 then usable=usable+row.count end
         end
     end
     local parts={}
     for token in diet:gmatch('[^,]+') do local kind=token:match('^%s*(.-)%s*$');parts[#parts+1]=kind..' ('..(counts[kind] or 0)..')' end
     local result=table.concat(parts,', ')
     if type(level)=='number' and level>0 then result=result..'\nUsable food (Classic estimate): '..usable end
-    if pending or unclassified then result=result..'\nPartial count: '..(pending and 'item data loading; ' or '')..(unclassified and 'unclassified food in bags.' or 'retry after inventory settles.') end
-    foodCache[cacheKey]={at=now,text=result}
+    if inventory.pending or inventory.unclassified then result=result..'\nPartial count: '..(inventory.pending and 'item data loading; ' or '')..(inventory.unclassified and 'unclassified food in bags.' or 'retry after inventory settles.') end
+    local size=0;for _ in pairs(foodCache) do size=size+1 end
+    if size>=32 then foodCache={} end
+    foodCache[cacheKey]=result
     return result
+end
+function F.AnimalLore(unit)
+    if F.ReadBeastLore then return F.ReadBeastLore(unit) end
+    local diet,abilities
+    local tip=query(C_TooltipInfo and C_TooltipInfo.GetUnit,unit)
+    if type(tip)=='table' and safe(tip.lines) and type(tip.lines)=='table' then
+        for _,line in ipairs(tip.lines) do
+            local text=line.leftText
+            if safe(text) and type(text)=='string' then
+                local clean=text:gsub('|c%x%x%x%x%x%x%x%x',''):gsub('|r','')
+                local foods=clean:match('^[Dd]iet:%s*(.+)') or clean:match('^[Ff]ood [Tt]ypes?:%s*(.+)')
+                if foods then diet=foods end
+                local skills=clean:match('^[Aa]bilities:%s*(.+)') or clean:match('^[Pp]et [Aa]bilities:%s*(.+)')
+                if skills then abilities=skills end
+                if clean:match('[Rr]ank%s+%d+') and not skills then abilities=abilities and (abilities..'; '..clean) or clean end
+            end
+        end
+    end
+    return diet,abilities
 end
 function F.AnimalDetails(unit,s)
     if not s.enabled then return nil end
@@ -115,22 +155,7 @@ function F.AnimalDetails(unit,s)
     if s.location~=false and (s.location==true or s.info) and record and record.zone then lines[#lines+1]='Location: '..record.zone end
     if s.role then lines[#lines+1]='Role: '..F.PetRole(family) end
     local diet,abilities
-    local tip=query(C_TooltipInfo and C_TooltipInfo.GetUnit,unit)
-    if safe(tip) and tip and safe(tip.lines) and tip.lines then
-        for _,line in ipairs(tip.lines) do
-            local text=line.leftText
-            if safe(text) and type(text)=='string' then
-                local clean=text:gsub('|c%x%x%x%x%x%x%x%x',''):gsub('|r','')
-                local foods=clean:match('^[Dd]iet:%s*(.+)') or clean:match('^[Ff]ood [Tt]ypes?:%s*(.+)')
-                if foods then diet=foods end
-                local skills=clean:match('^[Aa]bilities:%s*(.+)') or clean:match('^[Pp]et [Aa]bilities:%s*(.+)')
-                if skills then abilities=skills end
-                if clean:match('[Rr]ank%s+%d+') and not skills then
-                    abilities=abilities and (abilities..'; '..clean) or clean
-                end
-            end
-        end
-    end
+    if s.abilities or s.diet or s.food then diet,abilities=F.AnimalLore(unit) end
     local baseline=false
     if not abilities and record then
         abilities=record.abilities
@@ -205,8 +230,16 @@ if GameTooltip and GameTooltip.HookScript then
 end
 
 local inventory=CreateFrame('Frame')
-for _,event in ipairs({'BAG_UPDATE_DELAYED','GET_ITEM_INFO_RECEIVED','PLAYER_ENTERING_WORLD'}) do inventory:RegisterEvent(event) end
-inventory:SetScript('OnEvent',function() foodCache={} end)
+for _,event in ipairs({'BAG_UPDATE_DELAYED','GET_ITEM_INFO_RECEIVED','PLAYER_ENTERING_WORLD','PLAYER_TARGET_CHANGED',
+    'UNIT_AURA','UNIT_FLAGS','UNIT_LEVEL','UNIT_SPELLCAST_SUCCEEDED','SPELLS_CHANGED','PET_BAR_UPDATE'}) do inventory:RegisterEvent(event) end
+inventory:SetScript('OnEvent',function(_,event,unit)
+    if event=='GET_ITEM_INFO_RECEIVED' and (not inventoryCache or not inventoryCache.pendingIDs[unit]) then return end
+    if not event or event=='BAG_UPDATE_DELAYED' or event=='GET_ITEM_INFO_RECEIVED' or event=='PLAYER_ENTERING_WORLD' then foodCache={};inventoryCache=nil end
+    if F.InvalidateBeastLore and (not event or event=='PLAYER_ENTERING_WORLD' or event=='PLAYER_TARGET_CHANGED'
+        or (event=='UNIT_AURA' and (unit=='target' or unit=='mouseover'))
+        or (event=='UNIT_SPELLCAST_SUCCEEDED' and unit=='player')) then F.InvalidateBeastLore() end
+    if F.InvalidateRangeData then F.InvalidateRangeData(event,unit) end
+end)
 
 -- An explicit lookup is available to every class, independent of hunter UI toggles.
 function F.OpenBeastDetail()

@@ -272,6 +272,8 @@ function F.ShowFinderTargetPopup(found,isPlayer)
 end
 function F.ShowMobFinderTarget(found) F.ShowFinderTargetPopup(found,false) end
 local lastSeen={};local lastByID={};local trackedUnits={}
+F.characterContextResets=F.characterContextResets or {}
+table.insert(F.characterContextResets,function() lastSeen={};lastByID={};trackedUnits={} end)
 function F.ScanMobFinder()
     if not F.db then return end
     local s=F.MobFinderSettings()

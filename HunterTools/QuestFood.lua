@@ -19,6 +19,8 @@ function F.EnsureQuestFood()
     end
 end
 local questItemNames={}
+F.characterContextResets=F.characterContextResets or {}
+table.insert(F.characterContextResets,function() questItemNames={} end)
 function F.InvalidateQuestItemName(id)
     if questItemNames[id] and not questItemNames[id].name then questItemNames[id]=nil end
 end

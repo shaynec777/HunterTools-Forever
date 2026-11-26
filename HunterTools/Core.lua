@@ -1,5 +1,5 @@
 local _, F = ...
-F.VERSION = "3.2.18"
+F.VERSION = "3.2.29"
 F.FEED_SPELL = 6991
 F.FEED_EFFECT = 1539
 
@@ -21,7 +21,7 @@ function F.LoadSettings()
         end
         HunterToolsDB=type(FeedomaticTooDB)=="table" and copy(FeedomaticTooDB) or {}
     end
-    F.db = HunterToolsDB
+    F.db = F.BindCharacterSettings and F.BindCharacterSettings(HunterToolsDB) or HunterToolsDB
     if type(F.db.instanceChecks)~="table" then F.db.instanceChecks={} end
     for _,key in ipairs({"growl","pack"}) do
         if type(F.db.instanceChecks[key])~="boolean" then F.db.instanceChecks[key]=true end
@@ -51,7 +51,7 @@ function F.LoadSettings()
     F.db.lowFoodThreshold = math.floor(threshold)
     if type(F.db.petFoodLists) ~= "table" then F.db.petFoodLists = {} end
     F.NormalizePetFoodProfiles()
-    F.bagsDirty = true
+    F.bagsDirty = true;F.foodDirtyInventoryOnly=false
     if F.LoadAmmoSettings then F.LoadAmmoSettings() end
     if F.PetStatusSettings then F.PetStatusSettings() end
 end
@@ -298,7 +298,7 @@ function F.ListCommand(text)
         F.Print('/fom ' .. list .. ' add|remove <item link or ID>, list, or clear')
         return true
     end
-    F.bagsDirty = true
+    F.bagsDirty = true;F.foodDirtyInventoryOnly=false
     F.Print(list .. ' updated.' .. (next(lists.whitelist) and ' Whitelist restriction is active.' or ' Whitelist restriction is off.'))
     F.Refresh(true)
     return true
@@ -319,7 +319,7 @@ function F.QueueFoodEntryScan()
     F.foodEntryReadyAt=GetTime()+10
     F.foodEntrySnapshot=nil
     F.food=nil; F.foodCount=nil; F.pendingItems=true
-    F.bagsDirty=true
+    F.bagsDirty=true;F.foodDirtyInventoryOnly=false
 end
 
 function F.ConfirmFoodEntryScan(count,pending,locked)
@@ -338,11 +338,37 @@ end
 
 -- Feeding and status share one inventory result. Explicit forced refreshes (such
 -- as a feed click) still validate synchronously; entry settling retries are paced.
+-- Inventory events may be duplicates. Only a complete public slot match may
+-- reuse a prior eligibility result; explicit rules/quest/pet changes never do.
+function F.MarkFoodScanDirty(inventoryOnly)
+    if not F.bagsDirty then F.foodDirtyInventoryOnly=inventoryOnly and true or false
+    elseif not inventoryOnly then F.foodDirtyInventoryOnly=false end
+    F.bagsDirty=true
+end
+function F.FoodInventoryMatches()
+    local snapshot=F.foodInventorySnapshot
+    if not snapshot or F.pendingItems or F.lockedFood or F.foodEntryPending then return false end
+    if snapshot.lastBag~=(NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4) then return false end
+    for bag=0,snapshot.lastBag do
+        local slots=C_Container.GetContainerNumSlots(bag)
+        if not public(slots) or type(slots)~='number' or slots~=snapshot.bags[bag] then return false end
+        for slot=1,slots do
+            local item=C_Container.GetContainerItemInfo(bag,slot)
+            local old=snapshot.slots[bag..':'..slot]
+            if not public(item) then return false end
+            if item then
+                if type(item)~='table' or not public(item.itemID) or not public(item.stackCount) or not public(item.isLocked) then return false end
+                if not old or old.id~=item.itemID or old.count~=item.stackCount or old.locked~=(item.isLocked and true or false) then return false end
+            elseif old then return false end
+        end
+    end
+    return true
+end
 function F.EnsureFoodScan(force)
     if InCombatLockdown and InCombatLockdown() then return end
     local pet=UnitGUID and UnitGUID('pet')
     local petChanged=public(pet) and pet~=F.foodScanPet
-    if petChanged then F.bagsDirty=true end
+    if petChanged then F.bagsDirty=true;F.foodDirtyInventoryOnly=false end
     local now=GetTime and GetTime() or 0
     local retry=F.foodEntryPending and (not F.foodScanAt or now-F.foodScanAt>=2)
     if force or F.bagsDirty or F.foodCount==nil or retry then
@@ -353,6 +379,10 @@ function F.EnsureFoodScan(force)
             if F.foodScanDeferUntil and now<F.foodScanDeferUntil then
                 F.foodScanDeferred=true;return
             end
+        end
+        if not force and not petChanged and not retry and F.foodDirtyInventoryOnly and F.foodCount~=nil and F.FoodInventoryMatches() then
+            F.bagsDirty=false;F.foodDirtyInventoryOnly=nil;F.foodScanDeferUntil=nil;F.foodScanDeferred=nil
+            return F.food
         end
         return F.FindFood()
     end
@@ -365,6 +395,8 @@ function F.FindFood()
     if F.EnsureQuestFood then F.EnsureQuestFood() elseif F.ScanQuestFood then F.ScanQuestFood() end
     local best, count, pending, locked = nil, 0, false, false
     local edibleCache,allowedCache,protectionCache={},{},{}
+    local snapshot={bags={},slots={},lastBag=NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4}
+    local complete=true
     local function edible(id)
         local value=edibleCache[id]
         if value==nil then
@@ -381,8 +413,16 @@ function F.FindFood()
         if not public(slots) or type(slots)~='number' or slots<0 then
             pending=true; slots=0
         elseif bag==0 and slots==0 then pending=true end
+        snapshot.bags[bag]=slots
         for slot = 1, slots do
             local item = C_Container.GetContainerItemInfo(bag, slot)
+            if not public(item) then complete=false
+            elseif item then
+                if type(item)=='table' and public(item.itemID) and public(item.stackCount) and public(item.isLocked)
+                    and type(item.itemID)=='number' and type(item.stackCount)=='number' then
+                    snapshot.slots[bag..':'..slot]={id=item.itemID,count=item.stackCount,locked=item.isLocked and true or false}
+                else complete=false end
+            end
             if item and public(item.itemID) and item.itemID and item.stackCount > 0 and F.FoodProtectionReason then
                 local protection=protectionCache[item.itemID]
                 if protection==nil then protection=F.FoodProtectionReason(item.itemID) or false;protectionCache[item.itemID]=protection end
@@ -424,6 +464,8 @@ function F.FindFood()
     end
     F.food, F.foodCount = best, count
     F.pendingItems, F.lockedFood, F.bagsDirty = pending, locked, false
+    F.foodInventorySnapshot=complete and not pending and not locked and snapshot or nil
+    F.foodDirtyInventoryOnly=nil
     local pet=UnitGUID and UnitGUID('pet')
     F.foodScanPet=public(pet) and pet or nil
     F.foodScanAt=GetTime and GetTime() or 0

@@ -2,6 +2,8 @@ local _,F=...
 local setMarkerUpdates
 local events=CreateFrame('Frame')
 local markedGUID
+F.characterContextResets=F.characterContextResets or {}
+table.insert(F.characterContextResets,function() markedGUID=nil end)
 local function public(v) return not issecretvalue or not issecretvalue(v) end
 local function query(fn,...)
     if type(fn)~='function' then return end

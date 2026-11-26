@@ -104,7 +104,7 @@ function F.OpenFoodList()
     order:SetSize(280,25); order:SetPoint('TOPLEFT',25,-110)
     order:SetScript('OnClick',function()
         F.db.foodOrder=F.db.foodOrder=='low' and 'high' or 'low'
-        F.bagsDirty=true; F.Refresh(true); p:Refresh()
+        F.bagsDirty=true;F.foodDirtyInventoryOnly=false; F.Refresh(true); p:Refresh()
     end)
     local explanation=p.feedingPage:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall')
     explanation:SetPoint('TOPLEFT',25,-145); explanation:SetWidth(630)
@@ -202,7 +202,7 @@ function F.OpenFoodList()
     supplyHelp:SetText('Allowed food items. Warn once; restocking resets. + = incomplete count.')
     checkbox('Protect food for active quests',22,-410,F.db.protectQuestFood,function(value)
         F.db.protectQuestFood=value
-        F.bagsDirty=true; F.Refresh(true); F.UpdateFoodCatalog(); p:Refresh()
+        F.bagsDirty=true;F.foodDirtyInventoryOnly=false; F.Refresh(true); F.UpdateFoodCatalog(); p:Refresh()
     end)
     local questHelp=p.feedingPage:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall')
     questHelp:SetPoint('TOPLEFT',310,-421)
@@ -266,7 +266,7 @@ function F.OpenFoodList()
         row:SetScript('OnClick',function(self)
             if not self.id then return end
             F.FoodLists(true)[p.editList][self.id]=self:GetChecked() and true or nil
-            F.bagsDirty=true; F.Refresh(true); p:Refresh()
+            F.bagsDirty=true;F.foodDirtyInventoryOnly=false; F.Refresh(true); p:Refresh()
         end)
         p.rows[i]=row
     end

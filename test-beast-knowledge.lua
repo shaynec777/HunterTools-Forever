@@ -38,6 +38,7 @@ local id,row=F.ObserveBeast('target');assert(id==npc and row.family=='Fox' and n
 assert(row.locations[1].mapID==123 and row.locations[1].x==0.5)
 F.ObserveBeast('target');assert(#row.locations==1)
 lore={lines={{leftText='Diet: Meat'},{leftText='Abilities: Bite Rank 1'}}}
+frames[1].event(nil,'UNIT_AURA','target')
 F.ObserveBeast('target');assert(row.diet=='Meat' and row.loreAbilities=='Bite Rank 1' and not row.tameSpells)
 local record=F.BeastRecord(npc);assert(record.family=='Fox' and record.sources.family=='Observed in Forever')
 -- Missing Petopia fields fall through independently, false values are retained.

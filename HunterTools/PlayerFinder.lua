@@ -39,6 +39,8 @@ function F.WatchPlayer(value)
     s.watches[#s.watches+1]=name;s.enabled=true;F.Print('Player Finder: watching '..name..'.');F.UpdatePlayerFinderUI();return true
 end
 local lastSeen={}
+F.characterContextResets=F.characterContextResets or {}
+table.insert(F.characterContextResets,function() lastSeen={} end)
 function F.ScanPlayerFinder()
     if not F.db then return end
     local s=F.PlayerFinderSettings();local popup=F.playerFinderTargetPopup

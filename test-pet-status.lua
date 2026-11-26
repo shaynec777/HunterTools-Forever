@@ -43,10 +43,11 @@ F.FindFood=function() F.bagsDirty=false end
 time=function() return 1000 end
 F.PetRole=function(family) return family=='Tallstrider' and 'Defensive (Classic baseline)' or 'Unknown' end
 assert(loadfile('HunterTools/PetStatus.lua'))('test',F)
-local s=F.PetStatusSettings();assert(not s.enabled and s.tooltipEnabled and #F.petStatusFields==12)
+GetPetExperience=function() return 250,1000 end
+local s=F.PetStatusSettings();assert(not s.enabled and s.tooltipEnabled and #F.petStatusFields==13)
 s.windowFields.health=false;assert(s.tooltipFields.health,'surfaces must not share their table')
 s.windowFields.health=true
-local d=F.PetStatusData();assert(d.name=='Strider' and d.health=='240 / 300 (80%)')
+local d=F.PetStatusData();assert(d.xp=='250 / 1000 (25%)' and d.xpValue==250 and d.xpMax==1000);assert(d.name=='Strider' and d.health=='240 / 300 (80%)')
 assert(d.role=='Defensive (Classic baseline)' and s.windowFields.role and s.tooltipFields.role)
 s.windowFields.role=false;assert(s.tooltipFields.role)
 assert(d.happiness=='Happy - 125% damage' and d.loyalty=='Faithful - rising')
@@ -60,7 +61,7 @@ postCall(tip);assert(#added>2 and table.concat(added):find('Diet: Fruit, Cheese'
 local before=#added;postCall(tip);assert(#added==before,'do not duplicate tooltip lines')
 hooks.OnTooltipCleared(tip);s.tooltipFields.diet=false;added={};postCall(tip);assert(not table.concat(added):find('Diet:',1,true))
 hooks.OnTooltipCleared(tip);tip.GetUnit=function() return 'Other','target' end;added={};postCall(tip);assert(#added==0,'do not show own pet data on another unit')
-s.enabled=true;F.UpdatePetStatusWindow();local p=F.petStatusWindow;assert(p.shown and p.name.text=='Strider' and p.health.shown and p.focus.shown)
+s.enabled=true;F.UpdatePetStatusWindow();local p=F.petStatusWindow;assert(p.shown and p.name.text=='Strider' and p.health.shown and p.focus.shown and p.xp.shown and p.xp.label.text=='XP: 250 / 1000 (25%)')
 F.OpenConfig=function() F.menuOpened=true end;p.scripts.OnMouseUp(nil,'RightButton');assert(F.menuOpened)
 s.windowFields.health=false;F.UpdatePetStatusWindow();assert(not p.health.shown and p.focus.shown)
 -- Repeated window ticks reuse descriptive data, but keep resource bars live.
@@ -137,3 +138,16 @@ assert(F.CurrentPetAbilities()=='Unavailable during combat')
 InCombatLockdown=function() return false end;UnitExists=function() return false end
 assert(F.CurrentPetAbilities()=='No pet')
 print('PASS: current-pet spellbook names/ranks, deduplication, independent display settings, partial/empty loading, legacy fallback, combat and missing-pet guards')
+
+GetPetExperience=function() return 0,1000 end
+assert(F.PetExperienceData()=='0 / 1000 (0%)')
+GetPetExperience=function() return 0,0 end
+assert(F.PetExperienceData()=='At your level')
+GetPetExperience=nil;assert(F.PetExperienceData()=='Unavailable')
+GetPetExperience=function() error('not available') end;assert(F.PetExperienceData()=='Unavailable')
+issecretvalue=function(v) return v=='secret' end
+GetPetExperience=function() return 'secret','secret' end;assert(F.PetExperienceData()=='Unavailable')
+issecretvalue=nil
+GetPetExperience=function() return 1000,1000 end;assert(F.PetExperienceData()=='1000 / 1000 (100%)')
+s=F.PetStatusSettings();s.enabled=true;s.windowFields.xp=false;F.UpdatePetStatusWindow();assert(not p.xp.shown)
+s.windowFields.xp=true;UnitExists=function() return false end;F.UpdatePetStatusWindow();assert(not p.xp.shown)

@@ -47,7 +47,7 @@ function F.OpenFoodProtection()
         c:SetPoint('TOPLEFT',25,-55-(i-1)*38); c:SetChecked(F.db[key])
         local label=c:CreateFontString(nil,'OVERLAY','GameFontHighlight'); label:SetPoint('LEFT',c,'RIGHT',3,0); label:SetText(spec[2])
         c:SetScript('OnClick',function()
-            F.db[key]=c:GetChecked() and true or false; F.bagsDirty=true; F.Refresh(true)
+            F.db[key]=c:GetChecked() and true or false; F.bagsDirty=true;F.foodDirtyInventoryOnly=false; F.Refresh(true)
             if F.foodPanel then F.foodPanel:Refresh() end
         end)
     end

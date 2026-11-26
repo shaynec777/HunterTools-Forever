@@ -47,7 +47,7 @@ CheckInteractDistance=function() return false end
 assert(F.TargetDistanceEstimate('Range uncertain')=='Est. > 28 yd')
 print('PASS: non-enemy target distance bands')
 
--- Restricted interaction checks must never be attempted during combat.
+-- Friendly/unknown/dead targets must not run combat interaction checks.
 InCombatLockdown=function() return true end
 local interactions=0
 CheckInteractDistance=function() interactions=interactions+1;error('protected call attempted') end
@@ -60,14 +60,29 @@ assert(F.TargetRangeStatus()=='Range uncertain')
 assert(F.TargetDistanceEstimate('Range uncertain')=='Distance unavailable')
 UnitCanAttack=function() return true end
 ranged=false
-assert(F.TargetRangeStatus()=='Range unavailable')
+assert(F.TargetRangeStatus()=='Range unavailable','blocked hostile check stays unavailable')
+assert(interactions==1,'public living hostile target permits one follow-distance query')
+CheckInteractDistance=function() interactions=interactions+1;return true end
+assert(F.TargetRangeStatus()=='Too close','combat hostile near + Auto Shot false establishes too close')
+CheckInteractDistance=function() interactions=interactions+1;return false end
+assert(F.TargetRangeStatus()=='Too far','combat hostile far + Auto Shot false establishes too far')
+CheckInteractDistance=function() return 'secret' end;issecretvalue=function(v) return v=='secret' end
+assert(F.TargetRangeStatus()=='Range unavailable','secret hostile distance cannot classify range')
+issecretvalue=nil
+local before=interactions
+UnitCanAttack=function() return 'secret' end;issecretvalue=function(v) return v=='secret' end
+assert(F.TargetRangeStatus()=='Range unavailable' and interactions==before)
+issecretvalue=nil;UnitCanAttack=function() return true end
+UnitIsDeadOrGhost=function() return true end
+assert(F.TargetRangeStatus()=='Range unavailable' and interactions==before,'dead targets skip combat distance')
+UnitIsDeadOrGhost=function() return false end
 ranged=true
 assert(F.TargetRangeStatus()=='In range','public spell range remains usable in combat')
-assert(interactions==0,'combat must not call interaction distance')
+assert(interactions==before,'in-range Auto Shot needs no follow query')
 InCombatLockdown=function() return false end
 ranged=false
 CheckInteractDistance=function() return true end
 assert(F.TargetRangeStatus()=='Too close','interaction estimates resume after combat')
 CheckInteractDistance=function() error('API unavailable') end
 assert(F.TargetRangeStatus()=='Range unavailable' and F.NonEnemyDistanceBand()==nil)
-print('PASS: combat skips interaction calls, public spell checks remain available, recovery and API errors handled')
+print('PASS: combat hostile close/in/far, friendly/dead/secret guards, denied queries and recovery')

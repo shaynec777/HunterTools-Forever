@@ -41,6 +41,8 @@ function F.WeaponScopeAllowed(scope,weapon,level)
     return number(level) and level>=scope.level and number(weapon.itemLevel) and weapon.itemLevel>=scope.level
 end
 local itemCache={};local cacheSize=0
+F.characterContextResets=F.characterContextResets or {}
+table.insert(F.characterContextResets,function() itemCache={};cacheSize=0 end)
 function F.ClearWeaponComparisonCache() itemCache={};cacheSize=0 end
 function F.ReadComparisonWeapon(link)
     if not public(link) or type(link)~='string' then return end

@@ -130,12 +130,12 @@ function F.MarkLevelAmmoVendor()
     if row then F.SelectAmmoVendor(row.vendor) end
     return row
 end
-function F.ClearAmmoVendorMarker()
+function F.ClearAmmoVendorMarker(skipRefresh)
     F.ammoVendorDestination=nil
     if setMarkerUpdates then setMarkerUpdates(false) end
     if F.ammoVendorPin then F.ammoVendorPin:Hide() end
     if F.ammoVendorMiniPin then F.ammoVendorMiniPin:Hide() end
-    if F.ammoVendorPanel and F.ammoVendorPanel:IsShown() then F.ammoVendorPanel:Refresh() end
+    if not skipRefresh and F.ammoVendorPanel and F.ammoVendorPanel:IsShown() then F.ammoVendorPanel:Refresh() end
 end
 function F.AmmoVendorShop(v)
     if type(v)~='table' then return end

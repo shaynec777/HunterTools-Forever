@@ -49,3 +49,18 @@ local restored={db={performanceSpikes=log},Print=F.Print}
 assert(loadfile('HunterTools/Performance.lua'))('HunterTools',restored)
 restored.PerformanceCommand('spikes');assert(restored.db.performanceSpikes.count==202)
 print('PASS: opt-in profiling, returns/errors, inclusive timing, memory delta, unavailable APIs, auto-stop, wrapper restoration and limits')
+
+-- Dedicated animal rows survive a crowded top ten and explicitly show no calls.
+F.AnimalFoodCounts=function() clock=clock+0.125 end
+F.ReadBeastLore=function() clock=clock+0.25;return 'Meat',nil end
+F.StartPerformanceTest(120)
+for i=1,12 do F.PerformanceCallback('expensive-'..i,function() clock=clock+10 end) end
+F.AnimalFoodCounts();local diet=F.ReadBeastLore();assert(diet=='Meat')
+F.StopPerformanceTest()
+local saved=F.db.performanceLastReport
+assert(saved:find('Animal food/Beast Lore breakdown',1,true))
+assert(saved:find('AnimalFoodCounts: 1 calls; 0.125 ms total; 0.125 ms/call; 0.125 ms max; 0.125 ms self',1,true))
+assert(saved:find('ReadBeastLore: 1 calls; 0.250 ms total',1,true))
+assert(saved:find('AnimalFoodInventory: 0 calls; 0.000 ms total',1,true))
+assert(not saved:find('nan',1,true))
+print('PASS: saved animal timings remain visible outside top ten, including zero-call rows')

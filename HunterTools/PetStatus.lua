@@ -12,7 +12,7 @@ end
 local function number(v) return type(v)=='number' and v==v and math.abs(v)<1e12 end
 local function text(v) return type(v)=='string' and v:find('%S') and v or nil end
 F.petStatusFields={
-    {'identity','Level and family'},{'role','Pet role'},{'health','Health'},{'focus','Focus'},
+    {'identity','Level and family'},{'role','Pet role'},{'health','Health'},{'focus','Focus'},{'xp','Experience'},
     {'happiness','Happiness and damage modifier'},{'loyalty','Loyalty and trend'},
     {'training','Training points'},{'abilities','Learned abilities'},{'diet','Diet'},{'food','Food supply and next food'},
     {'feeding','Feeding status'},{'lastFeed','Last successful feeding'},
@@ -37,6 +37,18 @@ end
 local function resource(current,maximum)
     if not number(current) or not number(maximum) or current<0 or maximum<=0 then return 'Unavailable' end
     return ('%d / %d (%d%%)'):format(current,maximum,math.floor(current/maximum*100+0.5))
+end
+-- Read the native pet XP directly; never infer XP from player gains/rested XP.
+function F.PetExperienceData()
+    if InCombatLockdown() then return 'Unavailable',0,1 end
+    local current,maximum=query(GetPetExperience)
+    if number(current) and number(maximum) and current>=0 and maximum>0 then
+        return resource(current,maximum),math.min(current,maximum),maximum
+    end
+    local petLevel,playerLevel=query(UnitLevel,'pet'),query(UnitLevel,'player')
+    if number(current) and number(maximum) and maximum==0 and number(petLevel) and number(playerLevel)
+        and petLevel>0 and petLevel>=playerLevel then return 'At your level',0,1 end
+    return 'Unavailable',0,1
 end
 function F.CurrentPetAbilities()
     if InCombatLockdown() then return 'Unavailable during combat' end
@@ -84,6 +96,7 @@ function F.PetStatusData()
     local hp,maxHP=query(UnitHealth,'pet'),query(UnitHealthMax,'pet')
     local focus,maxFocus=query(UnitPower,'pet',2),query(UnitPowerMax,'pet',2)
     d.health=resource(hp,maxHP);d.focus=resource(focus,maxFocus)
+    d.xp,d.xpValue,d.xpMax=F.PetExperienceData()
     d.hp=number(hp) and hp or nil;d.maxHP=number(maxHP) and maxHP>0 and maxHP or nil
     d.focusValue=number(focus) and focus or nil;d.maxFocus=number(maxFocus) and maxFocus>0 and maxFocus or nil
     local petInfo=C_PetInfo or {}
@@ -132,7 +145,7 @@ function F.PetStatusData()
     end
     return d
 end
-local labels={identity='Pet',role='Role',health='Health',focus='Focus',happiness='Happiness',loyalty='Loyalty',training='Training',abilities='Learned abilities',diet='Diet',food='Food',feeding='Feeding',lastFeed='Last fed'}
+local labels={identity='Pet',role='Role',health='Health',focus='Focus',xp='XP',happiness='Happiness',loyalty='Loyalty',training='Training',abilities='Learned abilities',diet='Diet',food='Food',feeding='Feeding',lastFeed='Last fed'}
 -- Display-only values may be secret. Never format, compare, cache or do math on
 -- them in Lua; the native StatusBar and FontString setters accept them directly.
 local function displayValue(fn,...)
@@ -204,14 +217,38 @@ local function petTipLine(tooltip,label,value)
     local text=value and ('|cffffd580'..label..':|r '..value) or label
     tooltip:AddLine(text,r,g,b,true)
 end
+-- Restricted resource numbers stay local and go straight to a native font
+-- formatter. Do not concatenate, compare, cache or serialize those values.
+local function petResourceTip(tooltip,label,key)
+    local current,currentOK,maximum,maximumOK
+    if key=='health' then
+        current,currentOK=displayValue(UnitHealth,'pet');maximum,maximumOK=displayValue(UnitHealthMax,'pet')
+    else
+        current,currentOK=displayValue(UnitPower,'pet',2);maximum,maximumOK=displayValue(UnitPowerMax,'pet',2)
+    end
+    if not currentOK or not maximumOK or (safe(maximum) and maximum<=0) then return false end
+    if safe(current) and safe(maximum) then petTipLine(tooltip,label,resource(current,maximum));return true end
+    petTipLine(tooltip,label,'Unavailable')
+    local name=query(tooltip.GetName,tooltip)
+    local count=query(tooltip.NumLines,tooltip)
+    if type(name)=='string' and number(count) then
+        local font=_G[name..'TextLeft'..count]
+        if font and type(font.SetFormattedText)=='function' then
+            pcall(font.SetFormattedText,font,'|cffffd580'..label..':|r %d / %d',current,maximum)
+        end
+    end
+    return true
+end
 function F.AddPetStatusTip(tooltip,data,heading)
     if not F.db or not F.PetStatusSettings().tooltipEnabled then return end
     if tooltip.HunterToolsPetTipAdded then return end
     tooltip.HunterToolsPetTipAdded=true
     tooltip:AddLine(' ')
     tooltip:AddLine(heading or 'HunterTools Forever pet status',1,0.82,0)
-    for _,line in ipairs(F.PetStatusLines(data or F.PetStatusData(),F.PetStatusSettings().tooltipFields)) do
-        petTipLine(tooltip,line[1],line[2])
+    data=data or F.PetStatusData()
+    for _,line in ipairs(F.PetStatusLines(data,F.PetStatusSettings().tooltipFields)) do
+        local resourceLine=(line[3]=='health' or line[3]=='focus') and not data.paused and not data.missing
+        if not resourceLine or not petResourceTip(tooltip,line[1],line[3]) then petTipLine(tooltip,line[1],line[2]) end
     end
 end
 local function unitTip(tooltip)
@@ -261,7 +298,7 @@ function F.UpdatePetStatusWindow()
             local bg=b:CreateTexture(nil,'BACKGROUND');bg:SetAllPoints();bg:SetColorTexture(0.1,0.1,0.1,0.8)
             b.label=b:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall');b.label:SetPoint('CENTER');return b
         end
-        p.health=bar({0.2,0.75,0.25});p.focus=bar({0.9,0.5,0.15})
+        p.health=bar({0.2,0.75,0.25});p.focus=bar({0.9,0.5,0.15});p.xp=bar({0.55,0.3,0.85})
         p.details=p:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall');p.details:SetWidth(286);p.details:SetJustifyH('LEFT');p.details:SetSpacing(4)
         p:SetScript('OnDragStart',function() if IsShiftKeyDown() and not InCombatLockdown() and not F.PetStatusSettings().locked then p:StartMoving() end end)
         p:SetScript('OnDragStop',function()
@@ -291,6 +328,10 @@ function F.UpdatePetStatusWindow()
         p:Show();return
     end
     local d=F.PetStatusData()
+    if s.windowFields.xp and not d.missing then
+        p.xp:SetMinMaxValues(0,d.xpMax or 1);p.xp:SetValue(d.xpValue or 0)
+        p.xp.label:SetText('XP: '..(d.xp or 'Unavailable'));p.xp:Show()
+    else p.xp:Hide() end
     p.statusBuiltAt=number(now) and now or nil;p.statusGUID=guid;p.statusExists=exists
     p.statusSignature=signature;p.statusFoodScan=F.foodScanAt;F.petStatusDataDirty=nil
     local resumed=p.combatPaused==true;p.combatPaused=nil
@@ -302,13 +343,13 @@ function F.UpdatePetStatusWindow()
         p.portrait:Show()
     else p.portrait:Hide();p.portraitReady=nil end
     local y=62
-    for _,spec in ipairs({{p.health,'health'},{p.focus,'focus'}}) do
+    for _,spec in ipairs({{p.health,'health'},{p.focus,'focus'},{p.xp,'xp'}}) do
         local b,key=spec[1],spec[2]
         if s.windowFields[key] and not d.missing then
             if b.statusY~=y then b:ClearAllPoints();b:SetPoint('TOPLEFT',12,-y);b.statusY=y end;y=y+23
         else b:Hide() end
     end
-    local fields={};for k,v in pairs(s.windowFields) do fields[k]=v end;fields.health=false;fields.focus=false
+    local fields={};for k,v in pairs(s.windowFields) do fields[k]=v end;fields.health=false;fields.focus=false;fields.xp=false
     local lines={}
     for _,line in ipairs(F.PetStatusLines(d,fields)) do
         local label,value=line[1],line[2]

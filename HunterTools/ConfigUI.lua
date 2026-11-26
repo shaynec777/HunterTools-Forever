@@ -144,7 +144,7 @@ function F.OpenRangeSettings()
     if InCombatLockdown() then F.Print('Open settings after combat.'); return end
     F.HideConfigPages()
     if not F.rangeSettingsPanel then
-        local p=panel('HunterToolsRangeSettings','Range settings',460,330); F.rangeSettingsPanel=p
+        local p=panel('HunterToolsRangeSettings','Range settings',460,390); F.rangeSettingsPanel=p
         local help=p:CreateFontString(nil,'OVERLAY','GameFontHighlight')
         help:SetPoint('TOPLEFT',30,-60); help:SetWidth(400)
         help:SetText('Shows your target name, portrait, ranged-attack status and estimated distance. Non-enemies are gray. Drag the range window outside combat to move it.')
@@ -157,6 +157,13 @@ function F.OpenRangeSettings()
             if InCombatLockdown() then heal:SetChecked(F.RangeSettings().showPetHealRange);return end
             F.RangeSettings().showPetHealRange=heal:GetChecked() and true or false;F.UpdateRangeWindow()
         end)
+        local measured=CreateFrame('CheckButton',nil,p,'UICheckButtonTemplate');measured:SetPoint('TOPLEFT',25,-229);p.checks.measuredDistance=measured
+        local label=measured:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall');label:SetPoint('LEFT',measured,'RIGHT',2,0);label:SetText('Measured distance (when available; extra queries)')
+        measured:SetScript('OnClick',function()
+            if InCombatLockdown() then measured:SetChecked(F.RangeSettings().measuredDistance);return end
+            F.RangeSettings().measuredDistance=measured:GetChecked() and true or false;F.UpdateRangeWindow()
+        end)
+        local note=p:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall');note:SetPoint('TOPLEFT',30,-269);note:SetWidth(400);note:SetText('Off by default. Falls back to range estimates. Straight-line distance can differ from attack range on large targets.')
         local reset=CreateFrame('Button',nil,p,'UIPanelButtonTemplate'); reset:SetSize(180,26); reset:SetPoint('BOTTOM',0,65); reset:SetText('Reset window position')
         reset:SetScript('OnClick',function()
             if InCombatLockdown() then return end
@@ -166,7 +173,7 @@ function F.OpenRangeSettings()
         local back=CreateFrame('Button',nil,p,'UIPanelButtonTemplate'); back:SetSize(160,26); back:SetPoint('BOTTOM',0,25); back:SetText('Back to tools'); back:SetScript('OnClick',F.OpenConfig)
     end
     for key,c in pairs(F.rangeSettingsPanel.checks) do c:SetChecked(F.RangeSettings()[key]) end
-    if F.FinishMenu then F.FinishMenu(F.rangeSettingsPanel,460,330) end
+    if F.FinishMenu then F.FinishMenu(F.rangeSettingsPanel,460,390) end
     F.rangeSettingsPanel:Show()
 end
 function F.OpenInstanceSettings()

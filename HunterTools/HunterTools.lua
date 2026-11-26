@@ -203,7 +203,8 @@ loader:SetScript('OnEvent',function(_,event,a,b,c)
         or event=='BAG_UPDATE_DELAYED' or event=='ITEM_LOCK_CHANGED' or foodItem
         or event=='UNIT_PET' or event:match('^QUEST_')
     if inventoryChanged then
-        F.bagsDirty=true
+        if F.MarkFoodScanDirty then F.MarkFoodScanDirty(event=='BAG_UPDATE_DELAYED' or event=='ITEM_LOCK_CHANGED')
+        else F.bagsDirty=true end
     end
     -- Locks and pet state do not change quest objectives or native bag flags.
     if event=='ADDON_LOADED' or event=='PLAYER_ENTERING_WORLD' or event=='BAG_UPDATE_DELAYED'

@@ -1,7 +1,8 @@
 local addon,F=...
 -- Temporary, opt-in instrumentation. No timer or wrappers exist while disabled.
-local names={'ScanAmmo','EnsureAmmoScan','TrackingState','AspectState','UpdateHappinessBorder','Refresh','FindFood','CheckAmmoReminder','CheckAmmoUpgradeNotifications','CheckInstancePrompt','CheckAspectPrompt','UpdateAspectButton','UpdateTrackingButton','UpdateRangeWindow','UpdatePetStatusWindow','CheckPetAlerts','AddWeaponComparison','BuildWeaponComparison','ReadComparisonWeapon','FilterRangedWeapons','UpdateAmmoVendorPins','UpdateAmmoVendorMinimap','UpdateAnimalTooltip','UpdatePetTooltip'}
+local names={'EnsureFoodScan','FoodInventoryMatches','AnimalFoodInventory','AnimalLore','ReadBeastLore','ObserveBeast','BeastRecord','RangeTargetDetails','TargetPetDetails','AnimalFoodCounts','PetHealRangeWarning','TargetRangeStatus','TargetDistanceEstimate','ScanAmmo','EnsureAmmoScan','TrackingState','AspectState','UpdateHappinessBorder','Refresh','FindFood','CheckAmmoReminder','CheckAmmoUpgradeNotifications','CheckInstancePrompt','CheckAspectPrompt','UpdateAspectButton','UpdateTrackingButton','UpdateRangeWindow','UpdatePetStatusWindow','CheckPetAlerts','AddWeaponComparison','BuildWeaponComparison','ReadComparisonWeapon','FilterRangedWeapons','UpdateAmmoVendorPins','UpdateAmmoVendorMinimap','UpdateAnimalTooltip','UpdatePetTooltip'}
 local session
+function F.IsPerformanceTestActive() return session~=nil end
 local measured
 local function safe(fn,...)
     if type(fn)~='function' then return end
@@ -77,6 +78,18 @@ function F.PerformanceReport()
     for i=1,math.min(10,#rows) do local n,r=rows[i].name,rows[i].row
         lines[#lines+1]=('%s: %d calls; %.2f ms total; %.3f ms/call; %.3f ms max; %.2f ms self'):format(n,r.count,r.total,r.total/r.count,r.max,r.self or 0)
     end
+    lines[#lines+1]='Animal food/Beast Lore breakdown (nested times overlap):'
+    for _,name in ipairs({'FindFood','EnsureFoodScan','FoodInventoryMatches','AnimalFoodInventory','AnimalFoodCounts','ReadBeastLore','AnimalLore','ObserveBeast','BeastRecord','TargetPetDetails','RangeTargetDetails'}) do
+        local r=s.rows[name] or {count=0,total=0,max=0,self=0}
+        lines[#lines+1]=('%s: %d calls; %.3f ms total; %.3f ms/call; %.3f ms max; %.3f ms self'):format(name,r.count,r.total,r.count>0 and r.total/r.count or 0,r.max,r.self or 0)
+    end
+    lines[#lines+1]='Range render/native breakdown (nested times overlap):'
+    for _,entry in ipairs(rows) do
+        if entry.name:match('^range render:') or entry.name:match('^range native:') then
+            local r=entry.row
+            lines[#lines+1]=('%s: %d calls; %.3f ms total; %.3f ms max; %.3f ms self'):format(entry.name,r.count,r.total,r.max,r.self or 0)
+        end
+    end
     lines[#lines+1]=('Spikes >= %.1f ms: %d; retained %d; overwritten %d. /ht perf spikes shows details.'):format(s.spikes.threshold,s.spikes.count,math.min(50,s.spikes.count),s.spikes.overwritten)
     local report=table.concat(lines,'\n');if F.db then F.db.performanceLastReport=report end
     for _,line in ipairs(lines) do F.Print(line) end
@@ -125,6 +138,7 @@ function F.PerformanceCommand(text)
     if action=='start' then F.StartPerformanceTest(seconds)
     elseif action=='stop' then F.StopPerformanceTest()
     elseif action=='report' then F.PerformanceReport()
+    elseif action=='distance' and F.DistanceQueryReport then F.DistanceQueryReport()
     elseif action=='spikes' then F.PerformanceSpikeReport()
     else F.Print('/ht perf start [10-120 seconds]; /ht perf report; /ht perf stop. Reports contain only timings, memory and FPS.') end
 end

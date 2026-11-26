@@ -37,21 +37,38 @@ local function record(id)
     end
     return records[id]
 end
+local loreCache={}
+function F.InvalidateBeastLore() loreCache={} end
 function F.ReadBeastLore(unit)
+    if query(InCombatLockdown) then return end
+    local guid=query(UnitGUID,unit)
+    local now=query(GetTime)
+    local cacheable=type(guid)=='string' and type(now)=='number'
+    local cached=cacheable and loreCache[guid]
+    if cached and now>=cached.at and now-cached.at<2 then return cached.diet,cached.abilities end
     local tip=query(C_TooltipInfo and C_TooltipInfo.GetUnit,unit)
-    if type(tip)~='table' or not safe(tip.lines) or type(tip.lines)~='table' then return end
+    if type(tip)~='table' or not safe(tip.lines) or type(tip.lines)~='table' then tip={lines={}} end
     local diet,abilities
     for _,line in ipairs(tip.lines) do
         local s=text(line.leftText)
         if s then
             s=s:gsub('|c%x%x%x%x%x%x%x%x',''):gsub('|r','')
             diet=s:match('^[Dd]iet:%s*(.+)') or s:match('^[Ff]ood [Tt]ypes?:%s*(.+)') or diet
-            abilities=s:match('^[Aa]bilities:%s*(.+)') or s:match('^[Pp]et [Aa]bilities:%s*(.+)') or abilities
+            local skills=s:match('^[Aa]bilities:%s*(.+)') or s:match('^[Pp]et [Aa]bilities:%s*(.+)')
+            if skills then abilities=skills
+            elseif s:match('[Rr]ank%s+%d+') then abilities=abilities and (abilities..'; '..s) or s end
         end
+    end
+    if cacheable then
+        local count=0;for _ in pairs(loreCache) do count=count+1 end
+        if count>=32 then loreCache={} end
+        loreCache[guid]={at=now,diet=diet,abilities=abilities}
     end
     return diet,abilities
 end
 local seen={}
+F.characterContextResets=F.characterContextResets or {}
+table.insert(F.characterContextResets,function() seen={};loreCache={} end)
 function F.ObserveBeast(unit)
     if not enabled() or query(InCombatLockdown) or query(UnitPlayerControlled,unit) or query(UnitIsPlayer,unit) then return end
     local id=F.BeastNPCID(unit)
@@ -244,8 +261,10 @@ function F.CaptureFreshTame()
     pending=nil
 end
 local frame=CreateFrame('Frame')
-for _,event in ipairs({'PLAYER_TARGET_CHANGED','UPDATE_MOUSEOVER_UNIT','UNIT_SPELLCAST_SENT','UNIT_SPELLCAST_CHANNEL_START','UNIT_SPELLCAST_SUCCEEDED','UNIT_SPELLCAST_FAILED','UNIT_SPELLCAST_INTERRUPTED','UNIT_PET','PET_BAR_UPDATE','PLAYER_ENTERING_WORLD','PLAYER_REGEN_ENABLED'}) do frame:RegisterEvent(event) end
+for _,event in ipairs({'UNIT_AURA','PLAYER_TARGET_CHANGED','UPDATE_MOUSEOVER_UNIT','UNIT_SPELLCAST_SENT','UNIT_SPELLCAST_CHANNEL_START','UNIT_SPELLCAST_SUCCEEDED','UNIT_SPELLCAST_FAILED','UNIT_SPELLCAST_INTERRUPTED','UNIT_PET','PET_BAR_UPDATE','PLAYER_ENTERING_WORLD','PLAYER_REGEN_ENABLED'}) do frame:RegisterEvent(event) end
 frame:SetScript('OnEvent',function(_,event,unit,castGUID,spellID,sentSpellID)
+    if event=='PLAYER_ENTERING_WORLD' or event=='PLAYER_TARGET_CHANGED' or (event=='UNIT_AURA' and (unit=='target' or unit=='mouseover'))
+        or (event=='UNIT_SPELLCAST_SUCCEEDED' and unit=='player') then F.InvalidateBeastLore() end
     if not enabled() then pending=nil;return end
     local _,class=query(UnitClass,'player');if class~='HUNTER' then return end
     if event=='PLAYER_TARGET_CHANGED' then F.ObserveBeast('target')

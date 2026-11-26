@@ -1,7 +1,8 @@
 local _,F=...
 local markedGUID
 local function rememberedGUID()
-    local guid=markedGUID or (F.db and F.db.ammoVendorRaidGUID)
+    local guid
+    if F.db then guid=F.db.ammoVendorRaidGUID else guid=markedGUID end
     if type(guid)=='string' and guid:match('^Creature%-%d+%-%d+%-%d+%-%d+%-%d+%-') then return guid end
 end
 local function remember(guid)
