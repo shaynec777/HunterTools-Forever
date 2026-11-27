@@ -4,7 +4,7 @@ local characterFields={petFoodLists=true,petFoodListsVersion=true,petLastFeeds=t
     knownPetAbilities=true,lastPetAbilityLearning=true,petAbilityScanNames=true,
     petTrainingScanned=true,petTrainingDebug=true,discoveredFoods=true,ammoVendors=true,
     ammoVendorRaidGUID=true,performanceLastReport=true,performanceSpikes=true,distanceQueryDiagnostics=true,questDebug=true}
-local nested={ammo={discovered=true,lastEquipped=true,lastWarning=true},
+local nested={ammo={autoEquip=true,preferredAmmo=true,discovered=true,lastEquipped=true,lastWarning=true},
     beastJournal={records=true},mobFinder={watches=true},playerFinder={watches=true}}
 local function query(fn,...)
     if type(fn)~='function' then return end
@@ -33,7 +33,7 @@ end
 function F.ResetCharacterRuntime()
     if F.StopPerformanceTest then F.StopPerformanceTest() end
     for _,key in ipairs({'food','foodCount','foodScanAt','foodScanPet','foodEntrySnapshot','foodEntryReadyAt',
-        'foodInventorySnapshot','foodDirtyInventoryOnly','foodScanDeferUntil','foodScanDeferred','pendingFoodItemIDs','protectedFoodReasons','bagFoodCounts',
+        'autoAmmoVerifyToken','autoAmmoNotice','autoAmmoPending','autoAmmoQueued','foodInventorySnapshot','foodDirtyInventoryOnly','foodScanDeferUntil','foodScanDeferred','pendingFoodItemIDs','protectedFoodReasons','bagFoodCounts',
         'sessionPetFoodLists','petFoodGuidProfiles','petAbilitiesCache','ammoCounts','ammoScanAt',
         'ammoEntrySnapshot','ammoEntryReadyAt','ammoAlerts','pendingFeed','pendingFeedNotice','feedAttempt','waitUntil',
         'pendingItems','lockedFood','questFood','questFoodIDs','questFoodNames','questFoodLastScan','petAlertRuntime','petAlertDiagnostics',
@@ -42,6 +42,7 @@ function F.ResetCharacterRuntime()
         'questFoodPendingIDs','questFoodProtection','aspectChoicesCache','trackingChoicesCache',
         'playerFinderFound','mobFinderFound','mobFinderLocationStatus','mobFinderDestination'}) do F[key]=nil end
     F.bagsDirty=true;F.ammoDirty=true;F.questFoodDirty=true;F.petAbilitiesDirty=true;F.petStatusDataDirty=true
+    if F.autoAmmoCombatButton and not query(InCombatLockdown) then F.autoAmmoCombatButton:SetAttribute('type',nil);F.autoAmmoCombatButton:SetAttribute('macrotext',nil);F.autoAmmoCombatButton:SetAttribute('cycle-count',0);F.autoAmmoCombatButton:SetAttribute('cycle-request',nil) end
     for _,callback in ipairs(F.characterContextResets or {}) do callback() end
     for _,key in ipairs({'ammoCatalog','foodCatalog'}) do
         local base=F.characterBaseCatalogs and F.characterBaseCatalogs[key]
@@ -52,7 +53,7 @@ function F.ResetCharacterRuntime()
         F.characterContextUICleanup=nil
         if F.ClearAmmoVendorMarker then F.ClearAmmoVendorMarker(true) end
         if F.ClearTrainerMarker then F.ClearTrainerMarker() end
-        for _,key in ipairs({'petStatusWindow','mobFinderPanel','playerFinderPanel','rangedWeaponAlert',
+        for _,key in ipairs({'autoAmmoCombatButton','autoAmmoPanel','petStatusWindow','mobFinderPanel','playerFinderPanel','rangedWeaponAlert',
             'mobFinderTargetPopup','playerFinderTargetPopup','mobFinderTargetPing','mobFinderMiniPin','mobFinderMapPin','rangeWindow','petLowHealthVisual'}) do
             local p=F[key];if p then p.statusBuiltAt=nil;p.renderState=nil;p:Hide() end
         end

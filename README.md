@@ -6,7 +6,7 @@ FeedomaticToo has morphed into HunterTools Forever due to the many great suggest
 
 HunterTools Forever brings pet feeding, ammunition reminders and upgrades, dungeon checks, pet information, target range, and an ability browser together for World of Warcraft Forever. All tools can be individually enabled or disabled.
 
-## New in this update â€” 3.1.12
+## New in this update — 3.1.12
 
 - Find ammo sellers for your equipped weapon, level and faction without another addon.
 - Use **Nearest vendor for my level** in the Ammo config header to locate a seller of the best ordinary ammo tier you can use.
@@ -77,3 +77,12 @@ Thanks to Raytchel Bates and Vanauge Imnewtorp for their suggestions!
 ## Source editions and laptop installation
 
 The latest development source includes the independent Classic Era edition under `classic-port/source/HunterToolsClassic`. See [LAPTOP_SETUP.md](LAPTOP_SETUP.md) for cloning and installing either edition. Git source updates do not create a tagged release.
+
+
+## Ammo switching and scalable pet details
+
+
+
+Equip a weapon and your desired ammo, then click Remember equipped ammo on the Ammo switching page. Repeat for each weapon type, enable automatic equipping, and assign the Cycle ammo keybind for use during combat. Turn off Show ammo button for keybind-only use.
+
+See [Ammo switching setup](HunterTools/AUTO-AMMO.md) for combat cycling, message options and keybindings. Pet status settings include 50–200% window scaling.

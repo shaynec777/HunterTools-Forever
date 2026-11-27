@@ -29,6 +29,7 @@ assert(not F.db.ammo.lastEquipped and not F.db.ammo.discovered and root.ammo.las
 assert(F.db.beastJournal.enabled==false and F.db.beastJournal.records==nil)
 F.db.petFoodLists['pet:bear:bear']={blacklist={[117]=true},whitelist={}}
 F.db.knownPetAbilities={bite=1};F.db.petLastFeeds={pet={food='PvE meat'}}
+F.db.ammo.autoEquip=true;F.db.ammo.preferredAmmo={[2]=2512}
 F.db.ammo.discovered={[8888]={name='PvE ammo'}};F.db.ammo.lastEquipped=2512
 F.db.beastJournal.records={[20]={name='PvE beast'}}
 F.db.playerFinder.watches={{name='PvE player'}}
@@ -45,6 +46,7 @@ local pvP=F.characterContextKey;assert(pvP~=pve)
 assert(F.db.distanceQueryDiagnostics==nil and F.distanceRuntime==nil)
 assert(not F.targetRangeDetailsCache and not F.rangeSpellInfoCache and not F.mendPetRangeAt and not F.mendPetRangeSpell)
 assert(F.db.knownPetAbilities==nil and next(F.db.petFoodLists)==nil and F.db.petLastFeeds==nil)
+assert(F.db.ammo.autoEquip==nil and F.db.ammo.preferredAmmo==nil)
 assert(F.db.ammo.lastEquipped==nil and ammoView.lastEquipped==nil,'captured preference views follow active context')
 assert(F.db.performanceLastReport==nil and F.db.ammoVendorRaidGUID==nil)
 assert(F.db.playerFinder.watches==nil and F.db.playerFinder.sound==false)
@@ -55,6 +57,7 @@ F.db.playerFinder.watches={{name='PvP player'}}
 pvp=false;F.RefreshCharacterContext()
 assert(F.characterContextKey==pve and F.db.knownPetAbilities.bite==1 and F.db.ammo.lastEquipped==2512)
 assert(F.db.petLastFeeds.pet.food=='PvE meat' and F.db.playerFinder.watches[1].name=='PvE player')
+assert(F.db.ammo.autoEquip and F.db.ammo.preferredAmmo[2]==2512)
 assert(F.db.x==555,'general settings are shared')
 assert(F.db.distanceQueryDiagnostics.probe==12,'distance diagnostics follow the ruleset')
 for _,flags in ipairs({{true,false,false},{false,true,false},{false,true,true},{true,true,true}}) do

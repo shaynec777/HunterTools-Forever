@@ -23,6 +23,7 @@ function F.PetStatusSettings()
     for key,default in pairs({enabled=false,tooltipEnabled=true,locked=false}) do
         if type(s[key])~='boolean' then s[key]=default end
     end
+    if not number(s.scale) or s.scale<0.5 or s.scale>2 then s.scale=1 end
     for key,default in pairs({x=270,y=-160}) do
         if not number(s[key]) or math.abs(s[key])>10000 then s[key]=default end
     end
@@ -266,10 +267,23 @@ if GameTooltip and GameTooltip.HookScript then
         GameTooltip:HookScript('OnTooltipSetUnit',unitTip)
     end
 end
+function F.ApplyPetStatusScale()
+    if InCombatLockdown() then return end
+    local p=F.petStatusWindow;local s=F.PetStatusSettings()
+    if not p or p.appliedScale==s.scale then return end
+    p:SetScale(s.scale);p.appliedScale=s.scale
+    p:ClearAllPoints();p:SetPoint('CENTER',UIParent,'CENTER',s.x/s.scale,s.y/s.scale)
+end
+function F.SetPetStatusScale(value)
+    if InCombatLockdown() then return end
+    if not number(value) then return end
+    F.PetStatusSettings().scale=math.max(0.5,math.min(2,value))
+    F.ApplyPetStatusScale()
+end
 function F.ResetPetStatusPosition()
     if InCombatLockdown() then return end
     local s=F.PetStatusSettings();s.x=270;s.y=-160
-    if F.petStatusWindow then F.petStatusWindow:ClearAllPoints(); F.petStatusWindow:SetPoint('CENTER',UIParent,'CENTER',s.x,s.y) end
+    if F.petStatusWindow then F.petStatusWindow:ClearAllPoints(); F.petStatusWindow:SetPoint('CENTER',UIParent,'CENTER',s.x/s.scale,s.y/s.scale) end
 end
 function F.UpdatePetStatusWindow()
     if not F.db then return end
@@ -303,7 +317,7 @@ function F.UpdatePetStatusWindow()
         p:SetScript('OnDragStart',function() if IsShiftKeyDown() and not InCombatLockdown() and not F.PetStatusSettings().locked then p:StartMoving() end end)
         p:SetScript('OnDragStop',function()
             p:StopMovingOrSizing();if InCombatLockdown() then return end
-            local x,y=p:GetCenter();local px,py=UIParent:GetCenter();local settings=F.PetStatusSettings();settings.x=x-px;settings.y=y-py
+            local x,y=p:GetCenter();local px,py=UIParent:GetCenter();local settings=F.PetStatusSettings();settings.x=x*settings.scale-px;settings.y=y*settings.scale-py
         end)
         p:SetScript('OnMouseUp',function(_,button) if button=='RightButton' then F.OpenConfig() end end)
         p:SetScript('OnEnter',function()
@@ -315,6 +329,7 @@ function F.UpdatePetStatusWindow()
         p:SetScript('OnHide',function() GameTooltip:Hide() end)
     end
     local p=F.petStatusWindow
+    F.ApplyPetStatusScale()
     F.UpdatePetStatusResourceBars(p)
     local now=query(GetTime)
     local guid=query(UnitGUID,'pet');local exists=query(UnitExists,'pet')

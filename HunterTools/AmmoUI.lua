@@ -92,6 +92,7 @@ function F.OpenAmmoSettings()
     button('Test reminder',450,159,180,function()
         F.ScanAmmo(); local id=next(F.db.ammo.selected); F.ShowAmmoReminder(id,id and (F.ammoCounts or {})[id] or 0,true)
     end)
+    button('Ammo for weapon type >',25,210,285,function() F.OpenAutoAmmoSettings() end)
     content=p.stockPage
     button('Monitor equipped ammo',25,198,285,function()
         local id=F.AmmoTarget(); if id then F.db.ammo.selected[id]=true; F.db.ammo.minimums[id]=F.AmmoMinimum(id); F.ResetAmmoReminder(id) end; p:Refresh()

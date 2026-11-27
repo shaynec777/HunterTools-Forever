@@ -22,6 +22,7 @@ F.OpenAmmoSettings=function() F.ammoOpened=true end
 local function find(text) for _,w in ipairs(frames) do if w.text==text then return w end end; error(text) end
 F.RangeSettings=function() return {enabled=true} end
 local petSettings={enabled=false,tooltipEnabled=true,locked=false,windowFields={health=true},tooltipFields={health=true}}
+petSettings.scale=1
 F.PetStatusSettings=function() return petSettings end
 local browserSettings={enabled=true}
 F.PetBrowserSettings=function() return browserSettings end

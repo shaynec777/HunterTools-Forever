@@ -16,7 +16,7 @@ local function panel(name,title,w,h)
     return p
 end
 function F.HideConfigPages()
-    for _,key in ipairs({'configPanel','foodPanel','ammoPanel','instanceSettingsPanel','rangeSettingsPanel','petStatusSettingsPanel','petListPanel','animalSettingsPanel','petAbilityBrowser','ammoUpgradePanel','ammoVendorPanel','trainerPanel','protectionPanel','weaponSettingsPanel','rangedWeaponsPanel','beastJournalPanel','aspectSettingsPanel','aspectPrompt','aspectPicker','petAlertPanel','trackingSettingsPanel','tooltipSettingsPanel','trackingPicker','mobFinderPanel','playerFinderPanel'}) do
+    for _,key in ipairs({'configPanel','foodPanel','ammoPanel','autoAmmoPanel','instanceSettingsPanel','rangeSettingsPanel','petStatusSettingsPanel','petListPanel','animalSettingsPanel','petAbilityBrowser','ammoUpgradePanel','ammoVendorPanel','trainerPanel','protectionPanel','weaponSettingsPanel','rangedWeaponsPanel','beastJournalPanel','aspectSettingsPanel','aspectPrompt','aspectPicker','petAlertPanel','trackingSettingsPanel','tooltipSettingsPanel','trackingPicker','mobFinderPanel','playerFinderPanel'}) do
         if F[key] then F[key]:Hide() end
     end
 end
@@ -111,7 +111,7 @@ function F.OpenPetStatusSettings()
     if InCombatLockdown() then F.Print('Open settings after combat.');return end
     F.HideConfigPages()
     if not F.petStatusSettingsPanel then
-        local p=panel('HunterToolsPetStatusSettings','Pet status and mouseover tips',590,660);F.petStatusSettingsPanel=p
+        local p=panel('HunterToolsPetStatusSettings','Pet status and mouseover tips',590,710);F.petStatusSettingsPanel=p
         local help=p:CreateFontString(nil,'OVERLAY','GameFontHighlightSmall');help:SetPoint('TOPLEFT',28,-54);help:SetWidth(530)
         help:SetText('Window and tips have independent fields. Tips show your own pet. Drag the window outside combat; right-click it for the tool menu. Unit details pause during combat.')
         p.tips=CreateFrame('CheckButton',nil,p,'UICheckButtonTemplate');p.tips:SetPoint('TOPLEFT',25,-98)
@@ -132,13 +132,23 @@ function F.OpenPetStatusSettings()
                 c:SetScript('OnClick',function() F.PetStatusSettings()[surface][key]=c:GetChecked() and true or false;F.UpdatePetStatusWindow() end)
             end
         end
+        p.scaleLabel=p:CreateFontString(nil,'OVERLAY','GameFontHighlight');p.scaleLabel:SetPoint('BOTTOM',0,185)
+        for _,spec in ipairs({{'Smaller',-170,-0.1},{'100%',0,0},{'Larger',170,0.1}}) do
+            local step=spec[3]
+            local b=CreateFrame('Button',nil,p,'UIPanelButtonTemplate');b:SetSize(145,26);b:SetPoint('BOTTOM',spec[2],150);b:SetText(spec[1])
+            b:SetScript('OnClick',function()
+                local s=F.PetStatusSettings();F.SetPetStatusScale(step==0 and 1 or s.scale+step)
+                p.scaleLabel:SetText(('Window scale: %d%%'):format(math.floor(s.scale*100+0.5)))
+            end)
+        end
         local reset=CreateFrame('Button',nil,p,'UIPanelButtonTemplate');reset:SetSize(180,26);reset:SetPoint('BOTTOM',0,73);reset:SetText('Reset window position');reset:SetScript('OnClick',F.ResetPetStatusPosition)
         local alerts=CreateFrame('Button',nil,p,'UIPanelButtonTemplate');alerts:SetSize(260,26);alerts:SetPoint('BOTTOM',0,108);alerts:SetText('Pet low-health / death warnings');alerts:SetScript('OnClick',function() F.OpenPetAlertSettings() end)
         local back=CreateFrame('Button',nil,p,'UIPanelButtonTemplate');back:SetSize(160,26);back:SetPoint('BOTTOM',0,30);back:SetText('Back to tools');back:SetScript('OnClick',F.OpenConfig)
     end
     local p=F.petStatusSettingsPanel;local s=F.PetStatusSettings();p.tips:SetChecked(s.tooltipEnabled);p.lock:SetChecked(s.locked)
+    p.scaleLabel:SetText(('Window scale: %d%%'):format(math.floor(s.scale*100+0.5)))
     for surface,fields in pairs(p.fields) do for key,c in pairs(fields) do c:SetChecked(s[surface][key]) end end
-    if F.FinishMenu then F.FinishMenu(p,590,660) end;p:Show()
+    if F.FinishMenu then F.FinishMenu(p,590,710) end;p:Show()
 end
 function F.OpenRangeSettings()
     if InCombatLockdown() then F.Print('Open settings after combat.'); return end

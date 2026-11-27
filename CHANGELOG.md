@@ -1,4 +1,18 @@
-# 3.2.18 — 2026-11-19
+## HunterTools Forever 3.2.35
+
+- Save preferred ammunition separately for guns, bows and crossbows, and equip it automatically when changing weapons outside combat.
+- Cycle saved Gun > Bow > Crossbow ammunition with a combat-capable keybind or compact optional Ammo button. This changes ammo, not weapons.
+- Choose Banner, Chat, Both or Off announcements, with clear Ammo/Weapon mismatch feedback.
+- Find the controls on Settings > Ammunition & weapons > Ammo switching.
+- Scale the Pet Details window from 50% to 200% in Pet status settings.
+- Find HunterTools: Feed pet and HunterTools: Cycle ammo together under Key Bindings > AddOns.
+
+### Setup
+
+Equip a weapon and your desired ammo, then click Remember equipped ammo on the Ammo switching page. Repeat for each weapon type, enable automatic equipping, and assign the Cycle ammo keybind for use during combat. Turn off Show ammo button for keybind-only use.
+
+
+# 3.2.18 � 2026-11-19
 
 - Added hunter and pet trainer finders with red map and minimap markers.
 - Grouped Ammo Vendors and Trainers under Finders.
@@ -18,7 +32,7 @@ Vendor red X marking and clearing confirmed in-game.
 
 Catalogs use separate edition data and listed-source snapshots, not exhaustive generic world-drop coverage. Unconfirmed sources are excluded. No other addon is required. Performance measurements include diagnostic overhead; gameplay affects before/after comparisons.
 
-# 3.1.12 — November 15, 2026
+# 3.1.12 � November 15, 2026
 
 - Add independent ammo-vendor lookup, current-level vendor button and clickable chat marker links.
 - Add compact world-map/minimap destinations, nearest same-continent fallback, shop labels and conversation-based clearing.
@@ -125,7 +139,7 @@ Tracking regressions cover both list orders, Treasure-only fallback, and no acti
 
 The user confirmed the new controls and blank fallback in Forever. Classic uses its private happiness adapter and still needs in-game confirmation of this change. Existing settings are retained.
 
-# HunterTools Forever 3.1.6 — November 4, 2026
+# HunterTools Forever 3.1.6 � November 4, 2026
 
 - Forever: skip interaction-distance checks during combat and tolerate unavailable checks; public spell-range results remain usable.
 
@@ -441,7 +455,7 @@ Thanks to Raytchel Bates and Vanauge Imnewtorp for their suggestions!
 
 
 
-# In-game validation â€” October 16, 2026
+# In-game validation — October 16, 2026
 
 
 

@@ -1,7 +1,7 @@
 ## Interface: 16001
 ## Title: HunterTools Forever
 ## Author: Gideon (original engine); OpenAI Codex (adaptation and enhancements)
-## Version: 3.2.29
+## Version: 3.2.35
 ## Notes: Hunter tools, each individually enabled or disabled: feeding, ammo, range, pet status and animal tooltips.
 ## SavedVariablesPerCharacter: HunterToolsDB
 ## OptionalDeps: FeedomaticToo
@@ -26,6 +26,7 @@ WeaponCompareUI.lua
 RangedWeaponData.lua
 RangedWeapons.lua
 AmmoUI.lua
+AmmoAutoEquip.lua
 FoodList.lua
 InstanceCheck.lua
 AspectReminder.lua

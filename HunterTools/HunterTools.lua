@@ -1,6 +1,6 @@
 local addonName, F = ...
 BINDING_HEADER_GFWFOREVER = 'HunterTools Forever'
-_G['BINDING_NAME_CLICK GFWForeverFeedButton:LeftButton'] = 'Feed Pet'
+_G['BINDING_NAME_CLICK GFWForeverFeedButton:LeftButton'] = 'HunterTools: Feed pet'
 
 function F.UpdateHappinessBorder()
     if F.db and not F.db.enabled then return end

@@ -25,6 +25,7 @@ local categories={
  }},
  {'Ammunition & weapons',{
   {'Stock alerts','OpenAmmoSettings','ammoPanel','stock','ammo','Enable ammo stock alerts'},
+  {'Ammo switching','OpenAutoAmmoSettings','autoAmmoPanel'},
   {'Ammo upgrades','OpenAmmoUpgradeSettings','ammoUpgradePanel'},
   {'Weapon catalog & suggestions','OpenRangedWeapons','rangedWeaponsPanel'},
   {'Weapon comparisons (Experimental)','OpenWeaponComparisonSettings','weaponSettingsPanel'},
